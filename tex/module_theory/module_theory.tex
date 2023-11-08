@@ -1,0 +1,2598 @@
+\chapter{Modules}
+
+\section{Definitions.}
+
+In group theory, we started with a set $G$ equipped with a bilinear
+operation $\cdot : G \times G \to G$ which mapped $G$ to itself.
+The operation was required to be associative, and there needed to
+be inverses and an identity element. 
+
+In ring theory, we went further to assume $R$ was not only an
+abelian group, we placed the group operation with $+: R\times R
+\to R$ and then defined a \textit{multiplication} $\cdot: R \times
+R \to R$ which is was associative and left- and right-
+distributive.
+
+Finally, we reach module theory, which considers again an abelian
+group $M$ with operation $+:M \times M \to M$ but lets a ring $R$
+act on $M$, whose addition $+R\times R \to R$ agrees with the one
+which acts on $M$ but whose multiplication $\cdot: R \times M \to
+M$ acts on $R$ and $M$. 
+
+Note how abelian groups and rings are special cases of modules.
+This will be more clear once we introduce the axioms. 
+
+\begin{definition}
+    Let $R$ be a ring with identity, and $M$ an abelian group
+    equipped with $+:M \times M \to M$. Then $M$ is an
+    \textbf{left $R$-module} if we equip $R \times M$ with
+    multiplication $\cdot : R \times M \to M$ and for all $m \in
+    M$ and $a, b \in R$
+    \begin{enumerate}
+        \item $a(m_1 + m_2)= am_1 + am_2$
+        \item $(a + b)m = am + bm$
+        \item $(ab)m = a(bm)$
+        \item $1_Rm = m$ where $1_R$ is the identity of $R$.
+    \end{enumerate} 
+
+    Alternatively, an abelian group $M$ is a \textbf{right $R$-module} if we equip
+    $M \times R \to M$ with multiplication $\cdot: M \times R \to
+    M$ and for all $m \in M$ and $a, b \in R$
+    \begin{enumerate}
+        \item $(m + n)a = ma + na$ 
+        \item $m(a + b) = ma + mb$
+        \item $m(ab) = (ma)b$
+        \item $m1_R = m$ where $1_R$ is the identity of $R$.
+    \end{enumerate}
+\end{definition}
+
+Notice that we can think of these products as a group action, or sort of a
+"ring action" acting on $M$. That is, an $R$-module $M$ is just an abelian
+group that a ring $R$ can act on. If you have an abelian group $N$
+that $R$ simply cannot act on and satisfy the above axioms, then
+$N$ is not an $R$-module.
+\\
+For convenience, we will develop the theory of $R$-modules by
+solely working with left $R$-modules, since all proofs and
+statements will be equivalent up to a swap of variables for right
+$R$-modules. 
+\\
+\textbf{Examples.}\\
+\begin{itemize}
+    \item[1.] \textcolor{NavyBlue}{Note that if $R$ is commutative, then a left
+    $R$-module coincides with a right $R$-module. To see this, let $M$
+    be a left $R$-module. Then construct the right $R$-module by
+    defining the multiplication as
+    \[
+        m\cdot r = rm.
+    \]
+    Then we see that for all $m \in M$, $a,b \in R$, 
+    \begin{enumerate}
+        \item $(m_1 + m_2)\cdot a = a(m_1 + m_2) = am_1 + am_2 = m_1
+        \cdot a + m_2 \cdot a$ \checkmark
+        \item $m(a + b)= (a + b)m = am + bm = m \cdot a + m
+        \cdot b$ \checkmark 
+        \item $m\cdot (a b) = (ab)m = (ba)m = b(am) = b(m \cdot a) = (m
+        \cdot a )\cdot b$ \checkmark 
+        \item $m \cdot 1_R = 1_Rm = m$. \checkmark
+    \end{enumerate}
+    Note that in part $(c)$ is where we used the fact that $R$ is
+    commutative. So whenever $R$ is commutative, the existence of a
+    left $R$-module automatically implies that existence of a
+    right $R$-module, and vice versa.
+    }
+
+    \item[2.] Let $R$ be a ring. Then if we substitute $M =R$ in the above
+    definition, and let the multiplication $
+    \cdot$ be the multiplication on $R$ then $R$ is a left and a right
+    $R$-module. This is because $R$ is an abelian group which is
+    associative and left- and right-distributive. Hence, it satisfies
+    all of the above axioms. 
+
+    So keep in mind that a ring $R$ is just a left- and right-$R$
+    module that acts on $R$. 
+
+\end{itemize}
+Here's another example which shows that abelian groups are simply
+$\ZZ$ modules. 
+\begin{proposition}
+    Let $G$ be an abelian group. Then $G$ is a left and right
+    $\ZZ$-module. 
+\end{proposition}
+
+\begin{prf}
+    Let $\ZZ$ act on $G$ as follows. Define 
+    \[
+        ng = 
+        \begin{cases}
+            g + g + \cdots + g \text{ ($n$ times)} & \text{ if } n  > 0\\ 
+            0 & \text{ if } n = 0\\
+            (-g) + (-g) \cdots (-g) \text{ ($n$ times) } & \text{ if } n < 0
+        \end{cases}
+    \]
+    and 
+    \[
+        gn = 
+        \begin{cases}
+            g + g + \cdots + g \text{ ($n$ times)} & \text{ if } n  > 0\\ 
+            0 & \text{ if } n = 0\\
+            (-g) + (-g) \cdots (-g) \text{ ($n$ times) } & \text{ if } n < 0.
+        \end{cases}
+    \]
+    Then with this definition of multiplication, it is easy to
+    show that the axioms (a)-(d) are satisfied.
+\end{prf}
+
+\begin{itemize}
+    \item[3.] If $R$ is a ring and $I$ is a left (right) ideal of
+    $R$, then $I$ is a left (right) $R$-module. 
+
+    \item[4.] Let $V$ be a vector space defined over a field $F$.
+    Then $V$ is an $F$-module. (Now it is clear why there are a
+    million axioms in the definition of a vector space!)
+\end{itemize}
+
+With $R$-modules introduced and understood, we can jump right into
+homomorphisms. 
+\begin{definition}
+    Let $R$ be a ring and $M$ and $N$ be $R$-modules. We define
+    $f: M \to N$ to be an \textbf{$R$-module homomorphism} if 
+    \begin{itemize}
+        \item[1.] $f(m_1 + m_2) = f(m_1) + f(m_2)$ for any $m_1,
+        m_2 \in M$ 
+        \item[2.] $f(am) = af(m)$ for all $a \in R$ and $m \in M$.
+    \end{itemize}
+    If $f$ is a bijective $R$-module homomorphism, then we say
+    that $f$ is an \textbf{isomorphism} and that $M \cong N$.
+\end{definition}
+Thus we see that $R$-module homomorphisms must not only be linear
+over the elements of $M$, but they must also pull out scalar
+multiplication by elements of $R$.
+
+Recall earlier that we said a vector space $V$ over a field $F$ is
+an $F$-module. Now if $W$ is another vector space and $T: V \to W$
+is a linear transformation, then we see that $T$ is also an
+$F$-module homomorphism! 
+
+In the language of linear algebra, a
+\textbf{linear transformation} is usually defined as a function
+$T: V \to W$ such that for any $\bf{v}_1, \bf{v}_2, \bf{v} \in V$ and
+$\alpha \in F$ we have that 
+\begin{itemize}
+    \item[1.] $T(\bf{v}_1 + \bf{v}_2) = T(\bf{v}_1) + T(\bf{v}_2)$
+    \item[2.] $T(\alpha\bf{v}) = $ $\alpha$$T(\bf{v})$. 
+\end{itemize}
+As we will see, linear algebra is basically a special case of
+module theory. 
+
+\begin{definition}
+    Let $R$ be a ring and $M$ and $N$ a pair of $R$-modules. Then
+    $\hom_R(M,N)$ is the set of all $R$-module homomorphisms from
+    $M$ to $N$. 
+\end{definition}
+
+\textcolor{MidnightBlue}{It turns out we can turn $\hom_R(M,N)$
+into an abelian group, and under special circumstances it can
+actually be an $R$-module itself. It will be the case
+that $\hom_R$ will actually be an important functor, but that is
+for later.}
+\\
+\indent To turn this into an abelian group, we define addition of
+the elements to be 
+\[
+    (f + g)(m) = f(m) + g(m)
+\]
+for all $f, g \in \hom_R(M, N)$. We let the identity be the
+zero map, and realize associativity and closedness are a given to
+conclude that this is in fact an abelian group. 
+\\
+
+Suppose we want to make $R$, our ring, act on $\hom_R(M, N)$ in
+order for it to be an $R$-module. Then we define scalar
+multiplication to be $(af)(m) = a(f(m))$; a pretty reasonable
+definition for scalar multiplication. 
+
+\textcolor{Red}{This issue with this is that $\hom_R(M, N)$ will
+not be closed under scalar multiplication of elements of $R$
+unless $R$ is a commutative ring.
+}
+
+We'll demonstrate this as follows. Let $b \in R$ and
+$f \in \hom_R(M, N)$. Then the second property of an $R$-module
+homomorphism tells us that $f(bm) = bf(m)$ for all $m \in
+M$. Now suppose we try to use our definition of scalar
+multiplication, and consider $af$ where $a \in R$. Then if we try
+to see if $af$ will pass the second criterion for being an
+$R$-module homomorphism, we see that 
+\[
+    (af)(bm) = a(f(bm)) = a(bf(m)) = abf(m).
+\]
+That is, we see that $af$ isn't an $R$-module homomorphism because
+$(af)(bm) \ne b(af)(m)$ (which is required for an $R$-module homomorphism); rather, $(af)(bm) = abf(m).$ Now if $R$
+is a commutative ring, then 
+\[
+    abf(m) = baf(m)
+\]
+so we can then say that $(af)(bm) = b(af)(m)$, in which case $af$
+passes the test for being an $R$-module homomorphism. 
+
+This proves the following propsition, which will be useful for
+reference for later.
+\begin{proposition}\label{hom_abelian_module}
+    Let $M$ and $N$ be $R$-modules. Then $\hom_R(M, N)$ is an
+    abelian group. Furthermore, it is an 
+    $R$-module if and only if $R$ is a commutative ring.
+\end{proposition}
+Next, we make the following definitions for completeness. 
+
+\begin{definition}
+    Let $R$ be a ring and $M$ and $N$ be $R$-modules. If $f: M \to
+    N$ is an $R$-module homomorphism, then 
+    \begin{itemize}
+        \item[1.] The set $\ker(f) = \{m \in M \mid f(m) = 0\}$ is
+        the \textbf{kernal} of $f$ 
+        \item[2.] The set $\im(f) = \{f(m) \mid m \in M\}$ is the
+        \textbf{image} of $f$.
+    \end{itemize}
+\end{definition}
+
+
+
+
+
+
+\newpage 
+\section{Submodules, Quotient Modules and Isomorphism Theorems.}
+
+\begin{definition}
+    Let $M$ be a $R$-module. Then a set $N \subset M$ is said to
+    be a \textbf{submodule} of $M$ if $N$ is also a $R$-module. 
+\end{definition}
+
+\textcolor{MidnightBlue}{What do we need for $N \subset M$ to be a submodule?}
+For $N$ to be a submodule,
+\begin{itemize}
+    \item $N$ needs to be an nonnempty abelian group 
+    \item Axioms (a) - (d) in Definition 1.1 must be satisfied 
+    \item $N$ needs to be closed under multiplication of $R$. That
+    is, $\cdot : R \times M|_{N} \to N$, where $M|_N$ is $M$
+    restricted to $N$ (namely, just $N$).
+\end{itemize}
+
+However, since $N \subset M$, axioms (a) - (d) are already
+satisfied for $N$. In addition, if $N$ is a nonempty subgroup of $M$ then
+it is automatically abelian. Thus $N$ is a \textbf{$R$-submodule} of $M$ if $N$
+is a subgroup of $M$ and $N$ is closed under multiplication of
+elements from $R$. This leads us to the following submodule test. 
+
+\begin{thm}[(Submodule Test.)] Let $M$ be an $R$-module and $N
+\subset M$ be nonempty. Then $N$ is an $R$-submodule of $M$ if and
+only if $an_1 + bn_2 \in N$ for all $n_1, n_2 \in N$ and $a, b \in
+R$. 
+\end{thm}
+
+\begin{prf}
+    ($\implies$) If $N$ is an $R$-submodule of $N$ then obviously $an_1 + bn_2
+    \in N$ for all $n_1, n_2 \in N$ and $a, b \in R$. 
+
+    ($\impliedby$) Suppose $an_1 + bn_2 \in N$ for all $n_1, n_2
+    \in N$ and $a, b \in R$. 
+    First observe that $N$ is nonempty. Now
+    setting $a = 1$ and $b = -1$ we
+    see that $n_1 - n_2 \in N$ for all $n_1, n_2 \in N$, and thus
+    by the subgroup test we see that $N$ is a subgroup of $N$. 
+
+    Since $an_1 + bn_2 \in N$ for all $a, b \in R$ we see that $N$
+    is closed under multiplication of elements of $R$. 
+
+    Since $N$ is an abelian subgroup of $M$ and is closed under
+    multiplication of elements of $R$, we see that $N$ is an
+    $R$-submodule as desired. 
+\end{prf}
+
+\noindent \textbf{Example.}\\
+An immediate example we can create from our previous discussions
+the fact that if $f: M \to N$ is an $R$-module homomorphism then 
+\begin{itemize}
+    \item[1.] $\ker(f)$ is an $R$-submodule of $M$.
+    \item[2.] $\im(f)$ is an $R$-submodule of $N$. 
+\end{itemize}
+
+As we saw in group and ring theory, arbitrary intersections of
+subgroups or subrings resulted in subgroups and subrings. Thus the
+following theorem should be of no surprise.
+
+\begin{thm}
+    Let $R$ be a ring and $M$ an $R$-module. If $\{N_\alpha\}_{\alpha \in \lambda}$ be a
+    set of $R$-submodules of $M$, then $N = \bigcap_{\alpha \in
+    \lambda}N_{\alpha}$ is a submodule of $M$. 
+\end{thm}
+
+\begin{prf}
+    First observe that $N = \bigcap_{\alpha \in
+    \lambda}N_{\alpha}$ is nonempty, since $0 \in N_\alpha$ (the
+    identity) for all $\alpha \in \lambda$. Thus for any $n_1, n_2
+    \in N$ we know that $n_1, n_2 \in N_\alpha$ for all $\alpha
+    \in \lambda$. Since each such $N_\alpha$ is an $R$-submodule,
+    we know that $an_1 + bn_2 \in N_\alpha$ for all $\alpha \in 
+    \lambda$ for any $a, b \in R$. Hence, $an_1 + bn_2 \in N$ for
+    all $a, b \in R$, proving that $N$ is an $R$-submodule as
+    desired. 
+\end{prf}
+
+Note that what ring $R$ is under discussion, we will
+just state a $R$-submodule as simply a submodule.
+\\
+\\
+\textbf{Quotient Modules.}
+\\
+\\
+As we discovered quotient groups in group theory and quotient
+rings in ring theory, it should again be no surprise that we can
+formalize the concept of quotient modules. 
+
+In group theory, a quotient group $G/H$ only made sense if the
+group $H$
+being quotiened out was \textbf{normal} to $G$. This
+guaranteed that our desired group operation in the quotient group
+worked and made sense as desired. In ring theory, a quotient ring
+$R/I$ only made
+sense if the ring $I$ being quotiened out was an \textbf{ideal} of
+$R$. Since we wanted $R/I$ to be a ring, we needed not only
+addition but multiplication to be well-defined, but
+well-definedness only worked when $I$ was an ideal. 
+
+In both cases, we couldn't quotient out just any subgroup or a
+subring to get a quotient group or quotient ring. They had to be
+special subsets (e.g. normal groups, ideals). 
+However, in
+module theory, it does happen to be the case that we can just
+quotient out a submodule to get a quotient module. 
+
+\textcolor{purple}{
+To define a quotient module, we first consider an $R$-module $M$
+and a submodule $N$ of $M$. To turn $R/N$ into an $R$-module, we
+first turn this into an abelian group, which we can perfectly do
+since $N$ is a subgroup of $M$, an abelian group, so $M/N$ makes
+sense. A result from group theory tells us that if $M$ is abelian
+then $M/N$ is abelain. 
+\\
+\indent Next, to turn this into an $R$-module we define scalar
+multiplication as 
+\[
+    r(m + N) = rm + N
+\]
+where $r \in R$, and multiplication of elements as
+\[
+    (m + N)(m' + N) = mm' + N.   
+\]
+As always, when defining a quotient object we're
+worried about the ability of our multiplication to preserve
+equivalence of elements. This is usually where we run into trouble
+in group theory or ring theory, in which case we modify the set
+$N$ which we're quotienting out. In group theory, we'd turn $N$ into
+normal group, and in ring theory we'd turn $N$ into an ideal. Here
+we'll leave $N$ alone, since it works out in the end.
+\\
+\indent Thus 
+suppose that
+\[
+    m + N = m' + N
+\]
+that is, $m = m' + n$ for some $n \in N$. 
+Then to check if our 
+multiplicaton is well-defined, we observe that for $a \in R$
+\[
+    am + N = a(m' + n) + N = am' + an + N
+\]
+and since $N$ is a submodule, it is closed under scalar
+multiplication of elements of $R$. Hence, $an \in N$, so that 
+\[
+    am' + an + N = am' + N.
+\]
+Thus we see that $am + N = am' + N$, so that our scalar
+multiplication is well-defined.
+}
+This leads to the following definition.
+
+\begin{definition}
+    Let $R$ be a ring and $M$ an $R$-module. If $N$ is a submodule
+    of $M$, then we defined $M/N$ to be the \textbf{quotient
+    $R$-module} of $M$ with respect to $N$. As we showed earlier,
+    this is in fact an $R$-module.
+\end{definition}
+
+As before, it should be no surprise that the Noether Isomorphism
+Theorems apply to modules as well. In fact, the Noether
+Isomorphism Theorems were first introduced by Emmy Noether for
+modules; not through groups or for rings. The Isomorphism Theorems
+hold for groups and rings since abelian groups and rings are
+special cases of modules. 
+
+First, we introduce two homomorphisms which seem as if they are so stupidly
+simple that they don't even deserve a definition; yet, they do. 
+
+\begin{definition}
+    Let $R$ be a ring and $M$ and $N$ be $R$-module homomorphisms.
+    Then we define the following $R$-module homomorphisms.
+    \begin{itemize}
+        \item[1.] The map $\pi: M \to M/N$ given by 
+        \[
+            \pi(m) = m + N
+        \] 
+        is said to be the \textbf{projection map}. Note that $\pi$
+        is
+        \textbf{surjective}, and that $\ker(\pi) = N$ (since $m +
+        N = N$ if and only if $m \in N$.)
+
+        \item[2.] The map $i: M/N \to M$ given by 
+        \[
+            i(m + N) = m                
+        \]
+        is known as the \textbf{inclusion map}. More generally, if
+        $M' \subset M$, the \textbf{inclusion map} can also be
+        defined as $i: M' \to M$ where 
+        \[
+            i(m') = m'
+        \]
+        for all $m' \in M'$. Note that $i$ is \textbf{injective},
+        and in the first case $\im(i) = M/N\cup \{0\}$ and in the
+        second case $\im(i) = M'$.
+    \end{itemize}
+\end{definition}
+
+\begin{thm}[(First Isomorphism Theorem)]
+    Let $R$ be a ring and $M$ and $N$ be $R$-modules. If $f: M \to
+    N$ is an $R$-module homomorphism, then 
+    \[
+        M/\ker(f) \cong \im(f).  
+    \]
+    \vspace{-0.8cm}
+\end{thm}
+
+\begin{prf}
+    The proof is the same as before. Define the map $\phi:
+    M/\ker(f) \to N$ as 
+    \[ 
+        \phi(m + \ker(f)) = f(m).
+    \]
+    \textcolor{NavyBlue}{We quickly show that this is well-defined.} If $m + \ker(f) =
+    m' + \ker(f)$ for some $m, m' \in M$, then $m = m' + k$ for
+    some $k \in K$. Therefore, 
+    \[
+        \phi(m + \ker(f)) = f(m) = f(m' + k) = f(m') = \phi(m' + \ker(f)).
+    \]
+    \textcolor{NavyBlue}{Next, we show this is in fact an $R$-module homomorphism.}
+    Linearity is obvious, so we check the second criterion. Now
+    for any $a \in R$ we see that 
+    \[
+        \phi(a(m + \ker(f))) = \phi(am + \ker(f)) = f(am) = af(m) = a(\phi(m + \ker(f)))
+    \]
+    where we pulled the $a$ outside from $f(am)$ to make $af(m)$
+    from the fact that $f$ is an $R$-module homomorphism. 
+
+    \textcolor{NavyBlue}{Now we make two observations.} First, we
+    see that there is a one-to-one correspondence between
+    $M/\ker(f) \to \im(f)$. Second, this implies that $\phi$ is an
+    isomorphism between the two modules, so that 
+    \[
+        M/\ker(f) \cong \im(f)
+    \]
+    as desired.
+\end{prf}
+
+\begin{thm}[(Second Isomorphism Theorem.)]
+    Let $R$ be a ring and $M$ and $N$ and $P$ be submodules of
+    $M$. Then 
+    \[
+        (N + P)/P \cong N/(N \cap P).
+    \]
+    \vspace{-0.8cm}
+\end{thm}
+
+\begin{minipage}{0.35 \textwidth}
+    \begin{figure}[H]
+            \begin{tikzcd}[column sep=small] 
+                &  
+                    N + P
+                \\
+                N
+                \arrow[ur, dash]
+                &&
+                P
+                \arrow[ul,swap,"\text{(submodule)}"]
+                \\
+                &
+                N\cap P 
+                \arrow{ul}{\text{(submodule)}}
+                \arrow[ur, dash]
+            \end{tikzcd}
+    \end{figure}
+\end{minipage} \hfill
+\begin{minipage}{0.6\textwidth}
+    The diagram on the left is the same one we used in group
+    theory and ring theory. That is, the second isomorphism
+    theorem can still be described using the diamond diagram. 
+\end{minipage}  
+
+\begin{prf}
+    Construct the projection map $\pi : M \to M/P$ and let $\pi'$
+    be the restriction of $\pi$ to $N$. Then we see that
+    $\ker(\pi') = N \cap P$, while 
+    \[
+        \im(\pi') = \{\pi'(n) \mid n \in N\} = \{n + P \mid n \in N\} = (N + P)/P.
+    \]
+    Thus by the First Isomorphism Theorem we have that 
+    \[
+        N/\ker(\pi') \cong \im(\pi') \implies (N + P)/P \cong N/(N \cap P)
+    \]
+    as desired. 
+\end{prf}
+
+\begin{thm}[(Third Isomorphism Theorem)]
+    Let $R$ be a ring and $M$ an $R$-module. Suppose $N$ and $P$
+    submodules such that $P \subset N$. Then 
+    \[
+        M/N \cong (M/P)/(N/P).
+    \]
+    \vspace{-0.8cm}
+\end{thm}
+
+\begin{prf}
+    Construct the map $f: M/P \to M/N$ by defining $f(m + P) = m +
+    N$ where $m+P \in M/P$ and $m + N \in M/N$. First observe that
+    this is a surjective mapping since $P \subset M$, so the
+    correspondence $m + P \to m + N$ will cover all of $M/N$. 
+
+    Now observe that 
+    \[
+        \ker(f) = \{m + p \mid m \in N\} = N/P.
+    \]  
+    Therefore, by the First Isomorphism Theorem
+    \[
+        (M/P)/\ker(f) \cong M/N \implies (M/P)/(N/P) \cong M/N
+    \]
+    as desired.
+\end{prf}
+
+\begin{thm}[(Fourth Isomorphism Theorem)]
+    Let $R$ be a ring and $M$ an $R$-module. Suppose $N$ is a
+    submodule of $M$. Then every submodule of $M/N$ is of
+    the form $P/N$ where $N \subset P \subset M$. 
+\end{thm}
+Another way to understand this statement is to realize there is a
+one to one correspondence between the submodules of $M$ containing
+$N$ and the submodules of $M/N$.
+
+\begin{prf}
+    
+\end{prf}
+
+
+\newpage
+\section{Generating Modules, Torsions, Annihilators.}
+The concepts we have introduced so far are not new. In fact, this
+is the third time you've probably seen all of these concepts.
+However, module theory is very deep, and here is where we will
+start seeing new concepts. 
+\\
+\\
+\textbf{Generating Modules.}\\
+Let $M$ be an $R$-module and suppose $S \subset M$ where $S$ is
+nonempty.
+Denote the
+smallest submodule of $M$ containing $S$ as $\left< S \right>$,
+and observe that 
+\[
+    \left< S \right> = \bigcap_{\alpha \in \lambda} S_{\alpha}
+\]
+where $\{S_\alpha\}_{\alpha \in \lambda}$ is a family of
+submodules containing $S$.
+
+Note that this is in fact a submodule,
+since arbitrary intersections of submodules yield a submodule. 
+
+Now consider the set of all finite linear combinations of elements
+of $S$ with coefficients in $R$. That is, 
+\[
+    S' = \Big\{\sum_{i = 1}^{n} a_is_i \mid a_i \in R, s_i \in S \text{ for all } i \in N\Big\}. 
+\]
+This is of course also an $R$-module. We claim that $\left< S
+\right> = S'$.
+\begin{description}
+    \item[\phantom{meow}]$\bf{\left< S \right> \subset S'.}$ To
+    see this, consider any $s \in \left<S\right>$. Then $s \in
+    S_{\alpha}$ for all $\alpha \in \lambda$. Furthermore, since
+    $S \subset S'$ we see that $S'$ is one of the members of the
+    families of all submodules containing $S$. Therefore we must
+    have that $s \in S'$, and thus $\displaystyle s = \sum_{i = 1}^{n}a_is_i$
+    for some $a_i \in R$ and $s_i \in S$. Hence, $\left<S
+    \right> \subset S'$.
+    
+    \item[\phantom{meow}]$\bf{S' \subset \left< S \right>}.$
+    Simply observe that since $\left< S \right>$ contains $S$, and
+    because $\left< S \right>$ is a submodule,
+    it must be that $\left< S \right>$ contains all linear combinations of
+    elements of $S$ with coefficients in $R$. That is,
+    $\displaystyle \sum_{i = 1}^{n} a_is_i \in \left< S \right>$
+    for any $a_i \in R, s_i \in S$. 
+\end{description}
+
+Thus what we have shown is the following theorem. 
+\begin{thm}\label{submodule_intersection_theorem}
+    Let $M$ be an $R$-module and suppose $S \subset M$. Then if
+    $\left< S \right>$ is the smallest submodule of $M$ containing
+    $S$ then 
+    \[
+        \left< S \right> = \bigcap_{\alpha \in \lambda} S_\alpha
+    \]
+    where $\{S_\alpha\}_{\alpha \in \lambda}$ is the family of
+    submodules containing $S$. More explicilty, we have that 
+    \[
+        \left< S \right> = \Big\{\sum_{i = 1}^{n} a_is_i \mid a_i \in R, s_i \in S \text{ for all } i \in N\Big\}.
+    \]
+    \vspace{-0.7cm}
+\end{thm}
+
+The above theorem then leads a very useful definition that we will
+work with frequently. 
+
+\begin{definition}
+    Let $M$ be an $R$-module and $S \subset M$.
+    \begin{itemize}
+        \item[1.] The $R$-submodule $\left< S \right>$ of $M$ is
+        called the \textbf{submodule of $M$ generated by $S$.}
+        \item[2.] If $M = \left< S \right>$ for some $S \subset M$, then we say that
+        \textbf{$M$ is generated by $S$}. Hence, the elements of
+        $S$ are referred to as the \textbf{generators} of $M$.
+        \item[3.] If $M$ is generated by $S$ and $S$ is finite,
+        then we say \textbf{$M$ is finitely generated by $S$}. In
+        this case we refer to $|S|$, denoted as $\mu(M)$, as the
+        \textbf{rank} of $M$. Furthermore, if $S = \{x_1, x_2,
+        \dots, x_n\}$ it is convenient to write $M = \left< x_1,
+        x_2, \dots, x_n \right>$.
+    \end{itemize}
+\end{definition}
+
+In the case of a cyclic group $G$, we see that $G$ has rank one
+and one generator. Thus we see that this concept is generalized in
+module theory if the generating set for some module is of
+cardinality one. 
+
+Note we can also union modules together to get another module.
+\begin{definition}
+    Let $M$ be an $R$-module and $\{S_{\alpha}\}$ a family of
+    submodules of $R$. Then the \textbf{submodule generated by
+    $\{N_{\alpha}\}_\{\alpha \in \lambda\}$} is 
+    \[
+        \left< \bigcup_{\alpha \in \lambda}S_\alpha\right>
+    \]
+    which we often denote as $\displaystyle \sum_{\alpha \in \lambda}S_{\alpha}$.
+\end{definition}
+
+Next we move onto the concept of an annihilator, which we define
+as follows. 
+
+\begin{definition}
+    Let $M$ be an $R$-module, and suppose $X \subset M$. Then we
+    define the set 
+    \[
+        \ann(X) = \{a \in R \mid ax = 0 \text{ for all }x \in X\}
+    \]
+    to be the \textbf{annihilator of $X$}.
+\end{definition}
+\textcolor{NavyBlue}{Note that $\ann(X) \subset R$ and that
+$0 \in \ann(X)$ for any $X \subset M$. If $\ann(X) = \{0\}$, we of
+course say that it is \textbf{trivial}.}
+
+The annihilator captures
+all of the coefficients of $R$ which annihilate every element in
+$X$. Thus one can imagine that the size of $\ann(X)$ increases as
+the size of
+$X \subset M$ increases (of course, if $\ann(X)$ is not trivial for all $X$.)
+
+\begin{proposition}
+    Let $M$ be an $R$-module and let $X \subset M$ be nonempty. Then 
+    \begin{itemize}
+        \item[1.] $\ann(X)$ is a left ideal of $R$
+        \item[2.] If $N$ is a submodule of $M$, then $\ann(N)$
+        is an ideal of $R$.
+        \item[3.] If $R$ is commutative and $N$ is a cyclic submodule of $M$ generated by $x \in
+        N$ then $\ann(N) = \{a \in R \mid ax = 0 \}$.
+    \end{itemize}
+\end{proposition}
+
+\begin{prf}
+    \begin{itemize}
+        \item[1.] 
+        Let $X \subset M$. In order for $\ann(X)$ to be a left ideal, it must be a subring of
+        $R$ which absorbs left multiplication. 
+        \begin{description}
+            \item[It's a Subring.] We can apply the subring test to
+            prove this. Recall earlier we said that $0 \in \ann(X)$
+            for any $X \subset M$, so $\ann$ is nonempty. 
+            
+            Now let $a, b \in \ann(X)$, so that $ax = bx = 0$ for all
+            $x \in X$. Then clearly $abx = 0$ and $(a - b)x = ax -bx
+            = 0$ so that $ab \in \ann(X)$ and $a-b \in \ann(X)$. Thus
+            it is a subring of $R$.
+
+            \item[It's an ideal.] For any $r \in R$ and $a \in
+            \ann(X)$ we have that $rax = r(ax) = 0$. Therefore
+            $ra\in I$ for all $r \in R$, which proves it is a left
+            ideal. 
+            \\
+            \textcolor{Plum}{Why isn't it also a right ideal? Well,
+            observe that we would need $arx = 0$ whenever $a \in
+            \ann(X)$ and $r \in R$. This would require either that
+            $ar = 0$, which we can't always guarantee, or that $rx
+            \in X$. But we don't know if $rx \in X$; we could only
+            guarantee that if $X$ was an $R$-module, which we'll
+            see in the next proof.
+            }
+        \end{description} 
+
+        \item[2.] Let $N$ be a submodule of $M$. Since we showed
+        in (1.) that $\ann(X)$ is a left
+        ideal for any $X \subset M$, we must simply show that
+        $\ann(N)$ also absorbs right multiplication of $R$ as well in
+        order to show it is an ideal.
+
+        Thus let $r\in R$ and $a \in \ann(N)$. Since $N$ is a
+        submodule of $N$ we know 
+        that $rx \in N$. Hence $a(rx) = 0$ as $an = 0$ for all $n
+        \in N$. Therefore $ar \in \ann(N)$ whenever $r \in R$ and
+        $a \in \ann(N)$, proving that $\ann(X)$ absorbs right
+        multiplication and is therefore an ideal.
+
+        \item[3.] Consider $\ann(N)$ where $N$ is cyclic and
+        generated by $x$ and let $|N| = k$. Suppose we have an $a \in R$ such that
+        $ax = 0$. Then we
+        see that $ax^2 = (ax)x = 0$, $ax^3 = (ax)x^2 = 0$, and
+        that in general $ax^j = (ax)x^{j-1} = 0$ for any $j \in
+        \{1, 2, \dots, k\}$. Since every $n \in N$ is of the form
+        $x^j$ for some $j \in \{1, 2, \dots, k\}$ we have $an = 0$
+        for all $n \in N$. Hence, 
+        \[
+            \ann(X) = \{a \in R \mid an = 0 \text{ for all } n \in N\} = \{a \in R \mid ax = 0\}.
+        \]
+        \textcolor{red}{Where does commutativity come into play?}
+    \end{itemize}
+\end{prf}  
+Note that in general we denoted $\ann(x)$ to be $\ann(N)$ where
+$N$ is cyclic and generated by $x$. This only really makes sense
+if $R$ is commutative.
+
+For an $R$-module $M$ and a family of submodules
+$\{N_\alpha\}_{\alpha \in \lambda}$, we have been able to define
+the arbitrary intersection and addition of submodules. Next we
+define the product of $R$-modules. We now define a product of
+$R$-modules. 
+
+If $M$ is an $R$-module and $I$ is an ideal, then we can define 
+\[
+    IM = \Big\{ \sum_{i = 1}^{n}a_im_i \mid a_i \in R, m_i \in M \text{ for } n \in N \Big\}    
+\]
+which is a submodule of $R$. Thus our main properties of
+submodules are intersection, addition, and products with ideals. 
+
+\begin{definition}
+    Let $R$ be an integral domain and $M$ an $R$-module. Suppose
+    $x \in M$. Then
+    \begin{itemize}
+        \item[1.] If $\ann(x) \ne \{0\}$ then we define $x$ to be
+        \textbf{torsion element}. We define the set of torsion
+        elements of $M$ to be the \textbf{torsion submodule} and
+        denote this as $M_{\tau}$.
+        \item[2.] If $M_\tau = \{0\}$ then we say $M$ is
+        \textbf{torsion free}, while if $M_\tau = M$ we say that
+        $M$ is \textbf{torsion module}.
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    Let $R$ be an integral domain and $M$ an $R$-module. Then 
+    \begin{itemize}
+        \item[1.] $M_\tau$ is a submodule of $M$. 
+        \item[2.] $M/M_\tau$ is torsion free. 
+    \end{itemize}
+\end{proposition}
+
+\begin{prf}
+    \begin{itemize}
+        \item[1.] We can use the submodule test to show that this
+        is a submodule of $M$. First, recall that $M_\tau$ is
+        nonempty as it always contains 0. Let $a, b \in R$ and suppose $m_1,
+        m_2 \in M_\tau$. Then observe that $(am_1 + bm_2)x = am_1x
+        + bm_2x = 0$ since $m_1x = 0$ and $m_2x = 0$. Hence, this
+        is a submodule.
+
+        \item[2.] Suppose that $(m + M_\tau)x = M_\tau$ where $m
+        \in M$ for some $x \in M$. 
+        Then this implies that $mx \in M_\tau$. Therefore there
+        exists a $n \in R$ such that $n(mx) = (nm)x = 0$. Since
+        $R$ is an integral domain, $nm \ne 0$ so that we must have
+        $x = 0$. Thus the torsion module is trivial.
+    \end{itemize}
+\end{prf}
+
+\begin{proposition}
+    Let $R$ be an integral domain and suppose $M = \left< x_1,x_2,
+    \dots, x_n \right>$ (that is, $M$ is finitely generated). Then 
+    \[
+        \ann(M) = \ann(x_1) \cap \ann(x_2) \cap \dots \cap \ann(x_n).
+    \] 
+\end{proposition}
+Note that $0 \in \ann(x_i)$ for all $i \in \{1, 2, \dots, n\}$.
+Hence, the above intersection is never empty. 
+
+\begin{prf}
+    \begin{description}
+        \item[\phantom{m}]$\bf{\ann(M) \subset \ann(x_1) \cap \ann(x_2) \cap \dots \cap \ann(x_n)}$.
+        Observe that for any $a \in \ann(M)$, we see that $ax = 0$
+        for all $x \in M$. In particular, $ax_i = 0$ for $i \in
+        \{1, 2, \dots, n\}$. Hence we see that $a \in \ann(x_i)$
+        for each $x_i$, so that $a \in \ann(x_1) \cap \ann(x_2)
+        \cap \dots \cap \ann(x_n)$.
+        
+        \item[\phantom{m}]$\bf{\ann(x_1) \cap \ann(x_2) \cap \dots
+        \cap \ann(x_n) \subset }\bf{\ann(M)}$. Observe that for $
+        a \in \ann(x_1) \cap \ann(x_2) \cap \dots \cap \ann(x_n)$
+        we see that $ax_i = 0$ for each $i \in \{1, 2, \dots,
+        n\}$.
+            
+        By 1.\ref{submodule_intersection_theorem} we know that for
+        any $m \in M$ we have that $\displaystyle m = \sum_{i =
+        1}^{n}a_ix_i$ for some $a_i \in R$ and $x_i \in M$. But
+        note that 
+        \[
+            am = a\sum_{i =1}^{n}a_ix_i = \sum_{i =1}^{n}aa_ix_i = \sum_{i =1}^{n}a_i(ax_i) =0
+        \]
+        where in the last step we used the commutativity of $R$.
+        Therefore $a \in \ann(X)$, proving that $\ann(x_1) \cap \ann(x_2) \cap \dots
+        \cap \ann(x_n) \subset \ann(M)$.
+    \end{description}
+    With both directions of the proof complete, we can conclude
+    that 
+    $\ann(M) = \ann(x_1) \cap \ann(x_2) \cap \dots \cap
+    \ann(x_n)$ as desired.
+\end{prf}
+
+\newpage
+\section{Cartesian Products and Direct Sums. }
+
+In group and ring theories, we can make sense of the idea of a
+cartesian product of groups or rings. Thus it is again no surprise
+that we can construct cartesian products of modules. 
+
+However, we shall see a theme that is common in most areas of
+mathematics: infinite products behave differently than finite
+products. In fact, it usually turns out that our intuitive
+definiton for the products of our objects (in our case, modules)
+is usually wrong and cumbersome, even though it feels intuitive. 
+That is, we generally want to define products using the cartesian
+notion, but this usually just gives us more problems. 
+
+The alternative is to come up with a definition of multiplication
+that \textit{is} cartesian for finite products, but is not exactly
+cartesian for infinite products. This will make sense once we are
+more specific by what we mean.
+
+\begin{definition}
+    Let $M_1, M_2, \dots, M_n$ be a set of $R$-modules. We define
+    \[
+        \prod_{i = 1}^{n}M_i =  M_1\times M_2 \times \cdots \times M_n 
+    \]
+    as the \textbf{cartesian product} of these $R$-modules whose
+    elements are of the form $(x_1, x_2, \dots, x_n)$ where $x_i
+    \in M_i$ for $i \in \{1, 2, \dots, n\}$. 
+    
+    More generally, if
+    $\{M_\alpha\}_{\alpha \in \lambda}$ is an arbitrary family of
+    $R$-modules then $\displaystyle \prod_{\alpha \in \lambda}
+    M_\alpha$ is the \textbf{arbitrary cartesian product}. 
+
+    \textcolor{purple}{You may now ask how we notate, or even
+    describe these elements. We can't put them in a tuple, since
+    they're not finite. We could put them in a tuple like "$(x_1,
+    x_2, \dots)$", where the ellipsis implies an infinite list of
+    elements, but that would only take care of at most countable
+    families of $R$-modules.
+    }
+    \textcolor{MidnightBlue}{
+    \\
+    \\
+    \indent Instead, we use the following idea as elements of
+    $\displaystyle \prod_{\alpha \in \lambda} M_\alpha$ being
+    "functions." This is an abstract, yet quite useful strategy
+    used in different areas of mathematics to deal with arbitrary
+    products. 
+    \\
+    \\
+    \indent Let us first literally describe our elements. An
+    element $\displaystyle a \in \prod_{\alpha \in \lambda}
+    M_\alpha$ is uniquely determined by selecting one element
+    $m_\alpha \in M_\alpha$ for each $\alpha \in \lambda$. This is
+    how a tuple works. For example, in $\mathbb{R}^3$, we
+    separately pick 3 elements out of 3 separate copies of $\RR$ to
+    form a tuple $(x_1, x_2, x_3) \in \mathbb{R}^3$.
+    \\
+    \\
+    Thus for each $\displaystyle a \in \prod_{\alpha \in \lambda}$ we may
+    associate $a$ with a function $f_a: \lambda \to \prod_{\alpha
+    \in \lambda}M_\alpha$ which iterates through all $\alpha \in \lambda$ and
+    picks out an element $M_\alpha$. For example, if we know that,
+    for
+    $i \in \lambda$, the $i$-th coordinate of $a$ is $x$, then $f_a(i) =
+    x$. 
+    }
+    \begin{center}
+        \begin{tikzpicture}[baseline= (a).base, color = MidnightBlue]
+            \node[scale = 0.85] at (-0.2,0) {$f_a$};
+            \node[scale = 0.85] at (0.7,0) {$f_a$};
+            \node[scale = 0.85] at (1.6,0) {$f_a$};
+
+            \node[scale=1] (a) at (0,0){
+        \begin{tikzcd}[row sep=normal, column sep = 1.0, scale = 2]
+            \lambda:\{ \dots, & \alpha, \arrow[d] & \beta\arrow[d], &
+            \gamma\arrow[d],& \dots 
+            \}
+            \\
+            a = (\dots, & x_\alpha, & x_\beta & x_\gamma, & \dots)  
+        \end{tikzcd}
+        };
+    \end{tikzpicture}
+    \end{center}
+    \textcolor{NavyBlue}{
+    The above diagram illustrates our descriptions so far, where
+    in the case above we have that the $\alpha$-th element of $a$
+    is $x_\alpha$, the $\beta$-th element of $a$ is $x_\beta$, and
+    so on. With
+    that said, we can now restate that 
+    \[
+        \prod_{\alpha \in \lambda} M_\alpha = \{\text{All functions } f \mid  f(\alpha) \in M_\alpha \text{ where } \alpha \in \lambda \}.
+    \]
+    and move onto understanding why we want to
+    adjust our definition for multiplication of $R$-modules. 
+    }
+
+    It turns out that we can make the arbitrary cartesian product
+    into an $R$-module. 
+
+    \begin{proposition}
+        If $\{M_\alpha\}_{\alpha \in \lambda}$ is a family of
+        $R$-modules, then $\displaystyle \prod_{\alpha \in 
+        \lambda}M_{\alpha}$ is an $R$-module.
+    \end{proposition}
+
+    \begin{prf}
+        \begin{description}
+            \item[Abelian Group.] First observe that $\displaystyle
+            \prod_{\alpha \in \lambda} M_\alpha$ is an abelian group
+            if we realize the identity is the zero map $f$ (i.e., the
+            "tuple" of all zeros) and endow an operation of addition as follows. For
+            $f_1,
+            f_2 \in \displaystyle \prod_{\alpha \in \lambda} M_\alpha$
+            we have that 
+            \[
+                (f_1 + f_2)(\alpha) = f_1(\alpha) + f_2(\alpha)
+            \]
+            for all $\alpha \in \lambda$. Note that this makes sense
+            since $f_1(\alpha), f_2(\alpha) \in M_\alpha$. Hence the
+            sum will be an element in $M_\alpha$. Also, if $f \in
+            \displaystyle \prod_{\alpha \in \lambda} M_\alpha$, we
+            define the inverse to be $f^{-1}$ where $f^{-1}(\alpha) =
+            -f(\alpha)$. Commutativity is inherited from commutativity
+            of all $M_\alpha$, and so we have an abelian group.
+
+            \item[Ring Multiplication.] Let $a \in R$. Then define 
+            \[
+                (af)(\alpha) = a(f(\alpha))  
+            \] 
+            for all $\alpha \in \lambda$. Observe that, since each
+            $M_\alpha$ is an $R$-module, we have that $f(\alpha) \in
+            M_\alpha \implies af(\alpha) \in M_\alpha$ for all $\alpha
+            \in \lambda$. Thus our multiplcation is well-defined. It is then a simple exercise to check that
+            the axioms of an $R$-module are satisfied via our operations.
+        \end{description}
+    \end{prf}
+
+    Since our above argument was a bit abstract, we reintroduce
+    it in the language of finite products.
+    Again, we can turn a finite cartesian product of
+    $R$-modules into an $R$-module with the following operations.
+\begin{itemize}
+    \item[1.] Let $(m_1, m_2, \dots, m_n), (p_1, p_2 ,\dots,
+    p_n) \in M_1 \times M_2 \times \cdots \times M_n$. Then let us define
+    addition of elements as
+    \[
+        (m_1, m_2, \dots, m_n) + (p_1, p_2 ,\dots, p_n)
+        = (m_1 + p_1, m_2 + p_2, \dots, m_n + p_n).
+    \] 
+    \item[2.] For any $a \in R$ and $(m_1, m_2, \dots, m_n) \in
+    M_1 \times M_2 \times \cdots \times M_n$ we define scalar
+    multiplication as 
+    \[
+        a(m_1, m_2, \dots, m_n) = (am_1, am_2, \dots, am_n).
+    \] 
+\end{itemize}
+\end{definition}
+Again, it is then simple to check that this satisfies the axioms
+for an $R$-module. 
+
+\textcolor{NavyBlue}{When we think of multiplying sets together,
+cartesian products usually come to mind. They are the most natural
+to us since it has been ingrained in us to think this way since
+primary school. However, it turns out in many areas of mathematics
+that the cartesian approach to defining multiplication of objects
+leads to undersirable properties, and objects often misbehave
+under a cartesian definition. 
+\\
+\\
+As we said earlier, the problems arise when the products get
+infinite. Hence the solution involves defining a new kind of
+multiplication which is the same as a cartesian product for
+\textit{finite} products, but is different for infinite products.}
+
+This leads to the concept of direct sums, which we will use
+instead of cartesian products (we will soon see why).
+
+\begin{definition}
+    Let $\{M_\alpha\}_{\alpha \in \lambda}$ be a family of
+    $R$-modules. Then we define the \textbf{direct sum} of
+    $\{M_\alpha\}_{\alpha \in \lambda}$ as 
+    \[
+        \bigoplus_{\alpha \in \lambda}M_\alpha = \{\text{All functions } f \mid f(\alpha) \in M_\alpha \textbf{ and } f(\alpha) = 0 \text{ except for finitely many } \alpha \in \lambda\}.
+    \]
+\end{definition}
+
+The only
+difference between the direct sum and the cartesian product is that, for any point
+$\displaystyle a \in \bigoplus_{\alpha \in \lambda} M_\alpha$, all
+indices of $a$ are zero except for finitely many indices. So
+only finitely many indices are nonzero for a direct sum, while
+in a cartesian product there may be finite, countable or
+uncountably many nonzero indices.
+
+
+\textcolor{purple}{Thus, note that for a finite product, the direct sum
+and the cartesian product are the exact same thing}. There is no
+difference when the product is finite. In other words, 
+\[
+    M_1 \times M_2 \times \cdots \times M_n = M_1 \oplus M_2 \oplus \cdots \oplus M_n.
+\]
+
+\begin{proposition}
+    The direct sum of a family $\{M_\alpha\}_{\alpha \in
+    \lambda}$ of $R$-modules is an $R$-module. In fact,
+    $\displaystyle \bigoplus_{\alpha \in 
+    \lambda} M_\alpha$ is an $R$-submodule of $\displaystyle \prod_{\alpha \in \lambda} M_{\alpha}$.
+\end{proposition}
+
+\begin{prf}
+    Note that $\displaystyle \bigoplus_{\alpha \in \lambda}
+    M_\alpha \subset \prod_{\alpha \in \lambda}M_\alpha$. Thus we
+    can use the submodule test to check if is in fact an
+    $R$-module. Observe that for any $a, b \in R$ and
+    $\displaystyle f_1, f_2
+    \in \bigoplus_{\alpha \in \lambda}M_{\alpha}$, we have that 
+    \[
+        a(f_1)(\alpha) + b(f_2)(\alpha) \in \bigoplus_{\alpha \in \lambda}M_{\alpha} 
+    \]
+    since the function $a(f_1)(\alpha) + b(f_2)(\alpha)$ will be
+    nonzero for only finitely many values. (In fact, if $f_1$ is
+    nonzero for $k$-many values and $f_2$ is nozero for $l$ many
+    values, then $a(f_1)(\alpha) + b(f_2)(\alpha)$ is nonzero for
+    at most $k + l$-many values). Hence this passes the submodule
+    test.
+\end{prf}
+
+\noindent\textbf{Why do we prefer direct sums over cartesian products?} 
+\\
+
+The answer lies in the following observation. Suppose
+$\{M_{\alpha}\}_{\alpha \in \lambda}$ is a family of $R$-modules and
+that for each $\alpha \in \lambda$ there exists a homomorphism
+$\phi_\alpha : M_\alpha \to N$. Let $a \in \displaystyle
+\prod_{\alpha \in \lambda}M_\alpha$ and represent $a$ with the map
+$f_a:\lambda \to \displaystyle \prod_{\alpha \in
+\lambda}M_{\alpha}$. Thus $f_a(\alpha) \in M_\alpha$ is the $\alpha$-th
+coordinate of our point $a$.
+
+If we try to define
+a homomorphism $\displaystyle \phi : \prod_{\alpha \in
+\lambda}M_\alpha \to N$ in a natural, linear way such as 
+\[
+    \phi(a) = \sum_{\alpha \in \lambda}\phi_\alpha(f_a(\alpha))
+\]
+where $\displaystyle a \in \prod_{\alpha \in \lambda}M_{\alpha}$,
+then observe that the above sum is nonsense. What the hell is an
+infinite sum of module elements of $N$ supposed to represent?
+Also, there's no way to make sure this is even well-defined!
+
+However, if we instead consider $\displaystyle \bigoplus_{\alpha
+\in \lambda}M_{\alpha}$, then creating a natural homomorphism
+$\displaystyle \phi: \bigoplus_{\alpha \in 
+\lambda}M_{\alpha} \to N$ where again 
+\[
+    \phi(a) = \sum_{\alpha \in \lambda}\phi_\alpha(f_a(\alpha))
+\]
+works out fine. We see that $\phi$ is valid because $f_a(\alpha) =
+0$ for all but finitely many $\alpha \in \lambda$. Hence, the
+above sum will only ever consist of a sum of finite elements.
+
+The next important two theorems demonstrate the importance of the
+direct sum.
+
+\begin{thm}\label{fin_module_sums}
+    Let $M$ be an $R$-module and suppose $M_1, M_2, \dots, M_n$
+    are submodules such that 
+    \begin{itemize}
+        \item[1.] $M = M_1 + M_2 + \cdots + M_n$
+        \item[2.] $M_j \cap (M_1 + M_2 + \cdots + M_{j-1} + M_{j +
+        1} + \cdots + M_n) = \{0\}$ for all $j \in \{1, 2, \dots,
+        n\}$. 
+    \end{itemize}
+    Then 
+    \[
+        M \cong M_1 \oplus M_2 \oplus \cdots \oplus M_n.
+    \]
+    \vspace{-0.8cm}
+\end{thm}
+
+\begin{prf}
+    Construct the map $f:M_1 \oplus M_2 \oplus
+    \cdots \oplus M_n \to M$ as 
+    \[
+        f(x_1, x_2, \dots, x_n) = x_1 + x_2 + \cdots + x_n.
+    \]
+    It is simple to check that this is an $R$-module homomorphism.
+    Observe that by (1) $\im(f) = M$. Now suppose $(x_1, x_2, \dots, x_n) \in \ker(f)$. Then
+    we see that 
+    \[
+        x_1 + x_2 + \cdots + x_n = 0 \implies x_i = -(x_1 + x_2 + \cdots + x_{i-1} + x_{i+1} + \cdots + x_n)
+    \]
+    for all $i \in \{1, 2, \dots, n\}$. But by (2), we know that
+    no such $x_i$ can exist. Therefore $x_1 = x_2 = \cdots = x_n =
+    0$. Hence, $f$ is an isomorphism, which yields the desired result.
+\end{prf}
+
+The above result can be generalized to arbitrary direct sums. However, if we
+were dealing with cartesian products, we would not be able to
+generalize the above theorem to arbitrary direct sums. 
+
+\begin{thm}
+    Let $M$ be an $R$-module and suppose $\{M_\alpha\}_{\alpha \in
+    \lambda}$ is a family of $R$-modules such that 
+    \begin{itemize}
+        \item[1.] $\displaystyle M = \sum_{\alpha \in \lambda}
+        M_\alpha$ 
+        \item[2.] $M_\beta \bigcap \displaystyle  \sum_{\alpha \in
+        \lambda\setminus\{\beta\}}M_\alpha = \{0\}$ for all $\beta
+        \in \lambda$
+    \end{itemize}
+    then 
+    \[
+        M \cong \bigoplus_{\alpha \in \lambda}M_{\alpha}
+    \]
+    \vspace{-0.7cm}
+\end{thm}
+
+The proof is the exact same as before, although the notation is
+annoying. 
+
+
+\newpage
+\section{Exact Sequences and the Hom Functor.}
+
+This section will be the first encounter with the extremely
+important algebraic concept of an \textit{exact sequence}, which
+is something you may have already seen before without even knowing
+it. 
+
+\begin{definition}
+    Let $R$ be a ring. We define a \textbf{sequence} of
+    $R$-modules to be a chain of homomorphisms between
+    $R$-modules, generally denoted as
+    \begin{center}
+        \begin{tikzcd}
+            \cdots \arrow[r, "f_{i-1}"]
+            &
+            M_{i-1} \arrow[r, "f_{i}"]
+            &
+            M_i \arrow[r, "f_{i+1}"]
+            &
+            M_{i+1} \arrow[r, "f_{i+2}"]
+            &
+            \cdots
+        \end{tikzcd}
+    \end{center}
+    we say that that the above sequence is \textbf{exact} at $M_i$
+    if $\im(f_i) = \ker(f_{i+1})$. Hence, an exact sequence is a
+    sequence which is exact at every $M_i$. 
+\end{definition}
+
+\noindent \textbf{Short Exact Sequences.}\\
+Looking at "short" exact sequences aids out analysis of longer or
+infinite exact sequences. 
+\begin{proposition}
+    Let $M_1, M_2$ and $M$ be $R$-modules. Then
+    \begin{itemize}
+        \item[1.] The sequence
+        \begin{tikzcd}[column sep = \smallish]
+            0 \arrow[r] & M_1 \arrow[r, "f"] & M     
+        \end{tikzcd}
+        is exact if and only if $f$ is injective.
+
+        \item[2.] The sequence
+        \begin{tikzcd}[column sep = \smallish]
+            M \arrow[r, "g"] & M_2 \arrow[r] & 0    
+        \end{tikzcd}
+        is exact if and only if $g$ is surjective. 
+
+        \item[3.] 
+        The sequence
+        \begin{tikzcd}[column sep = \smallish]
+            0 \arrow[r] & M_1 \arrow[r, "f"] & M \arrow[r, "g"] & M_2 \arrow[r] & 0    
+            \end{tikzcd} is exact if and only if $f$ is injective
+            and $g$ is injective.
+    \end{itemize}
+\end{proposition}
+
+\begin{prf}
+    \begin{itemize}
+        \item[1.]  
+        ($\implies$) Suppose the sequence 
+        \begin{tikzcd}[column sep = \smallish]
+            0 \arrow[r] & M_1 \arrow[r, "f"] & M     
+        \end{tikzcd}
+        is exact. Then we have that $\im(0) = \ker(f) \implies
+        \ker(f) = \{0\}$. Therefore we see that $f$ is injective. 
+
+        ($\impliedby$)Now suppose $f$ is injective. Then $\ker(f) = 0$. Since
+        $\im(0) = \{0\}$ we see $\im(0) = \ker(f)$, so that the
+        sequence             \begin{tikzcd}[column sep = \smallish]
+            0 \arrow[r] & M_1 \arrow[r, "f"] & M     
+        \end{tikzcd}
+        is exact.
+
+        \item[2.] ($\implies$) Suppose the sequence 
+        \begin{tikzcd}[column sep = \smallish]
+            M \arrow[r, "g"] & M_2 \arrow[r] & 0    
+        \end{tikzcd}
+        is exact. Then we see that $\im(g) = \ker(0) = M_2$, since
+        the zero map simply takes all of $M_2$ and sends it to $0$.
+        Hence we see that $g$ is surjective. 
+
+        ($\impliedby$) Now suppose $g$ is surjective. Then $\im(g)
+        = M_2$ and we also have that $\ker(0) = M_2$. Therefore
+        $\im(g) = \ker(0)$ so that we have an exact sequence. 
+
+        \item[3.] By applying (1.) and (2.), the result follows.
+    \end{itemize}
+\end{prf}
+
+The above proposition offers the following definitions. 
+
+\begin{definition}
+    Let $M_1, M_2$ and $M$ be $R$-modules. If the sequence
+    \begin{center}
+        \begin{tikzcd}[column sep = \smallish]
+            0 \arrow[r] & M_1 \arrow[r, "f"] & M \arrow[r, "g"] & M_2 \arrow[r] & 0    
+            \end{tikzcd} 
+    \end{center}
+    is exact then we say it forms an \textbf{short exact
+    sequence}. Furthermore, if there exists an $R$-module $N$ such
+    that $M = N \oplus \im(f) = N \oplus \ker(g)$ (since $\im(f) =
+    \ker(g)$) then we say the above sequence is \textbf{split
+    exact}.
+
+    In this case, we say $N$ or $\im(f)$ is a \textbf{direct   
+    summand} of $M$.
+\end{definition}
+
+We can offer a few short exact sequences with some familiar
+objects. 
+\\
+\\
+\textbf{Examples.}
+\begin{itemize}
+    \item[1.] Let $M$ be an $R$-module with a submodule $N$. If
+    $i:N \to M$ is the inclusion map and 
+    $\pi: M \to M/N$ is the projection map, then the sequence 
+\begin{center}
+    \begin{tikzcd}[column sep = \smallish]
+        0 \arrow[r] & N \arrow[r, "i"] & M \arrow[r, "\pi"] & M/N \arrow[r] & 0    
+        \end{tikzcd} 
+\end{center}
+is exact. \\
+$\bm{\im(i) \subset \ker(\pi)}$. Observe
+    that if $n \in N$ then 
+    \[ 
+        \pi(i(n)) = \pi(n) = n + N = N
+    \]
+    so that $\im(i) \subset \ker(g)$.
+\\
+$\bm{\ker(\pi) \subset \im(i)}$. Suppose $m
+    \in \ker(\pi)$. Then we see that $\pi(m) = m + N = N$, so that
+    $m \in N$. Since $m \in N$, we know that $i(m) = m$. Therefore
+    $m$ is the image of some element in $M$ mapped by $i$ (namely,
+    just $m$ itself). Hence $\ker(\pi) \subset \im(i)$.
+
+With both directions, we can conclude that $\im(i) = \ker(\pi)$ so
+so that the sequence is exact.
+
+    \item[2.] Let $N$ and $P$ be $R$-modules. If we define $i':N
+    \to N \oplus P$ where $i'(n) = (n, 0)$ and $\pi': N \oplus P
+    \to P$ where $\pi'(n, p) = p$, we see that the sequence
+    \begin{center} 
+    \begin{tikzcd}[column sep = \smallish]
+        0 \arrow[r] & N \arrow[r, "i'"] & N\oplus M \arrow[r, "\pi'"] & M \arrow[r] & 0    
+        \end{tikzcd} 
+    \end{center}
+    is exact. We can realize this by simply observing that
+    $\ker(\pi')$ is the set of all elements $(n, 0) \in N \oplus
+    P$, which is exactly the image of $i'$. Therefore $\im(i') =
+    \ker(\pi')$, so that the sequence is exact.
+
+    \item[3.] The sequence
+    \begin{center} 
+        \begin{tikzcd}[column sep = \smallish]
+            0 \arrow[r] & \ZZ_p \arrow[r, "f"] & \ZZ_{pq} \arrow[r, "g"] & \ZZ_q \arrow[r] & 0    
+        \end{tikzcd} 
+    \end{center}
+    where $f:\ZZ_p \to \ZZ_{pq}$ is given by $f(n) = qn$ and
+    $g: \ZZ_{pq} \to \ZZ_q$ is given by $g(n) = n \mbox{ mod } q$,
+    then this sequence is exact. In fact, it is a split exact sequence.
+    From group theory, we know that 
+    \[
+        \ZZ_{mn} \cong \ZZ_m \oplus \ZZ_n
+    \]
+    if and only if $m$ and $n$ are coprime. In our case, $p$ and
+    $q$ are distint primes and hence are coprime so that $\ZZ_{pq} \cong \ZZ_p \oplus \ZZ_q$. We'll later show
+    that this will be sufficient to conclude that this is a split
+    sequence.
+
+    \item[4.] If instead we have the sequence
+    \begin{center} 
+        \begin{tikzcd}[column sep = \smallish]
+            0 \arrow[r] & \ZZ_p \arrow[r, "f"] & \ZZ_{p^2} \arrow[r, "g"] & \ZZ_p \arrow[r] & 0    
+        \end{tikzcd} 
+    \end{center}
+    where $f:\ZZ_p \to \ZZ_{p^2}$ is given by $f(n) = pn$ and
+    $g: \ZZ_{p^2} \to \ZZ_p$ is given by $g(n) = n \mbox{ mod }p$,
+    then this becomes
+    an exact sequence. However, this is not split exact as
+    $p$ is obviously not comprime with itself, and hence 
+    \[
+        \ZZ_{p^2} \not\cong \ZZ_p \oplus \ZZ_p
+    \]
+    which is why this is not a split exact sequence. 
+\end{itemize}
+
+The last two examples can be generalized into a theorem, which
+include other criterion for when a short exact sequence is split
+exact. 
+
+\begin{thm}\label{split_exact_lemma}
+    Let $M_1, M_2$ and $M$ be $R$-modules such that 
+    \begin{center}
+        \begin{tikzcd}[column sep = \smallish]
+            0 \arrow[r] & M_1 \arrow[r, "f"] & M \arrow[r, "g"] & M_2 \arrow[r] & 0    
+            \end{tikzcd} 
+    \end{center} 
+    is exact. Then the following are equivalent:
+    \begin{itemize}
+        \item[1.] There exists a homomorphism $\alpha : M \to M_1$
+        such that $\alpha \circ f = 1_{M_1}$ 
+        \item[2.] There exists a homomorphism $\beta: M_2 \to M$
+        such that $g \circ \beta = 1_{M_2}$ 
+        \item[3.] The above sequence is split exact. 
+    \end{itemize}
+    Furthermore, we see that 
+    \begin{align*}
+        M &\cong \im(f) \oplus \ker(\alpha)\\
+        &\cong \ker(g) \oplus \im(\beta)\\
+        &\cong M_1 \oplus M_2.
+    \end{align*} 
+    \vspace{-.5cm}
+
+\end{thm}
+
+
+
+
+\begin{prf}
+    \begin{description}
+        \item[($\bm{1 \implies 3}$).] Suppose there exists an
+        $\alpha : M \to M_1$ such that $\alpha \circ f = 1_{M_1}$.
+        Let $m \in M_1$. Then observe that 
+        \begin{align*}
+            \alpha(m - f(\alpha(m))) &= \alpha(m) - \alpha(f(\alpha(m)))\\
+            &= \alpha(m) - (\alpha \circ f)(\alpha(m))\\
+            &= \alpha(m) - \alpha(m)\\
+            &= 0
+        \end{align*}
+        where in the third step we used the fact that $\alpha
+        \circ f = 1_{M_1}$, and hence $\alpha(f(m)) = m$ for all
+        $m \in M_1$. Hence, $m - f(\alpha(m)) \in \ker(\alpha)$. 
+
+        \begin{center}
+            \begin{tikzpicture}
+                \filldraw[gray!20] (-3, -1) ellipse (1.5cm and 2cm);
+                \draw (-3, -1) ellipse (1.5cm and 2cm);
+        
+                \filldraw[thick, red!30] (3,0) ellipse (2cm and 3cm);
+                \draw (3,0) ellipse (2cm and 3cm);
+                \filldraw[thick, blue!30] (3,-1) ellipse (1.5cm and 2cm);
+                \draw (3,-1) ellipse (1.5cm and 2cm);
+        
+                \filldraw (2.7, 1.5) circle (0.5mm); % m
+                \node at (2.7, 1.8) {$m$};
+
+                \filldraw (-2.8, -1) circle (0.5mm); % 
+                \node at (-3, -1.5) {$\alpha(m)$};
+
+                \filldraw (2.05, -1) circle (0.5mm); % a(f(m))
+                \node at (3, -1) {$f(\alpha(m))$};
+
+                \filldraw (-3, -3) circle (0.5mm);
+                \filldraw (3, -3) circle (0.5mm);
+        
+                \draw[blue,-{Latex[length=3mm]}] (-2.8,-1) to [bend right] (2, -1);
+                \draw[red, -{Latex[length=3mm]}] (2, -1) to [bend right] (-2.8,-1);
+                \draw[red, -{Latex[length=3mm]}] (2.7, 1.5) to [bend
+                right = 55] (-2.8, -1);
+
+                \node at (3, 0.3) {$\im(f)$};
+                \node at (-0.3, 0) {$\alpha$};
+                \node at (-0.3, 2) {$\alpha$};
+                \node at (0, -2.1) {$f$};
+                \node at (-3, 1.3) {$M_1$};
+                \node at (3, 3.3) {$M$};
+                \node at (3, -2.6) {0};
+                \node at (-3, -2.6) {0};
+            \end{tikzpicture}
+
+            \textit{$\alpha(m)$ and $\alpha(f(\alpha(m)))$ are mapped to
+            the same element. Therefore, their difference is zero,
+            so that $m - f(\alpha(m)) \in \ker(\alpha)$. }
+
+        \end{center}
+        Since $f: M_1 \to M$ is injective, we see that $\alpha: M
+        \to M_1$ is surjective. To see this, let $m' \in M_1$.
+        Then there exists an $m'' \in M$ such that $\alpha(m'') = m'$;
+        namely, $m'' = f(m')$ works. 
+
+        Since $\alpha$ is surjective, we see that 
+        \[
+            \{f(\alpha(m)) \mid m \in M\} = \{f(m_1) \mid m_1 \in M_1 \} = \im(f).
+        \]
+        That is, $f(\alpha(M)) = f(M_1) = \im(f)$.
+        And because $\textcolor{red}{m - f(\alpha(m)) \in \ker(\alpha)}$ for all $m
+        \in M$, we see that $m \in \im(f) + \ker(\alpha)$ for
+        all $m \in M$. Hence, $M \subset \im(f) + \ker(\alpha)$.
+        But both $\im(f)$ and $\ker(\alpha)$ are subsets of $M$.
+        Therefore, $M = \im(f) + \ker(\alpha)$.     
+
+        Now let $x \in \ker(\alpha) \cap \im(f)$. Then $f(y) = x$
+        for some $y \in M_1$, and $\alpha(x) = 0$ as well. Hence, 
+        \[
+            \alpha(f(y)) = \alpha(x) = 0.
+        \]
+        But $\alpha \circ f = 0$, which implies that $y = 0$.
+        Therefore $\ker(\alpha) \cap \im(f) = \{0\}$. 
+        \begin{center}
+            \begin{tikzpicture}
+                \filldraw[gray!20] (-3, -1) ellipse (1.5cm and 2cm);
+                \draw (-3, -1) ellipse (1.5cm and 2cm);
+        
+                \filldraw[thick, red!30] (3,0) ellipse (2cm and 3cm);
+                \draw (3,0) ellipse (2cm and 3cm);
+                \filldraw[thick, blue!30] (3,-1) ellipse (1.5cm and 2cm);
+                \draw (3,-1) ellipse (1.5cm and 2cm);
+
+                \filldraw (-2.8, -1) circle (0.5mm); % 
+                \node at (-3, -1.5) {$m_1$};
+
+                \filldraw (2.05, -1) circle (0.5mm); % a(f(m))
+                \node at (3, -1) {$f(m_1)$};
+
+                \filldraw (-3, -3) circle (0.5mm);
+                \filldraw (3, -3) circle (0.5mm);
+        
+                \draw[blue, -{Latex[length=3mm]}] (-2.8,-1) to [bend right] (2, -1);
+                \draw[red, -{Latex[length=3mm]}] (2, -1) to [bend right] (-2.8,-1);
+                
+
+                \node at (3, 0.3) {$\im(f)$};
+                \node at (3, 2.4) {$\ker(\alpha)$};
+                \node at (-0.3, 0) {$\alpha$};
+                \node at (0, -2.1) {$f$};
+                \node at (-3, 1.3) {$M_1$};
+                \node at (3, 3.3) {$M$};
+                \node at (3, -2.6) {0};
+                \node at (-3, -2.6) {0};
+            \end{tikzpicture}
+        \end{center}
+        By Theorem
+        1.\ref{fin_module_sums}, we see that this implies that 
+        \[
+            M \cong \im(f) \oplus \ker(\alpha).
+        \]
+        Hence, $M$ is split exact as $\im(f)$ is a direct summand
+        of $M$.
+
+        
+
+        \item[($\bm{2 \implies 3}$).] Suppose (2) holds. We'll show that $\textcolor{blue}{m - \beta(g(m)) \in \ker(g)}$ for all $m \in M$. 
+
+        To show this, observe that 
+        \begin{align*}
+            g[m - \beta(g(m))] &=g(m) - g \circ \beta(g(m))\\
+            &= g(m) - g(m)\\
+            &= 0
+        \end{align*}
+        where in the second step we used the fact that $g \circ
+        \beta = 1_{M_2}$. Therefore, $\textcolor{blue}{m -
+        \beta(g(m)) \in \ker(g)}.$
+
+        \begin{center}
+            \begin{tikzpicture}[xscale=-1]
+                    \filldraw[gray!20] (-3, 0) ellipse (2cm and 3cm);
+                    \draw (-3, 0) ellipse (2cm and 3cm);
+            
+                    \filldraw[thick, red!30] (3,0) ellipse (2cm
+                    and 3cm);
+                    
+                    \draw (3,0) ellipse (2cm and 3cm);
+
+                    \filldraw[thick, blue!30] (3,-1) ellipse (1.5cm
+                    and 2cm);
+                    \draw (3,-1) ellipse (1.5cm and 2cm);
+            
+                    \filldraw (1.9, 1.7) circle (0.5mm); % m
+                    \node at (2.8, 1.5) {$\beta(g(m))$};
+
+                    \filldraw (-3.2, 0.5) circle (0.5mm); % 
+                    \node at (-4, 0.5) {$g(m)$};
+
+                    \filldraw (1.4, 0) circle (0.5mm); % a(f(m))
+                    \node at (1.4, 0.4) {$m$};
+
+                    \filldraw (-3, -3) circle (0.5mm);
+                    \filldraw (3, -3) circle (0.5mm);
+            
+                    \draw[red,-{Latex[length=3mm]}] (-3.2,0.5) to
+                    [bend right] (1.9, 1.7);
+                    \draw[blue,-{Latex[length=3mm]}] (1.9, 1.7) to [bend
+                    right] (-3.1,0.5);
+
+                    \draw[blue,-{Latex[length=3mm]}] (1.4, 0) to [bend
+                    left = 45] (-3.2, 0.55);
+
+                    %\node at (3, 2.3) {$\im(\beta)$};
+                    \node at (3, 0.3) {$\ker(g)$};
+                    \node at (-0.3, 2.3) {$g$};
+                    \node at (0, 0.1) {$\beta$};
+                    \node at (-0.3, -1) {$g$};
+                    \node at (-3, 3.3) {$M_2$};
+                    \node at (3, 3.3) {$M$};
+                    \node at (3, -2.6) {0};
+                    \node at (-3, -2.6) {0};
+            \end{tikzpicture}
+
+            \textit{$g(m)$ and $g(\beta(g(m)))$ are mapped to the same element in $M_2$, so their difference is zero. Therefore, $m - \beta(g(m)) \in \ker(g).$}
+
+        \end{center}
+        
+        Now note that 
+        \[
+            \{ \beta(g(m)) \mid m \in M\} = \{\beta(m_2) \mid m_2 \in M_2\} = \im(\beta)
+        \]
+        where in the second step we used the fact that $g$ is
+        surjective. That is, $\beta(g(M)) = \beta(M_2) = \im(\beta)$. Therefore we see that 
+        \[ 
+            m \in \im(\beta) + \ker(g)
+        \]
+        for all $m \in M$ which implies that 
+        $M \subset \im(\beta) + \ker(g)$. But since $\im(\beta)$
+        and $\ker(g)$ are both subsets of $M$, we see that $M =
+        \im(\beta) + \ker(g)$. 
+
+        Now let $m' \in \im(\beta) \cap \ker(g)$. Then there
+        exists an $m_2 \in M_2$ such that $\beta(m_2) = m'$.
+        Furthermore, since $m' \in \ker(g)$, 
+        \[
+            0 = g(m') = g(\beta(m_2)) = m_2
+        \]
+        since $g \circ \beta = 1_{M_2}$. Hence, $m_2 = 0$, so that
+        $\beta(m_2) = 0 = m$. Therefore $m = 0$, so that
+        $\im(\beta) \cap \ker(g) = \{0\}$. 
+        \begin{center}
+            \begin{tikzpicture}[xscale=-1]
+                    \filldraw[gray!20] (-3, 0) ellipse (2cm and 3cm);
+                    \draw (-3, 0) ellipse (2cm and 3cm);
+            
+                    \filldraw[thick, red!30] (3,0) ellipse (2cm
+                    and 3cm);
+                    
+                    \draw (3,0) ellipse (2cm and 3cm);
+
+                    \filldraw[thick, blue!30] (3,-1) ellipse (1.5cm
+                    and 2cm);
+                    \draw (3,-1) ellipse (1.5cm and 2cm);
+            
+                    \filldraw (1.9, 1.7) circle (0.5mm); % m
+                    \node at (2.8, 1.5) {$\beta(g(m))$};
+
+                    \filldraw (-3.2, 0.5) circle (0.5mm); % 
+                    \node at (-4, 0.5) {$g(m)$};
+
+                    \filldraw (1.4, 0) circle (0.5mm); % a(f(m))
+                    \node at (1.4, 0.4) {$m$};
+
+                    \filldraw (-3, -3) circle (0.5mm);
+                    \filldraw (3, -3) circle (0.5mm);
+            
+                    \draw[red,-{Latex[length=3mm]}] (-3.2,0.5) to
+                    [bend right] (1.9, 1.7);
+                    \draw[blue,-{Latex[length=3mm]}] (1.9, 1.7) to [bend
+                    right] (-3.1,0.5);
+
+                    \draw[blue,-{Latex[length=3mm]}] (1.4, 0) to [bend
+                    left = 45] (-3.2, 0.55);
+
+                    \node at (3, 2.3) {$\im(\beta)$};
+                    \node at (3, 0.3) {$\ker(g)$};
+                    \node at (-0.3, 2.3) {$g$};
+                    \node at (0, 0.1) {$\beta$};
+                    \node at (-0.3, -1) {$g$};
+                    \node at (-3, 3.3) {$M_2$};
+                    \node at (3, 3.3) {$M$};
+                    \node at (3, -2.6) {0};
+                    \node at (-3, -2.6) {0};
+            \end{tikzpicture}
+
+        \end{center}
+        
+        
+        By Theorem
+        1.\ref{fin_module_sums}, we have that 
+        \[
+            M \cong \im(\beta) \oplus \ker(g)
+        \]
+        so that $M$ is split exact, as one of its direct summands is $\ker(g)$.
+
+        \item[($\bm{1 \implies 2}$).]
+        Suppose (1) holds. Construct a function $\beta: M_2 \to M$
+        defined by 
+        \[
+            \beta(u) = v - f(\alpha(v))
+        \]
+        where $g(v) = u$. Since $G$ is surjective, we know that
+        such a $v$ exists, although we don't know if it is the
+        only $v \in M$ which maps to $u$, and if that could cause
+        us problems. Thus we'll show that
+        this definition is well defined (i.e. independent of the
+        choice of $v$). 
+
+        \begin{description}
+            \item[Well-defined.] 
+            Suppose $g(v') = u$ for some other $v' \in M$. Then
+            \begin{align*}
+                g(v') - g(v) &= v - f(\alpha(v)) - (v' - f(\alpha(v')))\\
+                &= (v - v') - f(\alpha(v)) + f(\alpha(v'))\\
+                &= (v - v') - f(\alpha(v) - \alpha(v'))\\
+                &= \textcolor{red}{(v - v') - f(\alpha(v - v'))}\\
+                &= 0.
+            \end{align*}
+            We will prove the conclusion made in red, i.e., 
+            $\textcolor{red}{(v - v') - f(\alpha(v - v'))} = 0.$
+            \\
+
+            To see this, first note that, as we proved earlier, $\textcolor{red}{x
+            - f(\alpha(x))} \in \ker(\alpha)$
+            for all $x \in M$. Hence, $\textcolor{red}{(v - v') - f(\alpha(v - v'))}
+            \in \ker(\alpha)$. 
+            \\
+
+            Furthermore,
+            since $g(v) = g(v')$, we see that $g(v - v')
+            = 0 \implies v - v' \in \ker(g)$. But $\ker(g) = \im(f)$,
+            so that $\textcolor{red}{v - v'} \in \im(f)$.
+            Obviously $\textcolor{red}{f(\alpha(v - v'))} \in
+            \im(f)$ for any $v \in M$, so that 
+            $\textcolor{red}{(v - v') - f(\alpha(v - v'))}
+            \in \im(f).$
+            \\
+
+            Thus we have that $\textcolor{red}{(v - v') - f(\alpha(v - v'))} \in \im(f)
+            \cap \ker(\alpha) = \{0\}$, so that $g(v) - g(v') =
+            0$.  
+        \end{description}
+        Next observe that for any $u \in M_2$ we have that 
+        \begin{align*}
+            g \circ \beta (u) &= g(v - f(\alpha(v)))\\
+            &= g(v) - (g \circ f)(\alpha(v))\\
+            &= g(v)
+        \end{align*}
+        where in the second step we used the fact that $(g \circ
+        f) = 0$ as $\ker(g) = \im(f)$. Thus we have that $g \circ
+        \beta = 1_{M_2}$, so that such a desired $\beta: M_2 \to M$
+        exists. 
+
+        \item[$\bm{(2 \implies 1)}$.] Suppose (2) holds. Construct
+        a function $\alpha : M \to M_1$ defined by 
+        \[
+            \alpha(m) = f^{-1}(m - \beta (g(m))).
+        \]
+        Note that we must be careful since we're dealing with an
+        inverse. To even make such a statement, we first recall
+        that $f$ is injective, so an inverse from $f^{-1}: \im(f) \to M$
+        certainly exists. But it only exists if its domain is at
+        most $\im(f)$. Thus we check that $\textcolor{blue}{m - \beta(g(m)) \in
+        \im(f)}$ for all $m \in M$.
+        
+        Earlier we proved that $\textcolor{blue}{m -
+        \beta(g(m)) \in \ker(g)}$, and we know that $\ker(g) =
+        \im(f)$ as the sequence is exact.
+        Therefore, we already know that $\textcolor{blue}{m -
+        \beta(g(m)) \in \im(f)}$.
+
+        Hence, $\alpha$ makes sense
+        since $f^{-1}$ exists and $m - \beta(g(m)) \in \im(f)$ for
+        all $m \in M$.
+
+
+        Now observe that for any $m_1 \in M_1$, 
+        \begin{align*}
+            \alpha \circ f(m_1) &= f^{-1}(f(m_1) - \beta(g(f(m_1))))\\
+            &= f^{-1}f(m_1) - f^{-1}(0)\\
+            &= m_1
+        \end{align*}
+        since $g(f(m_1)) = 0$ for all $m_1 \in M$. Thus such a
+        desired $\alpha$ exists.
+
+        \item[($\bm{3 \implies 1}$ \& 2).]
+        Suppose that 
+        \[
+            M \cong M'\oplus M''
+        \] 
+        where $M' = \im(f) = \ker(g)$, and $M''$ is some other
+        summand of $M$. Define a projection map $\pi: M \to M'$ as
+        \[
+            \pi(m) =
+            \begin{cases}
+                m & \text{ if } m \in M'\\
+                0 & \text{ otherwise}
+            \end{cases}
+        \]
+        and similarly the injective map $i: M'' \to M$ as $i(m'')
+        = m''$ for all $m'' \in M$. 
+        
+        Consider $\pi \circ f: M \to M'$. Since $M' = \im(f)$,
+        this is clearly an isomorphism. Now define $\alpha = (\pi
+        \circ f)^{-1} \circ \pi_1$ and observe that $\alpha
+        \to M \to M_1$ and 
+        \[
+            \alpha \circ f = (\pi \circ f)^{-1} \circ \pi_1 \circ f = 1_{M_1}.
+        \]
+        Hence, $(3) \implies (1)$.
+        
+        Similarly, observe that $g \circ i: M'' \to M_2$ is also
+        an isomorphism. To see this, first observe that $M' =
+        \ker(g)$, and since $M \cong M' \oplus M''$ we know that
+        $M' \cap M'' = \{0\}$. Therefore, if $m \in M''$ is
+        nonzero, then $m \not\in \ker(g)$. Hence $g(i(m)) \ne 0$
+        if and only if $m = 0$, so that $g \circ i$ is one to one.
+        Now surjectivity is clear, as $g$ itself is a surjective
+        function. 
+
+        Now define $\beta = i \circ (g \circ i)^{-1}$, and observe
+        that $\beta : M_2 \to M$ and 
+        \[
+            g \circ \beta = g \circ i \circ (g \circ i)^{-1} = 1_{M_2}.
+        \]
+        Therefore $(3 \implies 2)$, which completes the entire proof.
+    \end{description}
+\end{prf}
+
+That was a long ass proof, but the theorem is very powerful and
+worthwhile. Next, we'll reintroduce the concept of $\hom()$.
+\\
+
+\noindent \textbf{Inducing Homomorphisms.}
+
+\begin{minipage}{0.6\textwidth}
+    Let $M, N$ and $N'$ be $R$-modules, and let $\phi: M \to N$ and $f: N
+    \to N'$ be $R$-modules homomorphisms. Then we see that
+    the diagram to the right commutes.
+
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\textwidth}
+    \begin{center}
+        \begin{tikzcd}[column sep = large, row sep = large]
+            M \arrow[r, "\phi"] \arrow[rd, swap,"f \circ \phi"] & N \arrow[d, "f"]\\
+            & N'
+        \end{tikzcd}
+    \end{center}
+\end{minipage}
+\vspace{0.5cm}
+
+\begin{minipage}{0.6\textwidth}
+    However, suppose we feed the above diagram with arbitrary $\phi: M
+    \to N$. That is, we keep $f: N \to N'$ fixed, but let $\phi: M
+    \to 
+    N$ vary over all possible $\phi$. This is equivalent to grabbing
+    elements from the abelian group $\hom_R(M, N)$. We can denote
+    this with a red arrow, to remind the reader that this arrow
+    "picks" $\phi$. 
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\textwidth}
+    \begin{center}
+        \begin{tikzpicture}
+            \node at (0,2.5) {$\hom_R(M, N)$};
+            \draw[red, ->] (0, 2.2) to (0, 1.3);
+            \node{\begin{tikzcd}[column sep = large, row sep = large]
+                M \arrow[r, "\phi"] \arrow[rd, swap, "f \circ \phi"]& N \arrow[d, "f"]\\
+                & N'
+            \end{tikzcd}};
+        \end{tikzpicture}
+    \end{center}
+\end{minipage}
+
+\begin{minipage}{0.6\textwidth}
+    Note that we've described a well-defined system for assigning for each $\phi
+    \in \hom_R(M, N)$ a function 
+    \[ 
+        f \circ \phi.
+    \] 
+    Also, $f \circ \phi
+    : M \to N'$, so that $f \circ \phi \in \hom_R(M, N')$. We can
+    denote this with a blue arrow, to communicate that
+    $\hom_R(M,N')$ "accepts" $f \circ \phi$ (after all, it is an element of
+    the set).
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\textwidth}
+    \begin{center}
+        \begin{tikzpicture}
+            \node at (0,2.5) {$\hom_R(M, N)$};
+            \draw[red, ->] (0, 2.2) to (0, 1.3);
+            \node{\begin{tikzcd}[column sep = large, row sep = large]
+                M \arrow[r, "\phi"] \arrow[rd, swap, "f \circ \phi"]& N \arrow[d, "f"]\\
+                & N'
+            \end{tikzcd}};
+            \draw[blue, ->] (-0.4, -0.7) to (-0.4, -1.6);
+            \node at (-0.3, -2) {$\hom_R(M, N')$};
+        \end{tikzpicture}
+    \end{center}
+\end{minipage}
+\vspace{0.5cm}
+
+\begin{minipage}{0.6\textwidth}
+    What we've just described is an \textit{induced} function,
+    which we denote as $f_*$.
+    That is, if we fix $f$, then we can create a homomorphism
+    $f_*$  between the abelian groups $\hom_R(M, N)$ and
+    $\hom_R(M, N')$, where for each element $\phi \in \hom_R(M, N)$
+    we assign it the function $f \circ \phi \in \hom_R(M, N')$.
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\textwidth}
+    \begin{center}
+        \begin{tikzpicture}
+            \node at (0,2.5) {$\hom_R(M, N)$};
+            \draw[red, ->] (0, 2.2) to (0, 1.3);
+            \node{\begin{tikzcd}[column sep = large, row sep = large]
+                M \arrow[r, "\phi"] \arrow[rd, swap, "f \circ \phi"]& N \arrow[d, "f"]\\
+                & N'
+            \end{tikzcd}};
+            \draw[blue, ->] (-0.4, -0.7) to (-0.4, -1.6);
+            \node at (-0.3, -2) {$\hom_R(M, N')$};
+            \node at (-2.4, 0.5) {$f_*$};
+            \draw[->] (-1.4, 2.3) to [bend right] (-1.7, -1.7);
+        \end{tikzpicture}
+    \end{center}
+\end{minipage}
+
+
+\noindent $\hom_R(- , M)$.\\
+The we restate our results. If $N, N'$ are $R$-module homomorphisms and $f: N \to N'$ is an $R$-module
+homomorphism, then for any $R$-module $M$ we can create an induced
+homomorphism 
+\[ 
+    f_* : \hom_R(M, N) \to \hom_R(M, N')
+\] 
+defined as 
+\[
+    f_*(\phi) = f \circ \phi.
+\]
+\noindent $\hom_R(M, -)$.\\
+Similarly, if $N, N'$ are again $R$-modules and $g: N' \to N$ is a an
+$R$-module homomorphism, then for any $R$-module $M$, there is
+an induced homomorphism 
+\[
+    g^*: \hom_R(N, M) \to \hom_R(N', M)
+\]
+defined as 
+\[
+    g^*(\psi) = \psi \circ g.
+\]
+It turns out in category theory that the behavior of these
+functions fit the definition of a \textbf{functor}.
+$\hom_R(- , M)$ is known as a covariant functor,
+while $\hom_R(M, -)$ is known as a contravariant
+functor. We won't delve too much into this.
+
+\textcolor{NavyBlue}{Since the $\hom_R$ groups are abelian, we see that $f_*$ and $g_*$
+are in fact group homomorphisms. If $R$ is commutative, then we
+know that $\hom_R$ forms an $R$-module in which case $f_*$ and
+$g_*$ become $R$-module homomorphisms.}
+\\
+
+Now suppose a family of $R$-modules $\{M_i \mid i \in \mathbb{N}\}$ associated with a
+set of homomorphisms $\{f_i \mid f_i :M_{i-1} \to M_i, i
+\in \mathbb{N}\}$ for a long sequence, not necessarily exact.
+\begin{center}
+    \begin{tikzcd}
+        \cdots \arrow[r, "f_{i-1}"]
+        &
+        M_{i-1} \arrow[r, "f_{i}"]
+        &
+        M_i \arrow[r, "f_{i + 1}"]
+        &
+        M_{i+1} \arrow[r, "f_{i+2}"]
+        &
+        \cdots
+    \end{tikzcd}
+\end{center}
+Then if we apply the $\hom_R(M, -)$ functor,
+then we see that the above sequence implies a sequence between the
+$\hom$ groups:
+\begin{center}
+    \begin{tikzcd}
+        \cdots \arrow[r, "(f_{i-1})_*"]
+        &
+        \hom_R(M,M_{i-1}) \arrow[r, "(f_{i})_*"]
+        &
+        \hom_R(M,M_i) \arrow[r, "(f_{i+1})_*"]
+        &
+        \hom_R(M,M_{i+1}) \arrow[r, "(f_{i+2})_*"]
+        &
+        \cdots
+    \end{tikzcd}
+\end{center}
+and applying the $\hom_R(-, M)$ functor we get 
+\begin{center}
+    \begin{tikzcd}
+        \cdots
+        &
+        \hom_R(M,M_{i-1}) \arrow[l,swap, "(f_{i-1})^*"]
+        &
+        \hom_R(M,M_i) \arrow[l, swap,"(f_{i})^*"]
+        &
+        \hom_R(M,M_{i+1}) \arrow[l, swap,"(f_{i+1})^*"]
+        &
+        \cdots \arrow[l, swap, "(f_{i+2})^*"]
+    \end{tikzcd}
+\end{center}
+
+Thus the long sequence of $R$-modules implies the existence of two other long
+sequences of abelian groups. The interesting thing is that the two sequences are
+similar but differ in the direction of the arrows (this is why we
+denote the functions separately with an asterik either in the
+subscript or superscript). Furthermore,
+the direction of the arrows in the first seuqence of $M_i$
+$R$-modules determines the direction of the arrows in the other
+two sequences. 
+
+\begin{thm}
+    Let $M_1, M$ and $M_2$ be $R$-modules, and suppose $f:M_1 \to
+    M$ and $g:M \to M_2$ are $R$-modules. Then the sequence
+    \begin{equation}\label{0_M_1MM_2_short_exact}
+        \begin{tikzcd}
+            0 \arrow[r]
+            &
+            M_{1} \arrow[r, "f"]
+            &
+            M \arrow[r, "g"]
+            &
+            M_{2}
+        \end{tikzcd}
+    \end{equation}
+    is exact if and only if the sequence 
+        \begin{equation} \label{0_homM1_homM_homM2_exact_sequence}
+        \begin{tikzcd}
+            0 \arrow[r]
+            &
+            \hom_R(N,M_{1}) \arrow[r, "f_*"]
+            &
+            \hom_R(N, M) \arrow[r, "g_*"]
+            &
+            \hom_R(N,M_{2})
+        \end{tikzcd}
+    \end{equation}
+    is an exact sequence of abelian groups. Furthermore, the sequence 
+    \begin{equation}\label{M_1MM_2_0_short_exact}
+        \begin{tikzcd}
+            M_{1} \arrow[r, "f"]
+            &
+            M \arrow[r, "g"]
+            &
+            M_{2} \arrow[r]
+            &
+            0
+        \end{tikzcd}
+    \end{equation}
+    is exact if and only if 
+    \begin{equation}\label{homM1_homM_homM2_0_exact_sequence}
+        \begin{tikzcd}
+            \hom_R(M_{1}, N)
+            &
+            \hom_R(M, N) \arrow[l, swap, "f^*"]
+            &
+            \hom_R(M_{2}, N)\arrow[l, swap, "g^*"]
+            & 
+            0 \arrow[l]
+        \end{tikzcd}
+    \end{equation}
+    is an exact sequence of abelain groups.
+\end{thm}
+
+\begin{prf}
+    \textcolor{MidnightBlue}{To show that the sequence between the
+    $\hom$ abelian groups is exact, we need to check that (1)
+    $f_*$ is injective and (2) $\im(f_*) = \ker(g_*)$.
+    }
+    \begin{description}
+        \item[$\bm{f_*}$ is injective.]
+            Suppose that $f_*(\psi) = 0$ for some $\phi \in
+            \hom_R(N, M_1)$. Then 
+            \[
+                f_*(\psi) = 0 \implies f(\psi(n)) = 0
+            \] 
+            for all $n \in M$. However, $f$ is injective, so that
+            $\ker(f) = \{0\}$. Therefore $\psi(n) \in \ker(f) =
+            \{0\}$ for all $n$, which means that $\psi$ is the
+            zero function. Therefore $\ker(f_*) = \{0\}$ (where
+            the zero here stands for the zero function between $N$
+            and $M_1$) so that $f_*$ is injective. 
+
+            \item[$\bm{\im(f_*) \subset \ker(g_*)}$.]
+            Let $\phi \in \hom_R(N, M_1)$. Then observe that 
+            \[
+                g_*(f_*(\phi)) = g_*(f \circ \phi) = g \circ f \circ \phi = 0
+            \] 
+            since $g \circ f = 0$ as $\im(f) =
+            \ker(g)$.
+            Therefore we see that $\im(f_*) \subset \ker(g_*)$. 
+    
+            \item[$\bm{\ker(g_*) \subset \im(f_*)}$.]
+            Let $\psi \in \hom_R(N, M)$ and suppose that $g_*(\psi)
+            = 0$. Note that 
+            \[
+                g_*(\psi) = 0 \implies g(\psi(n)) = 0
+            \]
+            for all $n \in N$. Since $\ker(g) = \im(f)$, we know
+            for all $n \in N$ that $\psi(n) \in \im(f)$.
+            Therefore, there exist a set of $y \in M_1$ such that
+            $f(y) = \psi(n)$, and since $f$ is one to one this
+            correspondence is uniquely determined. 
+
+            Thus construct a function $\tau: N \to M_1$ such that 
+            \[
+                \tau(n) = f^{-1}(\psi(n)).
+            \]
+            As we discussed, this function is well defined since
+            $f$ is one-to-one, and therefore there is always a
+            unique value of $f^{-1}(\psi(n))$ for each $n$. Now
+            note that this function is an $R$-module homomorphism since, for
+            any $n_1, n_2 \in N$ and $a \in R$  
+            \begin{align*}
+                \tau(n_1 + n_2) &=  f^{-1}(\psi(n_1 + n_2))\\
+                &= f^{-1}(\psi(n_1) + \psi(n_2))\\
+                &= f^{-1}(\psi(n_1)) + f^{-1}(\psi(n_2))\\
+                &= \tau(n_1) + \tau(n_2)
+            \end{align*}
+            and 
+            \begin{align*}
+                \tau(an_1) &= f^{-1}(\psi(an_1))\\
+                    &= f^{-1}(a\psi(n_1))\\
+                    &= af^{-1}(\psi(n))\\
+                    &= a\tau(n_1).
+            \end{align*}
+            Therefore we see that $\tau \in \hom_R(N_1, M)$ and that
+            \[
+                f_*(\tau) = f_*(f^{-1}(\psi)) = f(f^{-1}(\psi))= \psi.
+            \]
+            Hence, $\psi \in \im(f_*)$. Hence $\ker(g_*)
+            \subset \im(f_*)$, which proves that $\ker(g_*) =
+            \im(f_*)$.  
+    \end{description}
+    \textcolor{MidnightBlue}{To prove the reverse direction, we
+    will assume the exactness of the second sequence and show that
+    (1) $f$ is injective and (2) $\im(f) = \ker(g)$.}
+
+    \begin{description}
+        \item[$\bm{f}$ is injective.] Suppose that sequence
+        \ref{0_homM1_homM_homM2_exact_sequence} is exact for all
+        $R$-modules $N$. Then let $N = \ker(f)$, and since $N
+        \subset M_1$ consider the
+        inclusion map $i: N \to M_1.$  Note however that for any
+        $n \in N$ we see that 
+        \[
+            f_*(i(n)) = f(i(n)) = 0
+        \]
+        since $\im(i) = \ker(f)$. Hence, $i \in \ker(f_*)$. 
+        However, since $f_*: \hom_R(N,
+        M_1) \to \hom_R(N, M)$ is injective, we know that
+        $\ker(f_*) = 0$. Therefore we have that $i = 0$, (i.e. it
+        is a zero map). But since we defined this to be the
+        \textit{inclusion} map, we have that $N = \{0\}$. Hence,
+        $\ker(f) = N = \{0\}$, so that $f$ is one to one.
+
+        \item[$\im(f) \subset \ker(g)$.] 
+        Let $N = M_1$, and let $1_{M_1}:M_1 \to M_1$ be the
+        identity. Then we see that 
+        \[
+            0 = g_*(f_*(1_{M_1})) = g \circ f
+        \]
+        by exactness of sequence
+        \ref{0_homM1_homM_homM2_exact_sequence}. Therefore we see
+        that $\im(f) \subset \ker(g)$. 
+
+        \item[$\ker(g) \subset \im(f)$.]
+        
+        
+
+
+    \end{description}
+\end{prf}
+
+\begin{thm}
+    Let $N$ be an $R$-module. If 
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[r]
+            &
+            M_{1} \arrow[r, "f"]
+            &
+            M \arrow[r, "g"]
+            &
+            M_{2} \arrow[r]
+            &
+            0
+        \end{tikzcd}
+    \end{center}
+    is a split exact sequence of $R$-modules, then 
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[r]
+            &
+            \hom_R(N,M_{1}) \arrow[r, "f_*"]
+            &
+            \hom_R(N, M) \arrow[r, "g_*"]
+            &
+            \hom_R(N,M_{2}) \arrow[r]
+            &
+            0 
+        \end{tikzcd}
+    \end{center}
+    and 
+    \begin{center}
+        \begin{tikzcd}
+            0
+            &
+            \hom_R(M_{1}, N) \arrow[l]
+            &
+            \hom_R(M, N) \arrow[l, swap, "f^*"]
+            &
+            \hom_R(M_{2}, N)\arrow[l, swap, "g^*"]
+            & 
+            0 \arrow[l]
+        \end{tikzcd}
+    \end{center}
+    are split exact sequences of abelian groups ($R$-modules if
+    $R$ is commutative).
+\end{thm}
+
+\begin{prf}
+    \textcolor{MidnightBlue}{By the previous theorem, we only need
+    to show that $g_*$ and $f^*$ are surjective and that the two
+    sequences split.
+    }
+    Since the first sequence splits, let $\beta: M_2 \to M$ be the
+    function which splits the first sequence. Consider the
+    function $\beta_*:
+    \hom_R(N, M_2) \to \hom_R(N, M)$. 
+    Then observe that for any $\psi \in \hom_R(N, M_2)$ that 
+    \[
+        g_* \circ \beta_* (\psi) = g_*(\beta(\psi)) = g \circ \beta(\psi) 
+        = \psi.
+    \]
+    Therefore, we see that $g_* \circ \beta_* = 1_{\hom_R(M_{2}, N)}.$ Hence by
+    Theorem 1.\ref{split_exact_lemma}, we see that $\beta_*$
+    splits the second sequence. However, note also that $g_* \circ
+    \beta_* = 1_{\hom_R(M_{2}, N)}$ implies that $g_*$ is surjective. Therefore
+    the second sequence is split exact.
+    \\
+
+    As for the third sequence, consider the function $\alpha^*:
+    \hom_R(M_1, N) \to \hom_R(M, N)$. Note that for any $\phi \in
+    \hom_R(M, N)$, we have that 
+    \[
+        \alpha^* \circ f^*(\phi) = \alpha^*(f(\phi)) = \alpha \circ f(\phi) = \phi.
+    \]
+    Hence we see that $\alpha^* \circ f^*$ splits the third
+    sequence. Furthermore, the fact that $\alpha^* \circ f^* =
+    1_{\hom_R(M, N)}$ implies that $f^*$ is surjective. Thus in total
+    we have that the third sequence is in fact a split exact sequence.
+\end{prf}
+
+The next theorem is a nice result that shows that $\hom_R$ is
+somewhat of a "linear" operator.
+\begin{thm}
+    Let $M_1, M_2$ and $M$ be $R$-modules. Then 
+    \[
+        \hom_R(M, M_1\oplus M_2) \cong \hom_R(M, M_1)\oplus \hom_R(M, M_2)   
+    \]
+    and 
+    \[
+        \hom_R(M_1 \oplus M_2, M) \cong \hom_R(M_1, M) \oplus \hom_R(M_2, M).
+    \]  
+    \vspace{-0.7cm}
+\end{thm}
+These are in general isomorphisms of abelian groups, but can
+be isomorphisms of $R$-modules if $R$ is commutative.
+
+\begin{prf}
+    Consider one of our earlier examples of a split exact
+    sequences:
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[r]
+            &
+            M_{1} \arrow[r, "i"]
+            &
+            M_1\oplus M_2 \arrow[r, "\pi"]
+            &
+            M_{2} \arrow[r]
+            &
+            0
+        \end{tikzcd}
+    \end{center}
+    where $i$ defined as $i(m_1) = (m_1, 0)$ is the inclusion map
+    and $\pi$ defined by $\pi(m_1, m_2) = m_2$ is the projection
+    map. As this is split exact, we can apply the previous theorem
+    to gaurantee the existence of sequences 
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[r]
+            &
+            \hom_R(M,M_{1}) \arrow[r, "i_*"]
+            &
+            \hom_R(M, M_1\oplus M_2) \arrow[r, "\pi_*"]
+            &
+            \hom_R(M,M_{2}) \arrow[r]
+            &
+            0 
+        \end{tikzcd}
+    \end{center}
+    and 
+    \begin{center}
+        \begin{tikzcd}
+            0
+            &
+            \hom_R(M_{1}, M) \arrow[l]
+            &
+            \hom_R(M_1\oplus M_2, M) \arrow[l, swap, "i^*"]
+            &
+            \hom_R(M_{2}, M)\arrow[l, swap, "\pi^*"]
+            & 
+            0 \arrow[l]
+        \end{tikzcd}
+    \end{center}
+    which are both split exact. Then by applying Theorem
+    1.\ref{split_exact_lemma} we have that 
+    \[
+        \hom_R(M, M_1 \oplus M_2) \cong \hom_R(M, M_1) \oplus \hom_R(M, M_2)
+    \]
+    and 
+    \[
+        \hom_R(M_1 \oplus M_2, M) \cong \hom_R(M_1, M) \oplus \hom_R(M_2, M).
+    \]
+\end{prf}
+
+\newpage
+\section{Free $R$-modules.}
+Free modules are the type of modules that you are probably
+already familiar with. Basically, they're modules who have some
+kind of generating set, which can create all other elements. As we
+can think of modules as vector spaces, we know that vectors spaces
+always have some kind of basis set, at least when they can be
+thought of as existing in $\RR^n$. It turns out that having a
+basis leads to many desirable properties. 
+
+First, we make a definition on linear independence, a concept
+required for discussing bases, and then formally define a free module.
+
+\begin{definition}
+    Let $R$ be a ring and $M$ an $R$-module. Then the set $S = \{x_1,
+    x_2, \dots, x_n\}$ with $S \subset M$ is said to be
+    \textbf{linearly independent} if and only if the only solution
+    to the equation 
+    \[
+        a_1x_1 + a_2x_2 + \cdots + a_nx_n = 0
+    \]
+    is $a_1 = a_2 = \cdots = a_n = 0$ (where $a_1, a_2, \dots,
+    a_n \in R$). 
+    
+    If $S$ is the smallest linear independent subset
+    of $M$, then we say that $S$ is a \textbf{basis} for $M$, in
+    which case $M$ is said to be a \textbf{free} $R$-module.
+\end{definition}
+Hence, an $R$-module is a module with a basis.
+
+This is the exact same definition of linear independence we've
+seen in linear algebra. 
+Nothing is new here. It is a classic exercise in linear algebra to
+check the following statement, which we offer here.
+
+\begin{proposition}
+    $S$ is a basis for some $R$-module $M$ if and only if every $x
+    \in M$ can be written uniquely as 
+    \[
+        x = a_1x_1 + a_2x_2 + \dots a_nx_n
+    \]
+    where $a_i \in R$ and $x_i \in S$ for $i = 1,2, \dots, n$.
+\end{proposition}
+
+\textbf{Examples}
+\begin{itemize}
+    \item[1.] Consider the $R$-module $M_{m,n}(R).$ Observe that
+    a basis for this module consists of 
+    \[
+        \{E_{ij} \mid 1 \le i \le m, 1 \le j \le n\}.
+    \]
+
+    \item[2.] Consider an abelian group $G$. Then as we showed
+    before, $G$ is technically a $\mathbb{Z}$-module. However, if
+    $G$ is finite, then it is not a free $\ZZ$-module. 
+    
+    
+    Suppose to the contrary that it is, and that $S
+    = \{x_1, x_2, \dots, x_n\}$ is a linearly independent set
+    which forms a basis of $G$. Then if $\{o_1, o_2,
+    \dots, o_n\}$ is a set such that $o_i = \text{order}(x_1)$
+    (which exists, by finiteness of $G$) then  
+    \[
+        o_1x_1 + o_2x_2 + \cdots + o_nx_n = 0.
+    \]
+    Hence, the set $\{x_1, x_2, \dots, x_n\}$ is not linearly
+    independent, so $G$ is not a free $\ZZ$-module.
+
+    \item[3.] Consider the set $R[X]$. Observe that a suitable
+    generating basis is 
+    \[
+        \{x^n \mid n \in \mathbb{N}\}
+    \]
+    which is probably something you already knew. 
+
+    \item[4.] Suppose $M_1$ and $M_2$ are free modules with bases
+    $S_1, S_2$. Then the set $M_1 \oplus M_2$ is a free module,
+    since it has a basis 
+    \[
+        \{(x, 0) \mid x \in S_1\} \cup \{(0, y) \mid y \in S_2\}.
+    \]
+    More generally, if $\{M_\alpha\}_{\alpha \in \lambda}$ is a
+    of free modules where $S_\alpha$ is the basis of $M_\alpha$,
+    then we see that 
+    \[
+        \oplus_{\alpha \in \lambda}M_\alpha
+    \]
+    is also a free module with basis 
+    \[
+        \bigcup_{\alpha \in \lambda}\{(\delta_{jk}s_{j\alpha}) \mid s_{j\alpha} \in S_j\}.
+    \]
+    where $\delta_{jk}$ is the Kronecker delta function.
+\end{itemize}
+
+\begin{proposition}\label{prop: unique homomorphism}
+    Let $M$ be a free $R$-module. Suppose the basis of the set is
+    $S$. Let $N$ be an $R$-module and $h: S \to N$ a function.
+    Then there exists a function $f \in \hom_R(M, N)$ such that
+    $f\mid_S = h$. 
+\end{proposition}
+
+\begin{thm}
+    Let $R$ be commmutative and $M$ and $N$ free modules with
+    bases. Then $\hom_R(M, N)$ is a finitely generated free
+    module. 
+\end{thm}
+
+\begin{prf}
+    Suppose the basis for $M$ is $S = \{x_1, x_2, \dots, x_n\}$,
+    and the basis for $N$ is $T = \{y_1, y_2, \dots, y_m\}$.
+    Define a set of functions for $1 \le i \le m$ and $1 \le j \le
+    n$ such that 
+    \[
+        f_{ij}(x_k) = 
+        \begin{cases}
+            y_j & \text{ if } k = i\\
+            0 & \text{ if } k \ne j
+        \end{cases}.
+    \]
+    By the previous proposition, we know that each $f_{ij}$ is a
+    element in $\hom_R(M, N)$. Now let $f \in
+    \hom_R(M,N)$ be arbitrary. Since $T$ is a basis for $N$, we
+    know that for each $v_k \in S$ there exists coefficients
+    $a_{k1}, a_{k2}, \dots, a_{kn}$ such that  
+    \[
+        f(v_k) = a_{k1}y_1 + \cdots + a_{kn}y_n.
+    \]
+    However, observe that 
+    \begin{align*}
+        f(v_k) &= a_{i1}y_1 + \cdots + a_{in}y_n\\
+        &= a_{k1}f_{k1}(x_k) + a_{k2}f_{k2}(x_k) + \cdots + a_{kn}f_{kn}(x_k).
+    \end{align*}
+    Therefore, we see that for any $b \in M$, 
+    \begin{align*}
+        f(b) &= f(a_{b1}x_1 + \cdots + a_{bm}x_m)\\
+        &=  a_{b1}f(x_1) + \cdots + a_{bm}f(x_m)\\
+        &= a_{b1}[a_{11}f_{11}(x_1) + a_{12}f_{12}(x_1) + \cdots + a_{1n}f_{1n}(x_1)]\\
+        &\hspace{.6cm} + a_{b2}[a_{21}f_{21}(x_2) + a_{22}f_{22}(x_2) + \cdots + a_{2n}f_{2n}(x_2)]\\
+        &\hspace{.6cm} + \cdots\\
+        &\hspace{.6cm} + a_{bm}[a_{m1}f_{m1}(x_m) + a_{m2}f_{m2}(x_2) + \cdots + a_{mn}f_{mn}(x_m)].
+    \end{align*}
+    Therefore we see that $\{f_{ij}\}$ generates $\hom_R(M, N)$,
+    so that $\hom_R(M, N)$ is finitely generated.
+\end{prf}
+The previous theorem doesn't hold if $M$ and $N$ are not finitely
+generated, since there are many counter examples to such a
+claim. 
+\textcolor{purple}{
+Let $R = \mathbb{Z}$ and $M = \oplus_{i =
+1}^{\infty}\mathbb{Z}$. Then observe that 
+\[
+    \hom_R(M, \ZZ) \cong \prod_{i = 1}^{\infty}\ZZ.
+\]
+by Theorem 1.13. However, we see that while $\ZZ$ is finitely 
+generated and $M$ is finitely generated, but $\displaystyle \prod_{i =
+1}^{\infty}\ZZ$ is not. (The proof is nontrivial.)}
+
+\begin{proposition}
+    Let $M$ be a free $R$-module with basis $S = \{x_j\}_{j \in
+    J}$ and suppose $I$ is an ideal of $R$. Let $\pi: M \to M/I$.
+    Then
+    $M/IM$ is a $R/I$-module and is free with basis $\pi(S) = 
+    \{ \pi(x_j)\}_{j \in J}$.
+\end{proposition}
+
+\begin{prf}
+    \begin{description}
+        \item[$\bm{M/IM}$ is an $\bm{R/I}$-module.]
+        First recall that $IM$ is a submodule of $M$. Therefore it
+        makes sense to consider the quotient $M/IM$. Then we can
+        define a mapping $\cdot: R/I \times M/IM \to M/IM$ as follows. Let $r
+        + I \in R/I$ and $m + IM \in M/IM$. Then define the mapping as
+        \begin{align*}
+            (r + I)\cdot(m + IM) &= r(m + IM)\\
+            &= rm + rIM\\
+            &= rm + IM.
+        \end{align*}
+        Since $M$ is an $R$-module, $rm \in M$ so that $rm + IM$ is in
+        fact in $M/IM$. The other module properties may be easily
+        verified without difficulty by using this mapping. 
+
+        \item[$\bm{M/IM}$ is free.] 
+        Suppose $m+ IM$ is an element of $M/IM$. Since $\pi: M \to
+        M/I$ is a surjective mapping, we see that there exists at
+        least one $m \in M$ such that $\pi(m) = m + IM$. Now since
+        $m$ is free, there exists a unique representation of $m$
+        of its basis elements, i.e., there exists $\{a_j\}_{j \in
+        J}$, a subset of $R$, such that 
+        \[
+            m = \sum_{j \in J} a_jx_j \implies  \pi(m) = \pi\left(\sum_{j \in J} a_jx_j \right) =
+            \sum_{j \in J} a_j\pi(x_j) + IM
+        \]
+        Hence $m + IM = \sum_{j \in J} a_j\pi(x_j) + IM.$ To finish showing
+        that $\{\pi(x_j)\}_{j \in J}$ is a basis for $M/IM$, we
+        only have to show that it is a linearly independent
+        set. So consider the equation 
+        \[
+            \sum_{j \in J}a_j\pi(x_j) = 0 + IM                
+        \]
+        for some constants $\{a_j\}_{j \in J}$ in $\mathbb{R}$.
+        Suppose additionally for contradiction that not all of the
+        constants are nonzero. Then we that $\sum_{j \in
+        J}a_j\pi(x_j)$ is an element of $IM$. However, this is a
+        contradiction since none of the elements of
+        $\{\pi(x_j)\}_{j \in J}$ is allowed to be in $IM$. Hence
+        this set generates $M/IM$ and is linearly independent, so
+        it is a basis.
+    \end{description}
+\end{prf}
+
+We can introduce an even more useful proposition regarding free
+modules, and more generally all modules. 
+
+\begin{proposition}
+    Let $M$ be an $R$-module. Then 
+    \[
+        M \cong F/K    
+    \]
+    for a free module $F$ and some submodule $K$ of $F$. That is,
+    $M$ is the quotient of some free module $F$. Furthermore, if
+    $M$ is finitely generated, then such an $F$ is finitely
+    generated and $\mu(F) = \mu(M)$. 
+\end{proposition}
+
+\begin{prf}
+    Suppose $S = \{x_j\}_{j \in J}$ is a set of elements which
+    generate $M$. Note that, even in the worst case scenario, such
+    an $S$ exists since we can at most take $S = M$. Now suppose
+    $F = \oplus{j \in J}R$, which is a free module. Construct the
+    module homomorphism $\psi: F \to M$ as 
+    \[
+        \psi((a_j)_{j \in J}) = \sum_{j \in J} a_jx_j.
+    \]  
+    Observe that since $S$ generates $M$, such a homomorphism is
+    surjective onto $M$. Hence, we see that $M$ is the quotient of
+    some free module $F$.
+
+    Now suppose that $F$ is finitely generated. Then $S$ is a
+    finite set, so that $F$ is also finitely generated (since in
+    this case it is the direct sum of at most a finite number of
+    copies of $R$). 
+
+    Now if $M$ is finitely generated, and is a quotient of $F$,
+    then clearly $\mu(M) \le \mu(F)$. However, we also know that
+    $\mu(F) \le |J| \le \mu(M)$. Therefore, we see that $\mu(M) =
+    \mu(F)$. 
+\end{prf}
+
+\begin{definition}
+    Let $M$ be an $R$-module and $F$ a free $R$-module. Then the
+    short exact sequence 
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[r] & K \arrow[r] & F \arrow[r] & M \arrow[r] & 0
+        \end{tikzcd}
+    \end{center}
+    is called a \textbf{free presentation} of $M$. Note by the
+    previous proposition that every $R$-module has a free
+    presentation. 
+\end{definition}
+
+Presentations are particularly useful since they make free modules
+convenient to work with. 
+
+\begin{proposition}
+    Suppose $F$ is a free $R$-module. Then every short exact
+    sequence 
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[r] & M_1 \arrow[r] & M \arrow[r] & F \arrow[r] & 0
+        \end{tikzcd}
+    \end{center}
+    is a split exact sequence. 
+\end{proposition}
+
+\begin{prf}
+    Let $S = \{x_j\}_{j \in J}$ be a basis for $F$. Now suppose $f: M \to F$ is the
+    surjective function in the above exact sequence. Now construct
+    a function $\psi: F \to M$ as follows: $\psi(x_j) = m_j$ if
+    and only if $f(m_j) = x_j$. Since $f$ is surjective, note that
+    this will always be possible. Such a function may not be
+    unique, but we don't care; we just want to know it exists. 
+
+    By proposition \ref{prop: unique homomorphism}, we know that
+    there exists a unique function $h: F \to M$ such that $h|_S =
+    \psi$. Therefore we see that $f \circ h = 1_F$, so that by
+    theorem \ref{split_exact_lemma}, we see that the sequence is
+    in fact split exact. 
+\end{prf}

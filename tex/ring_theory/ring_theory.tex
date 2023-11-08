@@ -1,0 +1,3682 @@
+\chapter{Rings}
+\section{Definitions.}
+
+While many mathematical objects come in the form of groups, we
+also know that there are objects and spaces which require more
+than one operation. Can we generalize them?
+
+For example, we know that the integers $\mathbb{Z}$ form a group
+under addition. But don't we also know that multiplication of
+elements of $\mathbb{Z}$ also yield elements of $\mathbb{Z}$?
+Isn't this another type of group-like structure we would like to
+generalize?
+
+We could do this on $\mathbb{R}$ too. It's a group under addition,
+but we know it's closed under multiplication and has some identity
+element.
+
+This is where rings come into play, which we define as follows. 
+
+\begin{definition}
+    Let $R$ be a set. We define $(R, +, \cdot)$ to be a \textbf{ring} if there
+    exist binary operations $+: R\times R \to R$ and $\cdot: R
+    \times R \to R$ (referred to as addition and multiplication)
+    such that 
+    \begin{itemize}
+        \item[(\textbf{R1})] \textbf{Group addition.} $(R, +)$ is an
+        \textbf{abelian group}, with $0$ denoted as the
+        identity. (In this group, the additive inverse of
+        an element $a$ is always denoted $-a$.)
+        \item[(\textbf{R2})] \textbf{Closure.} For all $a$, $b \in R$, we have that $a \cdot b \in R$.
+        \item[(\textbf{R3})] \textbf{Associativity.} For all $a$, $b$, $c \in R$, we have that $a \cdot (b \cdot c) = (a \cdot b) \cdot c$
+        \item[(\textbf{R4})] \textbf{Distributivity.} Similarly, we have that $a \cdot (b + c) = a\cdot b + a \cdot c$ and $(b
+        + c) \cdot a = b \cdot a + c \cdot a$.
+        \item[(\textbf{R4})] There exists an element $1 \ne 0$ in $R$ such that 
+        $1 \cdot a = a \cdot 1 = a$ for all $a \in R$. This is the \textbf{unit of the ring}. 
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    \begin{itemize}
+        \item As usual, if the multiplication operation $\cdot$ is specified and
+        well-understood, then we will drop $\cdot$ and write
+        multiplication of ring elements as $gh$ instead of $g \cdot h$.
+
+        \item Axioms (\textbf{R5}) is technically optional. However, we don't really 
+        care about rings without unity, so we just add it to ou defintion.
+    \end{itemize}
+\end{remark}
+
+
+\begin{proposition}
+    Suppose $R$ is a ring with identity $1 \ne 0$. Then 
+    \begin{itemize}
+        \item[1.] $0 \cdot a = a \cdot 0$ for all $a \in R$ 
+        \item[2.] $-(a \cdot b) = (-a) \cdot b = a \cdot (-b)$ for
+        all $a, b \in R$ 
+        \item[3.] $-a = a \cdot (-1) = (-1) \cdot a$
+        \item[4.] $(-a) \cdot (-b) =  a \cdot b$ 
+        \item[5.] The multiplicative identity is unique.   
+    \end{itemize}
+\end{proposition}
+This is just the stuff you would expect from a ring $R$ based
+on the fact that many domains you've seen are in fact rings,
+and some of these facts are obvious in those domains.
+
+\begin{prf}
+    \begin{itemize}
+        \item[1.] Observe that 
+        \begin{align*}
+            (0 \cdot a) + (0 \cdot a) &= (0 + 0) \cdot a \text{ (by R4 )}\\
+            & = (0 \cdot a) + 0 \text{  (since 0 + 0 = 0)}
+        \end{align*}
+        where we added
+        $0$ to the righthand side (which of course 
+        does not change the value of the equation.) Subtracting
+        $(0 \cdot a)$ from both sides, we get that 
+        \[
+            0 \cdot a  = 0.
+        \]
+        Similarly, observe that 
+        \begin{align*}
+            (a \cdot 0) + (a \cdot 0) & = a \cdot (0 + 0) \text{ (by R4)}\\
+            & = (a \cdot 0)+ 0 \text{ (since 0 + 0 = 0)}
+        \end{align*}
+        where again, we added $0$ to both sides. Subtracting $-(a
+        \cdot 0)$ from both sides, we get 
+        \[
+            a \cdot 0 = 0
+        \]
+        as desired. 
+        
+        \item[2.] First we'll show that $-(a \cdot b) = (-a) \cdot
+        b$. To prove this, observe that 
+        \begin{align*}
+            (a \cdot b) - [(a \cdot b)] & = 0 \\
+            & = a \cdot 0 \text{ (which we just proved)}\\
+            & = a \cdot [b + (-b)]\\
+            & = a \cdot b + a \cdot (-b) \text{ (by R4)}
+        \end{align*}
+        and adding $-(a \cdot b)$ to both sides yields 
+        \begin{align*}
+            -(a \cdot b) = a \cdot (-b)
+        \end{align*}
+        as desired. Now we'll show that $-(a \cdot b) = (-a) \cdot
+        b$. Observe that 
+        \begin{align*}
+            (a \cdot b) - [(a \cdot b)] & = 0 \\
+            & = 0 \cdot b \text{ (which we just proved)}\\
+            & = [a + (-a)] \cdot b\\
+            & = a \cdot b + (-a) \cdot b \text{ (by R4)}
+        \end{align*}
+        and adding $-(a \cdot b)$ gives that 
+        \begin{align*}
+            -(a \cdot b) = (-a) \cdot b
+        \end{align*}
+        which proves the asserition.
+
+        \item[3.] Simply let $b = 1$ in the previous statements. 
+        \item[4.] To prove that $(-a) \cdot (-b) = a \cdot b$,
+        first observe that for any $c \in  R$ we already proved
+        that 
+        \[
+            (-a) \cdot c = a \cdot (-c).
+        \]
+        Thus let $c = -b$. Then observe that 
+        \[
+            (-a) \cdot (-b) = a \cdot [-(-b)]
+        \]
+        and from group theory, we know that $-(-b) = b$.
+        Therefore, we see that 
+        \[
+            (-a) \cdot (-b) = a \cdot b
+        \]
+        as desired. 
+
+        \item[5.] To prove that uniqueness of the multiplicative
+        identity, first suppose that it is not unique. That is,
+        there exists elements $1_1$ and $1_2$ such that 
+        \[
+            1_1 \cdot a = a \cdot 1_1 = a \hspace{1cm}   1_2 \cdot a = a \cdot 1_2 = a.
+        \]
+        for all $a \in R$. Then observe that 
+        \[
+            1_1 = 1_1 \cdot 1_2 = 1_2
+        \]
+        so that the uniqueness must hold.
+        
+            
+    \end{itemize}
+\end{prf}
+\textcolor{NavyBlue}{An example of a ring is of course $\mathbb{Z}$, but that's boring. 
+Is $(\mathbb{Z}/n\mathbb{Z}, + , \cdot)$, where $n$ is a positive
+integer, a ring? Let's check if it is. }
+\begin{description}
+    \item[Abelian.] Since addition is commutative, we already know
+    that $\mathbb{Z}/n\mathbb{Z}$ is abelian (in fact, it is
+    cyclic.)
+    
+    \item[Associativity.] Let $a, b$ and $c \in \ZZ/n\ZZ$. Now
+    obviously, $a(bc) = (ab)c$ under \textit{standard} or "normal"
+    multiplication of integers. Therefore we see that   
+    \begin{align*}
+        a\cdot(b \cdot c) &= a(bc) \mbox{ mod } n \\
+        & = (ab)c \mbox{ mod }n \\
+        & =(a \cdot b ) \cdot c.
+    \end{align*}
+
+    \item[Distributivity.] Let $a, b$ and $c$ be defined as before.
+    Again, we know that $a(b + c) = ab + ab$ in $\mathbb{Z}$.
+    Therefore 
+    \begin{align*}
+        a\cdot(b + c) &= a(bc) \mbox{ mod } n \\
+        & = (ab + ac) \mbox{ mod }n \\
+        & = ab \mbox{ mod }n + ac \mbox{ mod }n\\
+        & = a \cdot b + a \cdot c.
+    \end{align*}
+    The argument is exactly the same to prove left distributivity.
+    Altogether, we see that $\ZZ/n\ZZ$ satisfies the axioms of a
+    ring when endowed with modulo addition for $+$ and modulo
+    multiplication for $\cdot$. 
+\end{description}
+
+
+    \noindent\textbf{Multiplication yielding zeros.}\\
+    For our ring $\mathbb{Z}$, we know that the only way to ever
+    obtain $0$ by multiplication is to just take $0$ itself and multiply
+    it by an integer. Thus in this ring, if $n, m$ are nonzero
+    then we always know that $n \cdot m$ is nonzero.
+    
+    However, note that in $\ZZ/n\ZZ$, we have
+    that $a \cdot b = 0$ if and only if $a \cdot b$ is a multiple
+    of $n$.
+
+    \textcolor{Plum}{If $n$ is prime, then there are no elements
+    in $\ZZ/n\ZZ = \{0, 1, 2, \dots, n-1\}$ whose product will be
+    a multiple of $n$. This is just because nothing divides $n$.
+    \\
+    \\
+    But if $n$ is composite, then there exist
+    integers $pq$ such that $n = pq$, and since $p < n$ and $q <
+    n$, you can be certain that $p, q \in \ZZ/n\ZZ$. Then we'd see
+    that $pq = 0$ in $\ZZ/n\ZZ$. If $p$ or $q$ are also composite, then
+    there are even more combinations of integers in $\ZZ/n\ZZ$
+    whose product yields 0 in $\ZZ/n\ZZ$. 
+    }
+
+    So in the ring $\ZZ$, multiplication of nonzero elements will
+    be nonzero. But in the ring $\ZZ/n\ZZ$ there are many ways one
+    one can multiply elements to get zero (if $n$ is not prime).
+    Obviously these are both rings, but they're behaving
+    differently! Hence we introduce the following definitions. 
+
+    \begin{definition}
+        Let $(R, +, \cdot)$ be a ring and suppose $a \ne 0$ and $b
+        \ne 0$ are elements of $R$,
+        while 
+        \[
+            a \cdot b = 0.
+        \]
+        Then $a$ and $b$ are \textit{both} called
+        \textbf{zero divisors} of the ring ${R}$. Note that $0$ is
+        not a zero divisor.
+        Meanwhile, if $R$ has an identity, and for some $a \in R$
+        there exists a $b \in R$ such that 
+        \[
+            ab = 1 = ba
+        \]
+        then we call \textit{both} $a$ and $b$ \textbf{units} in $R$.
+        It turns out the set of units of a ring $R$ form an
+        abelian group, which we denote as $R^*$.
+    \end{definition}
+
+    Note that $\ZZ$ has no zero divisors, and its unit group $R^*$
+    is just $\{1, -1\}$. We can see that since if $ab = 1$ for $a, b \in \ZZ$, then we
+    know that $a = b = 1$ or $-1$.
+
+    On the other hand, $\ZZ/n\ZZ$ can have a more interesting unit group.
+    Observe that if there exists integers $p, q \in \ZZ/n\ZZ$ such that 
+    \[
+        pq = n +1
+    \]
+    then we see that $p \cdot q = pq \mbox{ mod } n = n + 1
+    \mbox{ mod } n = 1 $ in $\ZZ/n\ZZ$. If either $p$ or $q$ are composite,
+    then $R^*$ becomes even more interesting.
+    
+    As a more specific example, observe that the ring $\ZZ/10\ZZ$
+    has units $\{1, 3, 7, 9\}$ and zero divisors $\{2, 4, 6, 8\}$.
+
+    \begin{lemma}
+        A zero divisor can never be a unit.
+    \end{lemma}
+
+    \begin{prf}
+        Let $R$ be a ring and suppose $a \in R$ is a zero divisor.
+        Then there exists an element $b \in R$ where $b \ne 0$ and $ab = 0.$
+        Now suppose that $a$ is also a unit, so that there exists
+        a $c \in R$ such tha $ac = ca = 1$. Then observe that 
+        \begin{align*}
+            1 = ca \implies b &= (ca)(b)\\
+            &= c(ab)\\
+            &= c(0)\\
+            & = 0
+        \end{align*}
+        which is a contradiction since we said $b \ne 0$. Hence
+        $a$ cannot be a unit.
+    \end{prf}
+
+    We'll next prove another useful lemma which is commonly known
+    as the cancellation law. 
+
+    \begin{lemma}\label{lemma 2}
+        Let $R$ be a ring, and $a \in R$ such that $a \ne 0$. If
+        $a$ is not a zero divisor, then for any $b, c \in R$ such
+        that $ab = ac$ we have that $b = c$. In addition, if $ba =
+        ca$ then $b = c$.
+    \end{lemma}
+
+    \begin{prf}
+        Suppose $ac = ab$ for some elements $a, b, c \in R$ where
+        $a$ is not a zero divisor. Then observe that 
+        \[
+            ab = ac \implies ac - ab = 0 \implies a(b - c) = 0.
+        \]
+        Since $a$ is not a zero divisor, the only way for the
+        above equation to hold is if $b - c = 0 \implies b = c$.
+        Proving the analagous statement is identical to this
+        proof. 
+    \end{prf}
+
+    \textcolor{NavyBlue}{Now that we have identified terms and can
+    describe the specific elements of a ring $R$ based on their
+    properties, we again return to our observation that $\ZZ$ and
+    $\ZZ/n\ZZ$ behaved differnetly. This is not uncommon in ring
+    theory, so we can divide rings into specific classes as
+    follows.}
+    
+    \begin{definition}
+        Let $R$ be a ring. 
+        \begin{itemize}
+            \item[1.] If $R$ is commutative ring with identity and has
+            no zero divisors, then $R$ is said to be an
+            \textbf{integral domain.}
+            \item[2.] The ring $R$ is a said to be a \textbf{division ring}
+            if every element of $R$ has a multiplicative inverse.
+            An equivalent condition is if $R^* = R\setminus
+            \{0\}$.
+            \item[3.] If $R$ is a commutative division ring, then
+            $R$ is said to be a \textbf{field}.
+        \end{itemize}
+    \end{definition}
+
+    You've probably read textbooks that called $\mathbb{R}$ or
+    $\mathbb{C}$ fields. This is what they're talking about. 
+
+    \begin{proposition}
+        \begin{itemize}
+            \item[1.] If $(R, +, \cdot)$ is an integral domain, then the
+            cancellation law holds for all elements of $R$. 
+
+            \item[2.] $(R, +, \cdot)$ is an integral domain if and
+            only if for $a, b \in R$, the equation $a\cdot b = 0$
+            implies either $a = 0$ or $b = 0$. 
+
+            \item[3.] $(R, +, \cdot)$ is a division ring if and only if $ax =
+            b$ and $ya = b$ are solvable in $R$ for every $a, b \in R$
+            where $a \ne 0 $.
+        \end{itemize}
+    \end{proposition}
+
+    \textcolor{MidnightBlue}{Consider again the ring $\ZZ/p\ZZ$
+    where $p$ is a positive integer. We noted that if $p$ is
+    prime then there are no zero divisors. Thus we could state
+    that this an integral domain. However, we can strengthen
+    this even further and state that this is a field, as follows.
+    \\
+    \indent Let $a \in \ZZ/p\ZZ$ be nonzero. We know that there exists an
+    inverse $a^{-1}$ such that 
+    \[ 
+        aa^{-1} = 1 \mbox{ mod } p 
+    \] 
+    if $a$ is coprime with $p$, which is of course true. Since
+    every element has a multiplicative invesrse we see that
+    $\ZZ/p\ZZ$ is a division ring. Since this is a commutative
+    division ring, we have that $\zz/p\zz$ is a field.
+    }
+    Observe that we could have more easily proved thiss tatemen
+    with the following theorem.
+    
+    \begin{thm}
+        Any finite integral domain is a field.
+    \end{thm}
+
+    \begin{prf}
+        Let $R$ be a finite integral domain and let $a \in R$ be nonzero.
+        Construct a function $\phi_a: R \to R$ by $\phi_a(b) = ab$
+        for $b \in R$. 
+
+        Suppose $\phi_a(b) = \phi_a(c)$ for $b, c \in R$. Then $ab
+        = ac \implies b = c$ since $R$ is an integral domain.
+        Therefore $\phi_a$ is injective, and it is clearly
+        surjective so that $\phi_a(R) = R$.
+        
+        Since $\phi_a$ is bijective for each $a \in R$, we know 
+        there always exists a $b \in R$ such that $\phi_a(b) = 1
+        \implies ab = 1$. In other words, each $a \in R$ has an
+        inverse, proving $R$ is a division ring. Since $R$ is an
+        integral domain and thus a commutative we have that it is a
+        commutative divison ring, and hence a field.
+    \end{prf}
+
+    \textcolor{MidnightBlue}{As we said before $\ZZ/p\ZZ$ is an
+    integral domain. Since it's also finite, this allows us to
+    conclude it is a field, which we proved before we proved the
+    above theorem.}
+
+    The following is apparently too difficult for any
+    introductory algebra book to prove in terms of elementary language.
+    \begin{thm}
+        Any finite division ring is a field.
+    \end{thm}
+
+    With the integral domain, division ring and field introduced,
+    we have a solid footing in the fundamentals of ring theory. We
+    move forward by introducing the concept of a subring.
+
+    \subsection*{Subrings.}
+    
+    \begin{definition}
+        Let $R$ be a ring and $S$ be a nonempty subset of $R$.
+        Then $S$ is a \textbf{subring} of $R$ if $S$ is a ring under the
+        addition and multiplication equipped on $R$. 
+
+        Specifically, $S$ is a subring if $S$ is an abelain group
+        under addition and is closed under multiplication.
+    \end{definition}
+    \noindent
+    \textbf{Examples.}\\
+    We already have an example from our previous work. We know
+    that $\ZZ$ and $\ZZ/n\ZZ$, where $n$ is a positive integer,
+    are both rings. Since $\ZZ/n\ZZ \subset \ZZ$, we see that
+    $\ZZ/n\ZZ$ is a subring of $\ZZ$. 
+    \\
+
+    \textcolor{Blue!80!White}{Define the set $\ZZ[i] = \{m + ni: m, n \in \ZZ\}$. 
+    Then this is a ring.} This is
+    clearly an abelian group under addition (0 is the identity, associativity is
+    obvious, closedness is clear, inverse of any given element is
+    the same element with coefficients of opposite sign).
+    Multiplicative associativity and left and right distributions
+    are clear. However, since $\ZZ[i] \subset \mathbb{C}$, we see
+    that $\ZZ[i]$ is a subring of $\mathbb{C}$.
+    \\
+
+    \textcolor{Green!80!White}{Let $R$ be a ring. Then the set of $n \times n$ matrices with
+    entries $R$, denoted $M_{n}(R)$, forms a ring.} Addition on
+    this set forms an abelian group. And we know from linear
+    algebra that matrix multiplication is associative and left and
+    right distributive.
+    It turns out this ring has many interesting subrings, which
+    we'll list here 
+    \begin{description}
+        \item[Diagonals.]
+            \[
+                D_n(R) = \{A \in \mathbb{R}: a_{ij} = 0 \text{ if } i \ne j\}
+            \]
+        \item[Upper Triangulars.]
+            \[
+                T^n(R) = \{A \in M_n(R): a_{ij} = 0 \text{ if } i > j\}
+            \] 
+        \item[Lower Triangulars.]  
+        \[
+            T_n(R) = \{A \in M_n(R): a_{ij} = 0 \text{ if } i < j\}.
+        \]  
+    \end{description}
+    These are all subrings of $M_n(R)$.
+    \\
+    
+    \textcolor{Purple!80!White}{Let $G$ be abelian. Then $\mbox{End}(G)$, the set of
+    endomorphism (homomorphisms from $G$ to itself), forms a
+    ring under addition as function addition and multiplication as
+    function composition.} 
+    \begin{description}
+        \item[Abelian Group.] First observe that this is a
+        commutative structure since $G$ is abelian. We just have
+        to show that this is a group.
+        \begin{description}
+            \item[Identity.] Let $0_G$ be the identity element of
+            $G$. Construct the identity element for $\mbox{End}(G)$ to
+            be the zero map $0$
+            defined as $0: G \to G$ such that $0(g) = 0_G$ for all
+            $g \in G$. 
+
+            \item[Associativity.] Since $G$ is associative, and
+            the images of elements in $\mbox{End}(G)$ are in $G$,
+            associativity is inherited. 
+
+            \item[Closedness.] Let $f, g \in \mbox{End}(G)$ and
+            define $h = f + g$. Then $h: G \to G$, and is
+            obviously a homomorphism, so that $h \in
+            \mbox{End}(G)$. 
+
+            \item[Inverses.] Let $f \in \mbox{End}(G)$. Then
+            construct the function $f^{-1} : G 
+            \to G$ such that $f^{-1}(g) = -h$ whenever $f(g) =
+            h$. (Note that $-h$ is the inverse of $h$.) Then we
+            see that $f^{-1}(g) + f(g) = 0$ for all $g \in G$, and
+            that $f^{-1}(g) \in \mbox{End}(G)$, so that $f^{-1}$
+            is an inverse of $f$. 
+        \end{description}
+
+        \item[Multiplicatively Closed.] Observe that if $h: f
+        \circ g$, then $h: G \to G$, and it is a homomorphism.
+        Hence $h \in \mbox{End}(G)$.
+        Therefore our multiplcative operator is closed.
+
+        \item[Multiplicative Associativity.] This holds in our
+        case since function composition is in general associative
+        for homomorphisms.
+
+        \item[Distributivity.] Let $f, g, h \in \mbox{End}(G)$.
+        Then observe that 
+        \[
+            f(g + h) = f \circ (g + h) = f \circ g + f \circ h = fg + fh
+        \]
+        and 
+        \[
+            (g + h)f = (g + h) \circ f = g \circ f + h \circ f = gf + hf
+        \]
+        by linearity of $f, g$ and $h$ (since homomorphisms in
+        general are linear functions).
+    \end{description}
+    Therefore, we have that $\mbox{End}(G)$ forms a ring under
+    function additon and composition.
+    \\
+
+    \textcolor{Red!70!Blue}{
+    \textbf{Polynomial Rings.}
+    Polynomials are an interesting example of a ring, which we
+    construct as follows.}
+    
+    \indent Let $R[x]$ be the set of all functions
+    $f: \ZZ^+ \to R$ such that $f(n) = 0$ for all but finitely
+    many $n$. These functions will be the coefficients to our
+    polynomials, and we want them to be finite, so we request that
+    only finitely many of our cofficients are nonzero.
+    That is, $f(n)$ represents the $n$-th coefficient.
+    \\
+
+    \noindent Define addition and multiplication for two $f, g \in R[x]$ as 
+    \[
+        (f + g)(n) = f(n) + g(n) \hspace{0.2cm}\text{ and }\hspace{0.2cm}  (f \cdot g)(n) =
+        \sum_{i = 0}^{n}f(i)g(n - i).
+    \] 
+    This last formula is the formula for the
+    $n$-th coefficient from the product of two polynomials. We'll
+    show this is a ring.
+    \begin{description}
+        \item[Abelian.] First we'll show this is an abelian group
+        under addition.
+        \begin{description}
+            \item[Identity.]Let $0_R \in R$ be the 0 element of $R$.
+            If we define 0 to be
+            the map $0(n) : \mathbb{Z} \to R$ such that $0(n) = 0_R$
+            for all $n \in \mathbb{Z}$, then clearly $0 \in R[x]$ and
+            $0 + f = f + 0 = f$ for any $f \in R[x]$. It is our
+            additivite identity. 
+
+            \item[Associativity.] Associativity is derived from
+            the fact that $R$ is associative under addition.
+
+            \item[Closedness.] 
+            To show this is closed we, show that $f + g$ is nonzero
+            for at most finitely many elements for any $f, g \in
+            R[x]$. Simply observe if $f$ is nonzero for $k$-many
+            elements and $g$ is nonzero 
+            for $l$-many elements then $(f + g)$ is nonzero for at
+            most $(l + k)$-many elements. Therefore $(f + g) \in R[x]$.
+
+            \item[Inverses.] 
+            For any $f \in R[x]$, define $f^{-1}$ to be $f^{-1}(n)
+            = -f(n)$ for all $n \in \ZZ^{+}$. Obviously $f^{-1}$
+            is nonzero for at most finitely many elements if $f$
+            is, so $f^{-1} \in R[x]$, and $f^{-1}(n) + f(n) = 0$
+            for any $n \in \ZZ^{+}$. Therefore $R[x]$ contains inverses.  
+        \end{description} 
+
+        \item[Multiplicatively Closed.]
+        Observe now that this is closed under multiplication. For
+        any $f, g \in R[x]$, we can simply observe that since $f,
+        g$ are nonzero for at most finitely many values of $n \in
+        ZZ^{+}$, we note that 
+        \[
+            fg(n) = \sum_{i = 1}^{n}f(i)g(n - i)
+        \]
+        is a function which is nonzero for at most finitely many
+        values, since it is always a finite sum of $f$ and $g$.
+
+        \item[Multiplicative Associativity.]
+        Let $f, g, h \in R[x]$. Then observe that 
+        \begin{align*}
+            (fg)h(n) = \sum_{i = 0}^{n}(fg)(i)h(n - i) &= 
+            \sum_{i = 0}^{n}\left( \sum_{j = 0}^{i}f(j)g(i - j) \right)h(n - i)\\
+            &= f(0)g(0)h(n) + \Big(f(0)g(1) + f(1)g(0)\Big)h(n-1)\\ 
+            &+ \Big(f(0)g(2) + f(1)g(1) + f(2)g(0)\Big)h(n-2) + \cdots \\
+            &= \sum_{i = 0}^{n}f(n)\sum_{j = 0}^{n-i}g(j)h(n-j-i)\\
+            &= \sum_{i = 0}^{n}f(n)(gh)(n - i)\\
+            &= f(gh)(n).
+        \end{align*}
+        Therefore multiplicative associativity is satisfied.
+        
+        \item[Distributivity.] 
+        Since the image of our functions are elements in $R$, distributivity is inherited from the ring $R$, which must
+        be left and right distributed. 
+    \end{description}
+
+    Therefore we see that $R[x]$ forms a rings. We'll now realize
+    that this is the set of polynomials by describing the function
+    a stupidly simple function: 
+    \[
+        x^n(m) = 
+        \begin{cases}
+            1 & \text{ if } n = m\\
+            0 & \text{ otherwise }
+        \end{cases}.
+    \]
+    Then observe that for any $f \in R[x]$, we may uniquely associate
+    with it the following object: 
+    \[
+        f = \sum_{n = 0}^{\infty}f(n)x^n.
+    \]
+    The $\infty$ in the upper limit is there to allow us to define
+    any polynomial of an arbitrary degree. We know it will always
+    a finite polynomial since we said that $f(n) \ne 0$ for at
+    most finitely many $n$. 
+
+    Thus what we've shown is that the space $R[x]$, constructed by
+    focusing on the coefficients, defining their rules for
+    polynomial multiplication, and realizing the polynomial
+    structure we wanted, is in fact a ring!
+    \\
+
+    Note that if we don't assume that $f(n)$ is nonzero for
+    finitely many $n$, then we'll end up constructing a different
+    ring, know as the \textbf{formal power series} ring denoted $R[[x]]$. This has
+    the same rules of addition and multiplication, so the ring
+    structure doesn't change. The only thing that changes is that
+    $R[[x]]$ includes infinitely long polynomials. 
+
+    Thus, we see that $R[x] \subset R[[x]]$ and therefore $R[x]$
+    is a subring of $R[[x]]$.
+
+    In group theory there was a Subgroup Test which simplified the
+    task of determine whether or not a subspace form a group or
+    not. Fortunately, such a tool is available in ring theory.
+
+    \begin{thm}[Subring Test.]
+        Let $R$ be a ring and $S \subset R$. Then $S$ is a
+        \textbf{subring} of $R$ if and only if, for all $x, y \in
+        S$ we have that $x - y \in S$ and $xy \in S$.
+    \end{thm}
+
+    \begin{prf}
+        ($\implies$) Suppose $S \subset R$ is a subring. Then
+        certain $x - y \in S$ and $xy \in S$. 
+
+        ($\impliedby$) Suppose now that $x - y \in S$ and $xy \in
+        S$ for all $x, y \in S$. The first condition immediately
+        $(S, +)$ is a subgroup of $(R, +)$, since $x - y \in S$
+        for all $x, y \in S$ is just the subgroup test. Now observe that $xy \in S$ for all $x, y \in S$.
+        Since $R$ is an abliean group under addition and is closed
+        under multiplication of its elements, we have that $S$ is
+        a subring of $R$ as desired.
+    \end{prf}
+
+    It turns out that arbitrary intersections of subrings produce
+    a subring, an important result we include here. 
+
+    \begin{thm}\label{subring_intersections}
+        Let $R$ be a ring and $\{S_\alpha\}_{\alpha \in \lambda}$
+        be a family of subrings of $R$. Then $S = \bigcap_{\alpha
+        \in \lambda} S_\alpha$ is a subring of $R$. 
+    \end{thm}
+
+    \begin{prf}
+        From group theory, we know that the arbitrary intersection
+        of subgroups is again a group. So $S = \bigcap_{\alpha \in
+        \lambda} S_\alpha$ is an abelian subgroup of $R$. 
+        Therefore, we just need to
+        check that $S$ is
+        closed under multiplication. 
+
+        From group theory, we know that the arbitrary
+        intersection of a family of subgroups is a group. Thus $S$
+        is an abelian group, and we just need to check that it is
+        closed under multiplication. 
+
+        For any $s, s' \in S$ we know that $s, s' \in S_\alpha$
+        for all $\alpha \in \lambda$. Since each subring is
+        obviously closed under multiplication we see that $ss' \in
+        S_\alpha$ for all $\alpha \in \lambda$. Hence, $ss' \in S$
+        as desired.
+    \end{prf}
+
+    \newpage
+    \section{Ring homomorphisms.}
+    After one understand the fundamentals of group theory, they go
+    on to construct maps between different groups. This is the
+    same strategy we'll follow here, since we can definitely
+    define \textbf{ring homomorphisms} between rings.
+
+    The ring homomorphisms are also useful since they can help us
+    deduce when two rings $R$ and $S$ are the "same," a concept
+    which evolves into the concept of isomorphisms.
+
+    \begin{definition}
+        Let $R$ and $S$ be rings, and $f:R \to S$. We define $f$
+        to be a \textbf{ring homomorphism} if it preserves
+        addition and multiplication; that is, if
+        \[
+            f(a + b) = f(a) + f(b) \hspace{0.2cm}\text{ and }\hspace{0.2cm} 
+            f(ab) = f(a)f(b) 
+        \]
+        for all $a, b \in R$. If $f$ is a bijection, then we say
+        that $f$ is a \textbf{ring isomorphism}.
+    \end{definition}
+
+    \textcolor{NavyBlue}{Note that a ring homomorphism is simply a
+    group homomorphism, with the extra condition of which preserves multiplication of the
+    ring elements.} Therefore the following proposition, which
+    hold for group homomorphisms, holds for ring homomorphisms
+    too. 
+    \begin{proposition}
+        Let $R$ and $S$ be rings and $f: R \to S$ a ring homomorphism.
+        Then 
+        \begin{itemize}
+            \item[1.] if $0_R \in R$ and $0_S \in S$ are zero
+            elements, then $f(0_R) = 0_S$. 
+
+            \item[2.] if $f(-a) = -f(a)$ for all $a \in R$
+            \item[3.] $f(a_1a_2\cdots a_n) = f(a_1)f(a_2)\cdots
+            f(a_n)$ for all $a_1, a_2, \dots a_n \in R$
+            \item[4.] $f(a_1 + a_2 + \cdots + a_n) = f(a_1) +
+            f(a_2) + \cdots + f(a_n)$ for all $a_1, a_2, \dots a_n \in R$.
+        \end{itemize} 
+    \end{proposition}
+    
+    \begin{prf}
+        Observe that 
+        \begin{align*}
+            \phi(r) + \phi(-r) = \phi(r + (-r))\\
+            = \phi(r)\\
+            = 0\\
+            = \phi(r) +[-\phi(r)].
+        \end{align*}
+        Since $(R, +)$ is a group, subtract $\phi(r)$.
+    \end{prf}
+    
+
+    \textcolor{red}{Note that it is not necessarily true that
+    $f(1_R) = 1_S$.} In group theory, it was always guaranteed
+    that we could map the identity element from one group to
+    another. In our case, that's still true: $f(0_R) = 0_S$. Group
+    identity of $(R,+)$ is still mapped to the identity of $(S, +)$. But
+    this is mapping the \textit{additive} identity of $R$ to the
+    \textit{additive} identity of $S$. 
+    
+    \textbf{What we're saying is that
+    \textit{multiplicative} identities may not always be mapped to each
+    other. }
+    
+    Now since we can't always guarantee that
+    $f(1_R) = 1_S$, \textcolor{red}{we also can't guarantee that $f(a^{-1}) =
+    f(a)^{-1}$ for some invertible $a \in R$.}
+    However, there is a clear cut case for when these things do
+    happen.     
+    \\
+
+    \begin{proposition}
+        Let $R$ and $S$ be rings and $\phi:R \to S$ a nonzero ring
+        homomorphism. Denote $1_R \in R$ and $1_S \in S$ to be the
+        respective multiplicative identities. Then 
+        \begin{itemize}
+            \item[1.] If $\phi(1_R) \ne 1_S$ then $\phi(1_R)$ is a
+            zero divisors of $S$. 
+
+            \item[2.] If $S$ is an integral domain then $\phi(1_R)
+            = 1_S$. 
+            
+            \item[3.] If $\phi(1_R) = 1_S$ and $u \in R$ is a unit then
+            $\phi(u)$ is a unit in $S$.
+            In other words, $\phi(R^*) \subset S^*$
+
+            \item[4.] If $\phi(1_R) = 1_S$ and if $u \in R$ has an
+            inverse $u^{-1} \in R$ then $\phi(u^{-1}) = \phi(u)^{-1}$.
+        \end{itemize}
+    \end{proposition}
+
+    \textcolor{MidnightBlue}{An immediately corollary is this:
+    $\phi: R \to S$ is a not nonzero ring homomorphism if and only if
+    $\phi(1_R) \ne 0_S$. Furthermore, 
+    If
+    $S$ is an integral domain then $\phi(R^*) \subset S^*$ for any
+    homomorphism $\phi: R \to S$.
+    }
+
+    \begin{prf}
+        \begin{itemize}
+            \item[1.] Suppose $\phi(1_R) \ne 1_S$. Since $1_R1_R =
+            1_R$, we know that
+            \begin{align*}
+                    \phi(1_R1_R) - \phi(1_R) = 0_S
+                \implies &
+                \phi(1_R)\phi(1_R) - \phi(1_R) = 0_S\\
+                \implies & \big(\phi(1_R) - 1_S\big)\phi(1_R) = 0_S.
+            \end{align*}
+
+            Since $\phi(1_R) \ne 1_S$, either $\phi(1_S) = 0$ or it is a zero
+            divisor of $S$. 
+
+            Suppose $\phi(1_R) = 0_S$ and let $a \in R$. Then
+            \begin{align*}
+                \phi(a) = \phi(1_Ra) 
+                        &= \phi(1_R)\phi(a)\\
+                        &= 0_S\phi(a)\\
+                        &= 0_S.
+            \end{align*}
+            Thus we see that $\phi$ send every element of $R$ to $0_S$.
+            However, this cannot be the case since we supposed that $\phi$ is a
+            nonzero homomorphism. 
+Therefore $\phi(1_R)\ne 0$, leaving us with no
+            choice but to conclude that $\phi(1_R)$ is a zero divisor in $S$
+            as desired.   
+
+            \item[2.]
+            Suppose $S$ is an integral domain, and that $\phi(1_R)
+            \ne 1_S$ for the sake of contradiction. Then observe
+            for any $a \in R$
+            \begin{align*}
+                \phi(1_R a) - \phi(a) = 0_S \implies \phi(1_R)\phi(a) - \phi(a) = 0_S
+                \implies (\phi(1_R) - 1_S)\phi(a) = 0_S.
+            \end{align*}
+
+            Since $\phi(1_R) \ne 1_S$, and $\phi$ is a nonzero homomorphism,
+            this implies that $\phi(a)$ and $\phi(1_R) - 1_S$ are zero
+            divisors in $S$ for at least one $a \in R$. However, this is a
+            contradiction since $S$ is an integral domain and hence has no
+            zero divisors. Thus by contradiction $\phi(1_R) =
+            1_S$.
+            
+            \item[3.] Suppose $\phi(1_R) = 1_S$ and 
+            let $u$ be a unit in $R$. Then $uv =
+            1_R$ for some $v \in R$. So 
+            \[
+                \phi(uv) = \phi(1_R) = 1_S \implies \phi(u)\phi(v) = 1_S.        
+            \]
+            Therefore, $\phi(u)$ is a unit in $S$. Next, since $uu^{-1} =
+            1_R$,
+            \[
+                \phi(1_R) = 1_S \implies \phi(uu^{-1}) = 1_S \implies 
+                \phi(u)\phi(u^{-1}) = 1_S \implies \phi(u)^{-1} = \phi(u^{-1})
+            \]
+            as desired.
+            
+            \item[4.] Suppose $\phi(1_R) = 1_S$ and that $u \in R$ has
+            some inverse $u^{-1} \in R$.
+            Since $uu^{-1} = 1_R$,
+            \[
+                \phi(1_R) = 1_S \implies \phi(uu^{-1}) = 1_S \implies 
+                \phi(u)\phi(u^{-1}) = 1_S \implies \phi(u)^{-1} = \phi(u^{-1})
+            \]
+            as desired.
+            
+        \end{itemize}
+    \end{prf}
+
+    
+
+    \noindent\textbf{Examples.}\\
+    Let $n \in \ZZ$, and define the function
+    $f: \ZZ \to \ZZ$ as 
+    \[
+        f(m) = nm.
+    \]
+    Then this is a homomorphism if and only if $n = 0$ or 1.
+    Suppose otherwise. Then observe that the second condition of
+    the definition of a ring homomorphism specifies that 
+    \begin{align*}
+        f(ab) = f(a)f(b) \implies nab &= nanb \\
+        & = n^2ab.
+    \end{align*}
+    This is only true if $n = 0$ or 1, which is our contradiction.
+
+    Instead, we can construct the following function to form a
+    homomorphism between $\ZZ$ and $\ZZ/n\ZZ$, where $n$ is a
+    positive integer. Let $f: \ZZ \to \ZZ/n\ZZ$ such that 
+    \[
+        f(m) = [m]
+    \]
+    where $[m] = \{k \in \ZZ \mid k = m \mbox{ mod } n\}$.
+    \\
+
+    Suppose we construct a homomorphism $\phi: \mathbb{R}[x] \to
+    S$. (Recall that $\RR[x]$ is the set of finite polynomials
+    with coefficients in $\RR$). Define $\phi$ as  
+    \[
+        \phi(p(x)) = p(i).
+    \]
+    First, observe that this is surjective, since for any $a + bi
+    \in \mathbb{C}$ we can send $a + bx \in \RR$ to this element
+    via $\phi$. Therefore $\im(\phi) = \mathbb{C}$. 
+
+    Let us now describe $\ker(\phi)$. First suppose that $p(i) =
+    0$ for some $p(x) \in \RR[x]$. At this point, we know that $p(x)$ must be at least a
+    second degree or greater polynomial. Therefore we can express $p(x)$ 
+    as 
+    \[
+        p(x) = q(x)(x^2 + 1) + bx + a
+    \]
+    for some $q(x) \in \RR[x]$. Then 
+    \begin{align*}
+        p(i) &= q(i)(i^2 + 1) + bi + a \\
+            &= a + bi
+    \end{align*}
+    but this implies that $a + bi = 0 \implies a = b = 0$.
+    Therefore, $p(i) = 0$ if and only if $p(x) = q(x)(x^2 + 1)$
+    some $q(x) \in \RR[x]$. In other words, 
+    \[
+        \ker(\phi) = \{p(x) \in \RR[x] \mid (x^2 + 1)\big|p(x)\}.
+    \]
+    \\
+    \\
+    As in group theory, we have the following theorem regarding
+    isomorphisms. We won't prove this again. 
+
+
+    \begin{thm}
+        Let $R$ and $S$ be rings. A ring homomorphism $f: R \to S$ is an
+        isomorphism if and only if there exists a h             omomorphism $g:
+        S \to R$ such that $f \circ g$ is the identity map on
+        $R$ and $g \circ f$ is the identity map on
+        $S$.
+    \end{thm}
+
+    With the ring homomorphism defined, we again have $\ker(f)$
+    and $\im(f)$ as valid and important concepts.
+    \begin{definition}
+        Let $R$ and $S$ be rings and $f: R \to S$ a ring
+        homomorphism. Then we define 
+        \[
+            \ker(f) = \{a \in R \mid f(a) = 0\}  
+        \]
+        and 
+        \[
+            \im(f) = \{f(a) \mid a \in R\}.
+        \]
+    \end{definition}
+
+    \begin{proposition}
+        Suppose $f: R \to S$ is a ring homomorphism. Then 
+        \begin{itemize}
+            \item[1.] The kernal $\ker(f)$ is a subring of $R$.
+            \item[2.] The image $\im(f)$ is a subring of $S$.  
+        \end{itemize}
+    \end{proposition}
+    Caveat: Recall that "subrings" are rings that might not
+    possibly contain $1$, the multiplcative identity.
+
+    \begin{prf}
+        \begin{itemize}
+            \item[1.] We can show this using the Subring Criterion.
+            As we stated before, $f(0) = 0$. Hence $0 \in
+            \ker(f)$ so that $\ker(f)$ is nonempty. 
+
+            To prove this, observe that 
+            \begin{align*}
+                f(0) + f(0) & = f(0 + 0)\\
+                & = (0)\\
+                & = f(0) + 0.
+            \end{align*}
+            Since $(R, +)$ is a group, we can subtract $f(0)$
+            from both sides to get $f(0) = 0$.
+
+            Next, we want to show that $r_1, r_2 \in \ker(f)
+            \implies r_1 - r_2 \in \ker(f)$. Since we showed that
+            $f(-r) = -f(r)$ for all $r \in R$, we know that 
+            \begin{align*}
+                f(r_1 - r_2) & = f(r_1) + f(-r_2)\\
+                & = f(r_1) - f(r_2)\\
+                & = 0 - 0\\
+                & = 0.
+            \end{align*}
+            Hence, we see that $r_1 - r_2 \in \ker(f)$. 
+
+            Now again suppose $r_1r_2 \in \ker(f)$. Then 
+            \begin{align*}
+                f(r_1r_2) & = f(r_1)f(r_2)\\
+                & = 0
+            \end{align*}
+            so that $r_1r_2 \in \ker(f)$. By the subring test, we
+            see that $\ker(f)$ is a subring of $R$. 
+
+            \item[2.] We can similarly prove this via the Subring
+            Test. First, observe that $f(0) = 0$, so that $0 \in
+            \im(f)$. Hence, $\im(f)$ is nonempty. 
+
+            Next, suppose $s_1, s_2 \in \im(f)$. Then we want to
+            show that $s_1 - s_2 \in \im(f)$. Now 
+            \begin{align*}
+                s_1 - s_2 & = f(r_1) - f(r_2)\\
+                & =f(r_1 - r_2).\\
+            \end{align*}
+            This shows that $s_1 - s_2 \in \im(f)$. Finally, we'll
+            show that $s_1s_2 \in \im(f)$. Observe that 
+            \begin{align*}
+                s_1 \times s_2 = f(r_1)f(r_2) = f(r_1r_2).
+            \end{align*}
+            Hence we see that $s_1\times s_2 \in \im(f)$. Thus
+            $\im(f)$ is a subring of $R$. 
+        \end{itemize}            
+    \end{prf}
+    Finally, we end this section by noting that two important and
+    useful mathematical identites continue to hold in the context
+    of rings. We won't offer their
+    proofs though since they are a bit tedious. 
+    
+    \begin{proposition}
+        Let $R$ be a ring and let $a_1, a_2, \dots, a_m$ and $b_1,
+        b_2, \dots, b_n$ be elements of $R$. Then 
+        \[
+            (a_1 + a_2 + \cdots + a_m)(b_1 + b_2 + \cdots + b_n) 
+            = \sum_{i = 1}^{m}\sum_{j = 1}^{n}a_ib_j
+        \]
+    \end{proposition}
+
+    \begin{proposition}[Binomial Theorem]
+        Let $R$ be a ring (with identity) and let $a, b \in R$
+        with $ab = ba$. Then for any $n \in \mathbb{N}$ 
+        \[
+            (a + b)^n = \sum_{k = 0}^{n} {n\choose k} a^kb_{n-k}.
+        \]
+    \end{proposition}
+
+
+
+    \newpage
+    \section{Ideals and Quotient Rings.}
+    
+    Consider a ring
+    homomorphism $f: R \to S$. Let $a \in R$ and
+    suppose $b \in \ker(f)$. Then 
+    \[
+        f(ab) = f(a)f(b) = 0f(b) = 0.
+    \]
+    Therefore, if $a \in \ker(R)$, then $ab \in \ker(R)$ for all
+    $b \in R$. Many subrings behave this way and are particularly
+    interesting, so we give them a special name! 
+    \\
+    First, we'll introduce the concept of a coset.
+    \begin{definition}
+        Let $(R, +, \cdot)$ be a ring with identity $1 \ne 0$. Suppose $I$ is
+        a subring. Then we define the set 
+        \[
+            \overline{a} = a + I = \{a + i \in R \mid i \in I\}   
+        \]
+        to be a \textbf{coset} $I$ in $R$. Since $R$ is an abelian
+        group under addition, we see that 
+        \[
+            a + I = I + a
+        \]
+        for all $a \in R$. Hence, left and right cosets are the
+        concept here. Finally, we define the \textbf{collection of
+        cosets} by 
+        \[
+            R/I = \{\overline{a} \mid a \in R\}.               
+        \]
+    \end{definition}
+    We are now ready to introduce the concept of an ideal. 
+    \begin{definition}
+        Let $R$ be a ring and suppose $I \subset R$. Then we
+        define $I$ to be an \textbf{ideal} of $R$ if and only if 
+        \begin{itemize}
+            \item [1.] $I$ is an additive subgroup of $R$ 
+            \item [2.] $rI \subset I$ for all $r \in R$ 
+            \item [3.] $Ir \subset I$ for all $r \in R$
+        \end{itemize}
+
+        \textcolor{Purple}{An ideal is simply an interesting
+        subring $R'$ of a ring $R$ which sort of "sucks in"
+        elements of $R$ and sends them into $R'$. That is, $rr'
+        \in R'$ for every $r \in R$ and $r' \in R'$.
+        \\
+        \\
+        We've already seend many examples of this, although we
+        don't usually think of them that way. For instance, it's
+        a well known fact that for any integer times an even
+        number is again an even number. Algebraically, for $n \in \ZZ$
+        and $k \in 2\ZZ$ we have that $nk \in 2\ZZ$ and $kn \in
+        2\ZZ$. 
+        \\
+        \\
+        Thus $2\ZZ$ is an ideal of $\ZZ$. In fact, if $k$ is any
+        even integer then $k\ZZ$ is an ideal of $\ZZ$.
+        \\
+        \\
+        The set of odd integers is not an ideal of $\ZZ$, since we
+        could always take an even number $n \in \ZZ$ and any odd
+        $k$, and multiply them to obtain an even number $nk$ which
+        is obviously not in the set of odd integers.
+        }
+
+
+        If $I \subset R$ satisfies (2) then $I$ is
+        said to be a \textbf{left ideal}. On the other hand if $I
+        \subset R$ satisfies (3) then it is said to be a
+        \textbf{right ideal}. 
+    \end{definition}
+
+    Thus any ideal $I$ is both a left and right ideal. In
+    addition, the concept of a left ideal is identical to a right
+    ideal in a commutative ring.  
+
+    \begin{thm} 
+        Suppose $I \subset R$ is a proper subring. Then the
+        following are equivalent:
+        \begin{itemize}
+            \item[1.] $I = \ker(f)$ for some $f: R \to S$
+            \item[2.] $r\cdot x = x \cdot r \in I$ for any $r \in
+            R$, $x \in I$ 
+            \item[3.] $R/I$ is a ring with $\overline{1} \ne \overline{0}$. 
+            \item[4.] $I$ is an ideal.  
+        \end{itemize}
+    \end{thm}
+
+    \begin{prf}
+        \begin{itemize}
+            \item[1.] We'll show $(i) \implies (ii)$. Assume $I =
+            \ker(f)$. Given $r \in R$ and $i \in I$, 
+            \begin{align*}
+                \phi(r \cdot i) = \phi(r)\cdot\phi(i) = \phi(r)\cdot 0 = 0\\
+                \phi(i \cdot r) = \phi(i)\cdot\phi(r) = 0 \cdot\phi(r) = 0
+            \end{align*}
+            This shows that $r \cdot i, i \cdot r \in \ker(f)$. 
+
+            \item[ii.] We'll show that $(ii) \implies (iii)$.
+            Assume $ri, ir \in I$ for all $r \in R, i \in I$.
+            We'll show that this is a ring with $\overline{1} \ne
+            \overline{0}$. 
+
+            First, we define that 
+            \begin{align*}
+                \overline{a} + \overline{b} = \overline{a + b}\\
+                \overline{a}\overline{b} =\overline{ab}.
+            \end{align*}
+            We first need to show that these definitions are
+            well-defined. Suppose $\overline{a_1} =
+            \overline{a_2}$ and $\overline{b_1} = \overline{b_2}$.
+            Then $a_1 = a_2 + x$ and $b_1 = b_2 + y$ for some
+            $x,y\in I$. Then 
+            \[
+                a_1 + b_1 = (a_2 + b_2) + (x + y).
+            \]
+            Since $I \subset R$ is a subring, $x+y \in I$. So, 
+            \[
+                \overline{a_1 + b_1} = \overline{a_1}\overline{a_2}.   
+            \]
+
+            Simiarly, $\cdot$ is well defined on $R/I$. Again, suppose $\overline{a_1} =
+            \overline{a_2}$ and $\overline{b_1} = \overline{b_2}$.
+            Then $a_1 = a_2 + x$ and $b_1 = b_2 + y$ for some
+            $x,y\in I$. Then 
+            \begin{align*}  
+                a_1 \cdot b_1 & = (a_2 + x) \cdot (b_2 + y)\\
+                & = (a_2\cdot b_2) + [(a_2 \cdot y) +(x \cdot b_2) + (x \cdot y)].
+            \end{align*}    
+            $I$ is a subring, so $x \cdot y \in I$. Now $(ii)$ is
+            true, so $a_2 \cdot y \in I$ and $x \cdot b_2 \in I$.
+            Therefore, $\overline{a_1\cdot b_1} = \overline{a_2
+            \cdot b_2}$. 
+
+            Finally, we'll show that $(R/I, +, \cdot)$ is a ring. 
+            \begin{description}
+                \item[(R1: Addition)] Observe that $\overline{0}
+                \in R/I$ is the identity and $\overline{-a}$ are
+                inverses of $\overline{a} \in R/I$. 
+
+                \item[(R2: Closure)] The set is closed by
+                construction on $\cdot$. 
+
+                \item[(R3: Assoc), (R5: Distributivity)] hold for
+                $R/I$ because they hold for $R$. 
+
+                \item[(R4: Identity)] The identitty holds for
+                $\overline{1} \in R/I$. One can check that
+                $\overline{1} \ne \overline{0}$. 
+            \end{description}
+            \item[iii] Now we can show that $(iii) \implies (i)$.
+            Assume $S = R/I$ is a ring. Define 
+            \[
+                \phi: R \to S \quad a \mapsto \overline{a} = a + I
+            \]
+            One checks that $\ker(\phi) = I$. 
+
+            \item[iv.] Our work in the previous section has
+            allowed us to prove $(i) \implies (iv)$. Now observe
+            that we can prove $(iv) \implies (i)$ by simply
+            considering the map in $(iii)$.
+        \end{itemize}
+    \end{prf}
+    
+
+    \begin{thm}[ (Properties of Ideals)]
+        Let $R$ be a ring and $I, J$ ideals of $R$. Then 
+        \begin{itemize}
+            \item[1.] $I +J$ is an ideal of $R.$ (Note we may
+            extend this to larger, finit sums)
+            \item[2.] $IJ = \left\{\displaystyle \sum_{k=1}^ni_kj_k \mid \text{for all
+            } n \in \mathbb{N}, i_k \in I, j_k \in J\right\}$ is an
+            ideal of $R$. (Note we can extend this to larger,
+            finite products.) 
+            \item[3.] $I \cap J$ is an ideal of $R$. Morever, if
+            $\{I_\alpha\}_{\alpha \in \lambda}$ is a family of
+            ideals of $R$, then $\bigcap\limits_{\alpha \in
+            \lambda} I_\alpha$ is an ideal of $R$. 
+        \end{itemize}
+    \end{thm}
+
+    \begin{prf}
+        \begin{itemize}
+            \item[1.] 
+            By the Second Isomorphism Theorem we know that $I + J$
+            is a subring of $R$. Thus, we just need it to be
+            closed under multiplication for it to be an ideal. 
+
+            Let $i + j \in I + J$ and let $r \in R$.
+            then $r(i + j) = ri +rj \in I + J$, since $ri \in I$
+            and $rj \in J$. Similarly, $(i + j)r \in I + J$, so
+            that $I + J$ is an ideal of $R$.
+
+            \item[2.] In words, $IJ$ is the set of all finite sums
+            of elements of the form $ij$ where $i \in I$ and $j
+            \in J$. Thus is clearly an abelian group. To show it
+            is closed under multiplication, let $r \in R$. Then
+            observe that $r(\sum_{k=1}^{n}i_kj_k) =
+            \sum_{k=1}ri_kj_k$. 
+            Now $ri_k \in I$ for all $k$ since $I$ is an ideal.
+            Therefore $r(\sum_{k=1}^{n}i_kj_k) \in IJ$. 
+
+            For similar reasons $(\sum_{k=1}^{n}i_kj_k)r \in I$,
+            so that $IJ$ is an ideal. 
+
+            \item[3.] By our knowledge of
+            group theory we know that intersections of subgroups
+            form a group, so that this is an abelian subgroup.
+            To see it is an ideal we just need to check it is
+            closed under scalar multiplication. 
+
+            Let $i \in I \cap J$. Then $i \in I$ and $i \in J$.
+            Hence, $ir \in I$ and $ri \in J$, and $ri \in I$ and
+            $rj \in J$ as $I$ and $J$ are ideals. Hence $ir \in I
+            \cap J$ and $ri \in I \cap J$, so that $I \cap J$ is
+            an ideal. 
+
+            The more general statement has the same proof structure.
+        \end{itemize}
+    \end{prf}
+
+
+    \begin{lemma}
+    If $S$ is a nonempty
+    partially ordered set in which every chain $I_1 \subset I_2
+    \subset \cdots$ has an upper bound $I$, then $S$ has a maximal
+    element $M$.
+    \end{lemma}
+
+    \begin{thm}[ (Properties of Ideals)]
+        Let $(R, +, \cdot)$ be a ring with identity $1 \ne 0$.
+        Consider a chain $I_1 \subseteq I_2 \subseteq \cdots \subseteq
+        I_n \subseteq \cdots \subseteq R$ of proper ideals of $R$.
+        \begin{itemize}
+            \item[1.] $\displaystyle I = \bigcup_{n \ge 1}I_n$ is a proper
+            ideal of $R$. 
+
+            \item[2.] Each proper ideal $I$ of $R$ is
+            contained in a maximal ideal $M$ of $R$.
+        \end{itemize}
+    \end{thm}
+
+    \begin{prf}
+        \begin{itemize}
+            \item[1.]
+            \underline{$\bm{I}$ \textbf{is nonempty}.}\\[1.2ex]
+            Observe that $I$ is nonempty if at least one $I_k$ is
+            nonempty. 
+    
+            \noindent\underline{$\bm{a, b \in I \implies a -b \in I}$.}\\[1.2ex]
+            Pick $a, b \in I$. Then $a \in I_n$ and $b \in I_m$ for some
+            $n, m$. Without loss of generality assume $n \le m$. Then $I_n
+            \subseteq I_m$. Thus $a \in I_m$ as well, and since $I_m$ is
+            an ideal, we see that $a - b \in I_m$. Hence $a - b \in I$. 
+    
+            \noindent\underline{$\bm{ra \in I}$ \textbf{if} $\bm{r \in R,
+            a \in I}$}.\\[1.2ex]
+            If $a \in I$ then $a \in I_k$ for some $k$. Since $I_k$ is an
+            ideal, we have that $ra \in I_k$. Hence $ra \in I$. 
+    
+            \noindent\underline{$\bm{I \ne R}$.}\\[1.2ex]
+            Suppose on the contrary that $I = R$. Then for every $r \in R$
+            there exists an integer $k$ such that $r \in I_k$. In
+            particular, for some $u \in R^{\times}$ (the unit group),
+            there is a $k$ such that $u \in I_k$. Since $I_1 \subseteq I_2
+            \subseteq
+            \cdots \subseteq I_k$, we see that all ideal $I_1, I_2,
+            \dots, I_k$ are not proper (as they contain a unit.)
+            \\
+            \\
+            However, this is a contradition, since each $I_n$ must be
+            proper. Thus $I$ cannot be all of $R$. 
+    
+            \item[2.] Consider any proper ideal $I_1$ of $R$. If $I_1$ is not maximal,
+            then there exists an ideal $I_2$ such that $I_1 \subset I_2$. If
+            $I_2$ is not maximal, then there exists an ideal $I_3$ such
+            that $I_2 \subset I_3$.
+            Now construct the set 
+            \[
+                S = \{I_n \text{ is proper } \mid I_{n} \subset I_{n+1}\}.
+            \]
+            where $I_n \in S_j$ whenever there exists a proper ideal
+            $I_{n+1}$ where $I_n \subset I_{n+1}$.
+            
+            If this set is finite, then we take the maximal element
+            (relative to partial ordering on subset inclusion) $M$ as the
+            maximal ideal. 
+    
+            Suppose on the other hand that this set is infinite. 
+            By part
+            $(a)$, we see that every $I_n \in S$ is a subset of the proper
+            ideal $\bigcup_{n \ge 1} I_n$, so that this is an upper bound
+            on the set of elements $S_J$ (in terms of set inclusion).
+            Hence by Zorn's lemma, we see that there must exist a maximal
+            element $M \in S$. As all members of $S$ are proper ideals, we
+            see that $M$ is by definition a maximal ideal where $M \ne R$.
+            As $I_1$ was arbitrary, we see that all ideals are contained in
+            some maximal ideal $M$, as we set out to show.
+        \end{itemize}
+    \end{prf}
+
+    The following is a useful example of an ideal known as the
+    nilradical:
+    \begin{proposition}
+        Let $(R, +, \cdot)$ be a commutative ring with $1 \ne 0$, and let
+    $I \subset R$ be a proper ideal. The 
+    \textit{radical} of $I$ is the set 
+    \[
+        \sqrt{I} = \{r \in R \mid r^n \in I \text{ for some } n \in \zz_{> 0}  \}.
+    \]
+    \begin{enumerate}
+        \item $\sqrt{I}$ is an ideal containing $I$. 
+        
+        \item $\sqrt{I}$ is the intersection of all prime
+        ideals $P$ which contain $I$.
+    \end{enumerate}
+    \end{proposition}
+
+    \begin{prf}
+        \begin{enumerate}
+            \item First observe that $I \subset \sqrt{I}$. Since for any $r \in I$,
+            we see that $r^1 = r \in I$. Hence $r \in \sqrt{I}$. 
+        
+            Now we'll show that $\sqrt{I}$ is an ideal.\\[1.2ex]
+            \noindent\underline{$\bm{\sqrt{I} \ne \varnothing}$.}\\[1.2ex]
+            Since $I \subset \sqrt{I}$, we see that $\sqrt{I}$ is nonempty. 
+            \\[1.2ex]
+            \noindent\underline{$\bm{a, b \in \sqrt{I} \implies a - b \in
+            \sqrt{I}}$.}\\[1.2ex]
+            Let $a, b \in \sqrt{I}$. Then there exist positive integers $m, n$
+            such that $a^m \in I$ and $b^n \in I$. Now observe that 
+            \[
+                (a -  b)^{n + m} = \sum_{k = 0}^{m + n}\binom{m+n}{k}a^{n + m - k}(-b)^{k}.
+            \]
+            by the binomial theorem. Observe that when $k \le n$,
+            \begin{align*}
+                k \le n & \implies n - k \ge 0\\
+                & \implies n + m - k \ge m.
+            \end{align*}
+            Hence we see that $a^{n + m - k} = a^{n - k}a^m \in I$ because
+            $a^m \in I$. Since $I$
+            is an ideal, we see that 
+            \[
+                \sum_{k = 0}^{n}\binom{m+n}{k}a^{n + m - k}(-b)^{k}  
+            \]
+            is a sum of terms in $I$, so therefore it is in $I$. 
+        
+            Now suppose $k > n$. Then we get that 
+            \begin{align*}
+                n < k &\implies k =  n + j \text{ for some } j \in \mathbb{Z}^{+}.
+            \end{align*}
+            Therefore we see that $b^{k} = b^{j}b^{n} \in I$. Since $I$ is an
+            ideal, the sum
+            \begin{align*}
+                \sum_{k = n+1}^{n}\binom{m+n}{k}a^{n + m - k}(-b)^{k}  
+            \end{align*}
+            is a sum of terms in $I$. Hence the total sum is in $I$. Now we
+            see that 
+            \[
+                \sum_{k = 0}^{m + n}\binom{m+n}{k}a^{n + m - k}(-b)^{k}
+                =
+                \sum_{k = 0}^{n}\binom{m+n}{k}a^{n + m - k}(-b)^{k}  
+                + 
+                \sum_{k = n+1}^{n}\binom{m+n}{k}a^{n + m - k}(-b)^{k}
+            \]
+            so that $\displaystyle (a - b)^{m+n} = \sum_{k = 0}^{m + n}\binom{m+n}{k}a^{n +
+            m - k}(-b)^{k}$ is a sum of two terms in $I$, and hence is in $I$.
+            Thus we have that $a, b \in \sqrt{I} \implies a - b \in \sqrt{I}$.
+            \\[1.2ex]
+            \noindent\underline{$\bm{ra \in I}$ \textbf{if} $\bm{r \in R, a
+            \in I}$.}\\[1.2ex]
+            Suppose that $a \in \sqrt{I}$. Then $a^n \in I$ for some positive integer
+            $n$. Since $R$ is a commutative ring, we see that $(ra)^n = r^na^n
+            \in I$ since $a^n \in I$ and $I$ is an ideal. Thus $ra \in I$ for
+            any $r \in R$, $a \in I$. 
+            \\[1.2ex]
+            \noindent\underline{$\bm{\sqrt{I} \ne R}$.}\\[1.2ex]
+            Suppose that $\sqrt{I} = R$. Then for every $r \in R$, there
+            exists a positive integer $n$ such that $r^n  \in I$. 
+    
+            Then in particular for some unit $u \in R^{\times}$ we have that $u^m
+            \in I$ for some integer $m$. However, since $R^\times$ is a
+            group under multiplication, we know that $u^m \in R^{\times}$.
+            Hence $u^m$ is a unit. Since $u^m \in I$, this implies that
+            $I$ contains a unit, which ultimately implies that $I = R$. 
+            \\
+            \\
+            (\underline{Note}: It is a fact from class that if an ideal
+            $I$ of $R$ contains a unit, it is all of $R$. I am utilizing
+            this fact. Please don't dock off points for this literal fact
+            from class.)
+            \\
+            \\
+            However, this is a contradition since we assumed that $I$ was
+            proper. Hence $\sqrt{I} \ne R$, which proves that it is a
+            proper ideal.
+    
+            \item 
+            First we prove the hint. 
+            \\
+            \\
+            Following the hint, suppose $x \not\in \sqrt{I}$. If we
+            let $D = \{1, x, x^2, \dots\}$, pick a maximal ideal $M$ in
+            the ring $S = D^{-1}R/D^{-1}I$. 
+    
+            Let $\phi: R \to S$ where $\phi(r) = \dfrac{r}{1} + D^{-1}I$.
+            Let $P$ be the pull-back of $M$ under $\phi$. 
+            We'll now prove the hint by showing $P$ is prime, $x \not\in
+            \sqrt{I} \implies x \not\in P$ and that $I \subset P$.
+            \\[1.2ex]
+            \underline{$\bm{P}$ \textbf{is prime}}.\\[1.2ex]
+            First observe we need to make sure that the pullback is well
+            defined, in the sense that 
+            if $M$ is maximal then $P$ is prime. First observe that since
+            $M$ is maximal, it is prime by our previous lemma. Thus we
+            know from Hw 2 
+            that we need to show two things.
+            \begin{itemize}
+                \item[1.] $\bm{\phi(1) = 1}.$ Observe that 
+                \[
+                    \phi(1) = \dfrac{1}{1} + D^{-1}I   
+                \] 
+                which is the identity element in $D^{-1}R/D^{-1}I$. Hence,
+                $\phi(1) = 1$. 
+                $\phi^{-1}(P)$ is a prime ideal. From problem 2, we know
+                that this allows us to conclude the pull-back is well defined.
+    
+                \item[2.] $\bm{P = \phi^{-1}(M)}$ \textbf{is prime}. (It
+                may help the reader for me to refer to $P$ explicitly as
+                $\phi^{-1}(M)$, in terms of clarity of the solution, so
+                I'll follow that convention.)
+                \begin{description}
+                    \item[$\bm{\phi^{-1}(M)}$ is nonempty.]
+                    Observe that $\phi(0) = \dfrac{0}{1} + D^{-1}I \in M$,
+                    as $M$ is an ideal of $D^{-1}R/D^{-1}I$ and hence
+                    contains the zero element. Therefore $0 \in
+                    \phi^{-1}(M) = P$ and so
+                    $P$ is nonempty. 
+                    
+                    \item[$\bm{a, b \in \phi^{-1}(M)\implies a-b \in \phi^{-1}(M)}$.] 
+                    Let $a, b \in \phi^{-1}(M)$. Then $\phi(a), \phi(b) \in M$.
+                    Hence, we see that 
+                    \begin{align*}
+                        \phi(a), \phi(b) \in M & \implies \phi(a) - \phi(b) \in M \text{ (since } M \text{ is a prime ideal)}\\
+                        & \implies \phi(a - b) \in M \text{ (by homomorphism properties)}\\
+                        & \implies a - b \in \phi^{-1}(M).
+                    \end{align*}
+                    Therefore, we see that $a - b \in \phi^{-1}(M)$ if $a, b \in
+                    \phi^{-1}(M)$.  
+        
+                    \item[$\bm{ra \in \phi^{-1}(M)}$ \textbf{if} $\bm{r \in R, p \in \phi^{-1}(M)}$.] 
+                    We'll show that $r \cdot a \in \phi^{-1}(M)$ for all
+                    $r \in R$. Observe that 
+                    \begin{align*}
+                        \phi(r\cdot a) = \phi(r)\phi(a).
+                    \end{align*}
+                    Since $\phi(a) \in M$, and $M$ is a prime ideal, $s\phi(a) \in M$
+                    for all $s \in D^{-1}R/D^{-1}I$. In particular, since $\phi(r) \in D^{-1}R/D^{-1}I$, we
+                    see that $\phi(r)\phi(a) \in M$. Therefore, $\phi(r \cdot a)
+                    \in M$ so that $r\cdot a \in \phi^{-1}(M)$.
+        
+                    \item[$\bm{ab \in \phi^{-1}(M) \implies a \in \phi^{-1}(M)}$ \textbf{or} $\bm{b \in \phi^{-1}(M)}$]
+                    Suppose $ab \in \phi^{-1}(M)$. Then we see that 
+                    \[ 
+                        \phi(ab) \in M \implies \phi(a)\phi(b) \in M.
+                    \]
+                    Since $M$ is a maximal, and hence a prime ideal (as
+                    proven earlier), we see that either $\phi(a)
+                    \in M$ or $\phi(b) \in M$. In either case, we see that
+                    either $a \in \phi^{-1}(M)$ or $b \in \phi^{-1}(M)$, which
+                    is what we set out to show.
+    
+                    \item[$\bm{\phi^{-1}(M)}$ \textbf{is proper}.] Finally, we show
+                    that $\phi^{-1}(M)$ is proper. Suppose that $\phi^{-1}(M) = R$. Then 
+                    \[
+                        \phi^{-1}(M) = R \implies \phi(R) = M.   
+                    \]
+                    Thus we see that $\phi(r) \in M$ for all $r \in R$.
+                    Let $r = 1$. 
+                    \[
+                        \phi(r) \in M \implies \phi(1) \in M \implies 1 \in M
+                    \]
+                    since we have that $\phi(1) = 1$.
+                    However, $1 \not\in M$ since $M$ is maximal and hence
+                    proper. As we've reached a contradiction, we see that
+                    the pullback $P$ must always be proper. 
+                \end{description} 
+            \end{itemize}
+            Thus we see that the pullback is well-defined (i.e., if $M$ is
+            prime, so is its pullback $P$) in this case and
+            that $P$ is prime. 
+            \\
+            \\
+            (Note: it was technically unnecessary to do all of this work.
+            Even in terms of clarity, I could have just referenced Hw 2,
+            problem 3, and argued that the work carries over via the
+            $\phi(1) = 1$ argument, since that was the only reason we 
+            need $R$ and $S$ to be integral domains there, and then used
+            the fact that maximal ideals are prime. However, I included
+            the full work to be explicitly clear.)
+            \\
+            \\
+            Next, we continue and prove the hint.\\
+            \underline{$\bm{x \not\in \sqrt{I} \implies x \not\in
+            P}$}.\\[1.2ex]
+            Recall we supposed $x \not\in \sqrt{I}$. Now
+            if $M$ is an ideal of $D^{-1}R/D^{-1}I$, then by the Fourth
+            Isomorphism theorem we have that $M$ corresponds to some ideal
+            $M'$ of $D^{-1}R$ where $D^{-1}I \subset M'$. Hence we can
+            write  
+            \[
+                M = M' +  D^{-1}I.
+            \]
+            (\underline{Note}: before you dock off points, the above choice of
+            notation was introduced by Professor Goins himself. I think
+            it's a bit unorthodox, which you may also think as well, but
+            again, Goins used this notation so I will as well.)
+            \\
+            \\
+            Now suppose for a contradiction that $x \in P$. Then we have that $\dfrac{x}{1} +
+            D^{-1}I \in M$. For this to be the case, we need that $\dfrac{x}{1} \in
+            M'$. Since $M'$ is an ideal of $D^{-1}R$, we know that
+            $r\dfrac{x}{1} \in M$ for all $r \in D^{-1}R$. In particular, we see that 
+            \[
+                \dfrac{1}{x} \cdot \dfrac{x}{1} \in M \implies \dfrac{1}{1} \in M'.
+            \]
+            As $\dfrac{1}{1}$ is a unit, this implies that $M' = D^{-1}R$
+            (\underline{Note}: It is a fact from class that if an ideal
+            $I$ of $R$ contains a unit, it is all of $R$. I am utilizing
+            this fact. Please don't dock off points for this literal fact
+            from class.)
+            \\
+            However, by the Fourth Isomorphism Theorem, this implies that
+            $M = D^{-1}R/D^{-1}I$; a contradiction to the assumption that
+            $M$ is a maximal ideal. Thus we see that $x \not\in P$. 
+            \\[1.2ex]
+            \underline{$\bm{I \subset P}.$}\\[1.2ex]
+            Now since $M$ is an ideal, we see that it contains the zero
+            element $D^{-1}I$. Now observe that for any $i \in I$,
+            \[
+                \phi(i) = \dfrac{i}{1} + D^{-1}I = D^{-1}I \in M.
+            \]
+            Therefore we see that $I \subset \phi^{-1}(M) = P$.
+            \\
+            \\
+            As this point we have shown that if $P$ is the pullback of $M$
+            under the given homomorphism, then (1) the pull back is well-defined (2) $P$ is prime (3) if $x
+            \not\in \sqrt{I}$ then $x \not\in P$ and (4) $I \subset P$.
+            
+    
+            Now consider the fact that $x \not\in \sqrt{I} \implies x
+            \not\in P$. Let $\displaystyle \bigcap_{I \subset P' \text{, prime}}P'$
+            denote the intersection of all prime ideals containing $I$. Since 
+            \[
+                \bigcap_{I \subset P' \text{, prime}}P' \subset P    
+            \] 
+            because $P$ is a prime ideal contaning $I$, we see that if $x \not\in P$ then $\displaystyle x \not\in \bigcap_{I
+            \subset P' \text{, prime}}P'$. As we proved that if $x \not\in
+            \sqrt{I}$, then $x \not\in P$, we see that 
+            \[
+                x \not\in \sqrt{I} \implies x \not\in \bigcap_{I \subset P' \text{, prime}}P'.
+            \]
+            Taking the contrapositive of the statement, we can then conclude
+            that 
+            \[
+                x \in \bigcap_{I \subset P' \text{, prime}}P' \implies x \in \sqrt{I}
+            \]
+            which ulimately implies that $\displaystyle \bigcap_{I \subset P', \text{prime}}P'
+            \subset \sqrt{I}$. 
+            \\[1.2ex]
+            \underline{$\bm{x \in \sqrt{I} \implies x \in P}$}\\[1.2ex]
+            To show the reverse inclusion, suppose  $x \in \sqrt{I}$, and
+            let $P$ be a prime ideal such that $I \subset P$. Then
+            $x^n \in I$ for some positive integer $n$. 
+    
+            Suppose for the sake of contradiction that $x \not\in P$ Let $N$ be the
+            smallest positive integer such that $x^N \in I$. 
+            Since $x^N \in I \subset P$, we see that $x^N \in P$. Note
+            that 
+            \[
+                x^N = x \cdot x^{N-1} \in P.            
+            \]
+            Since $P$ is a prime ideal, either $x \in P$ or $x^{N-1} \in
+            P$. However, by assumption $x \not\in P$. Thus we must have
+            that $x^{N-1} \in P$. But since $I \subset P$, this implies
+            that $x^{N-1} \in I$. This contradicts our choice of $N$ as
+            the smallest positive integer as $x^N \in I$. We have our
+            contradiction, so we must have that $x \in P$. 
+    
+            Since $x \in \sqrt{I} \implies x \in P$  for every prime ideal
+            $P$ such that $I \subset P$, we see that 
+            \[
+                \sqrt{I} \subset \bigcap_{I\subset P \text{, prime}} P.    
+            \]
+            Since we already showed that $\displaystyle \bigcap_{I\subset P, \text{
+            prime}} P \subset \sqrt{I}$, both set inclusions imply  that 
+            \[
+                \sqrt{I} = \bigcap_{I\subset P \text{, prime}} P 
+            \]
+            as desired.
+        \end{enumerate}
+    \end{prf}
+
+
+    \begin{proposition}
+        Let $R$ be a ring and $I, J$ be ideals of $R$ such that $I
+        \subset J \subset R$. Then $I$ is an ideal of $J$.
+    \end{proposition}
+
+    \begin{prf}
+        To prove this, simply observe that for any $j \in J$ and
+        $i \in I$ we have that $ij \in I$ and $ji \in I$. 
+    \end{prf}
+
+    A primary example of an ideal is any kernal of a homomorphism.
+    
+    \begin{lemma}
+        Let $\phi:R \to S$ be ring homomorphism. Then $\ker(\phi)$
+        is an ideal of $R$.
+    \end{lemma}
+
+    We already partially showed this earlier, and the full proof
+    is not difficult. 
+
+    \begin{lemma} \label{divison_ring_thm}
+        If $R$ is a division ring then the only ideals of $R$ are
+        $\{0\}$ and $R$ itself.
+    \end{lemma}
+
+    \begin{prf}
+        Of course, $\{0\}$ is an ideal for any ring. Therefore let
+        $I$ be a nonzero ideal. Then 
+        \[ 
+            ir \in I
+        \] 
+        for any $i \in I$ and $r \in R$. Since $R$ is a division ring, every
+        element has a multiplicative inverse (except 0). Hence for
+        any nonzero $i$ we can choose $r = i^{-1}$ to conclude
+        that $ii^{-1} = 1_R \implies 1_R \in I$. 
+
+        Since $1_R \in I$, we can set $r \in R$ to be any element
+        to conclude that $1_Rr = r \implies r \in I$. Therefore $I
+        = R$. So every ideal is either $R$ or $\{0\}$.
+    \end{prf}
+
+    \begin{proposition}
+        Let $R$ be an integral domain. Any
+        ring homomorphism $\phi$ from $R$ to an arbitrary ring $S$ is
+        injective or the zero map.
+    \end{proposition}
+
+    \begin{prf}
+        Since $\ker(\phi)$ is an ideal of $R$, it is either
+        $\{0\}$, in which case $\phi$ in injective, or $R$, in
+        which case $\phi$ is the zero map.
+    \end{prf}
+
+    Next we can introduce the concept of a quotient ring, which
+    involves quotienting out an ideal. Note that for a ring $R$
+    and an ideal $I$, the concept of $R/I$ makes sense since $R$
+    is an abelian group, while $I$ is a subgroup and is therefore a
+    normal group to $R$. Thus we make the following definition.
+
+    \begin{definition}
+        Let $R$ be a ring and $I$ an ideal of $R$. Then $R/I$, the
+        set of all elements $r + I$ where $r \in R$, is
+        defined to be a \textbf{quotient ring} whose operations
+        are specified as follows. 
+        \begin{description}
+            \item[Addition.] For any $r + I, s + I \in R/I$ we have
+            that 
+            \[
+                (r + I) + (s + I) = (r + s) + I.
+            \]
+            \item[Multiplication.]
+            For $r + I, s + I \in R/I$ we have that 
+            \[
+                (r + I)\cdot(s + I) = rs + I.
+            \]
+        \end{description}
+    \end{definition}
+    First, let's check that this is even sensical. Again, we know from
+    our group theory intuition that $R/I$ definitely makes sense
+    when looked at as an additive group. The identity is $I$,
+    inverses exist, it is closed and of course associative. Nothing has changed from our
+    group theory perspective. 
+
+    We want $R/I$ to not only be an abelian group, but
+    \textit{also} a ring, we defined multiplication of elements as
+    $(r + I)\cdot(s + I) = rs + I$. Thus we'll check the validity
+    such multiplication. 
+    \\
+
+    \textcolor{MidnightBlue}{The issue at hand is that, for any $r +
+    I \in R/I$, there are many ways we can represent the element.
+    For instance, for any $r' \in R$ such that $r = r' + i$ for
+    some $i \in I$, we have that $r + I = r' + I$. That is, the way we
+    decide to represent our elements is not unique. Thus we just
+    need to check that the way we defined multiplication doesn't
+    depend on the chosen representative of an element $r + I \in
+    R/I$.}
+    
+    To do this suppose that $r + I = r' + I$ and $s + I = s' + I$
+    are elements of $R/I$. Then $r = r' + i$ and $s = s' + j$ for
+    some $i, j \in I$. 
+    Therefore, $(r' + I)(s' + I) = r's' + I$. On the other hand
+    \begin{align*}
+        (r + I)\cdot(s + I) &= rs + I\\
+        &= (r' + i)(s' + j) + I\\
+        &= r's' + \underbrace{r'j + is' + ij}_{\text{all are in } I} + I\\
+        &= r's' + I.
+    \end{align*}
+    where in the last step we used the fact that since $I$ is an
+    ideal, $r'j \in I$ and $is' \in
+    I.$ Obviously $ij \in I$ as well. Therefore $(r + I)(s + I) =
+    (r' + I)(s' + I)$, so our definition for
+    multiplication is clear and well-defined.             
+    \\
+    
+    \textcolor{Plum}{
+    You may be wondering the following: In a quotient ring $R/I$,
+    why does $I$ have to be an ideal of $R$? To answer this,     
+    note in the second to last step above, we
+    used the fact that $I$ was 
+    an ideal of $R$ to conclude that $r'j, is' \in I$. If $I$
+    hadn't been an ideal, we wouldn't have been able to absorb
+    these elements into $I$. Hence, we wouldn't have been able to
+    make sure that our desired multiplication is well-defined.
+    So this is why a quotient ring
+    must always quotient out an ideal, and why we can't just
+    quotient out any subring of $R$. }
+    \begin{definition}
+        Consider the following map $\pi: R \to R/I$, known as the
+        \textbf{projection map}, defined as 
+        \[
+            \pi(r) = r + I.
+        \]
+        Note that this is a stupidly simple map. It's so stupid it
+        almost doesn't even deserve a name. But it will be
+        \textit{convenient} to be able to refer back to the
+        concept of associating an element $r \in R$ with a coset
+        $r + I \in R/I$ as a \textbf{projection}. It's so
+        convenient that if you go on in algebra you won't stop
+        this "coset" mapping, yet everytime you see it you'll
+        probably think it's dumb.
+
+        Also notice that in this case $\ker(\pi) = I$, and that
+        $\im(\pi) = R/I$.
+    \end{definition}        
+
+    \newpage
+    \section{Isomorphism Theorems.}
+    With the concept of a quotient ring defined, we can formulate
+    analagous Isomorphism Theorems as we had in group theory. As
+    we move forward, recall that the main ingredients of the
+    isomorphism theorems in group theory were \textbf{normal
+    subgroups} and \textbf{quotient groups}. For our ring
+    isomorphism theorems, the "normal groups" will be
+    \textbf{ideals} while the "quotient groups" will be the
+    \textbf{quotient rings}. 
+
+    The reasons for having such analogous theorems available to us
+    for ring theory is that \textcolor{Red}{groups are a
+    special case of rings. The only thing that makes a group
+    different from a ring
+    is that we've just added a few extra axioms.} But it turns out
+    that, even after adding these extra axioms, the Isomorphism
+    Theorems still hold. 
+
+    If you go on in algebra you'll see the Isomorphism Theorems
+    again, proved for algebraic objects called \textbf{modules}. In
+    fact, the Isomorphism Theorems were first proved by Emmy
+    Noether in terms of modules; not groups, or rings, but the
+    theorems hold for groups and rings since
+    groups and rings are special cases of modules.
+
+    \begin{thm}[(First Isomorphism Theorem.)]If $R$ and $S$ are rings, and $\phi: R \to S$ is a
+        homomorphism, then 
+        \[
+            R/\ker(f) \cong \im(f).
+        \]
+    \end{thm}
+
+    \begin{prf}
+        The proof of this is analogous to the proof in group
+        theory. We construct a homomorphism $\phi:G/\ker(f) \to
+        \im(f)$ by defining 
+        \[
+            \phi(r + \ker(f)) = f(r).
+        \]
+        Observe that for any nonzero $s \in \im(f)$, there exists
+        a $r \in R$ such that $f(r) = k$. Since $s$ is nonzero, $r
+        \not\in \ker(f)$. However, observe that $f(r + \ker(f))
+        = k$. Therefore $\phi$ is surjective. 
+
+        Now observe that $\phi$ is one to one. Suppose that 
+        \[ 
+            \phi(r + \ker(f)) = \phi(r' + \ker(f))
+        \] 
+        for some elements $r + \ker(f), r' + \ker(f) \in
+        R/\ker(f)$. Then $f(r) = f(r')$. But this implies that 
+        $f(r) - f(r') = 0$ or that $f(r - r')
+        = 0 \implies r-r' \in \ker(f)$. Therefore $r - r' = s$ for
+        some $s \in \ker(f)$ so that 
+        \[
+            r + \ker(f) = r' + s + \ker(f) = r' + \ker(f).
+        \]
+        Thus we have that $r + \ker(f) = r' + \ker(f)$, proving
+        that $\phi$ is injective. Altogether we have constructed
+        an isomorphism from $R./\ker(f)$ to $\im(f)$, which proves
+        the theorem.
+    \end{prf}
+
+    As an application of this, we can revisit one of the examples
+    we computed. Earlier we found that for a homomorphism $\phi:
+    \RR[x] \to \mathbb{C}$ defined as 
+    \[
+        \phi(p(x)) = p(i)
+    \]
+    that $\im(f) = \mathbb{C}$ and $\ker(f) = \{p(x) \in \RR[x]
+    \mid (x^2 + 1)\Big|p(x) \}$. Now that we can equivalently
+    dtescribe the kernal as $K = \{p(x) \in \RR[x] \mid p(x) =
+    q(x)(x^2 + 1) \text{ for some } q(x) \in \RR[x]\}$. Therefore,
+    by the First Isomorphism Theorem,
+    \[
+        \RR[x]/K \cong \mathbb{C}.
+    \]
+    That is, the set of complex numbers is isomorphic to
+    $\RR[x]/K$. Well, what is this set? This set is all the
+    elements of the form 
+    \[
+        q(x) + K 
+    \] 
+    where $q(x) \in \RR[x]$ is an element which does not have $x^2
+    + 1$ as a factor. Thus, the complex numbers are isomorphic to
+    the equivalence class of polynomials which are not divisble by
+    $x^2 + 1$.
+
+    \begin{thm}[(Second Isomorphism Theorem.)]
+        Let $R$ be a ring, $I$ an ideal of $R$, and $S$ a subring
+        of $R$. Then 
+        \begin{itemize}
+            \item[1.] $S + I$ is a subring of $R$ 
+            \item[2.] $I$ is an ideal of $S + I$
+            \item[3.] $S \cap I$ is an ideal of $S$
+            \item[4.] $(S + I)/I \cong S/(S \cap I)$.
+        \end{itemize}
+    \end{thm}
+
+    \begin{minipage}{0.25 \textwidth}
+        \begin{figure}[H]
+                \begin{tikzcd}[column sep=small] 
+                    &  
+                        S + I
+                    \\
+                    S 
+                    \arrow[ur, dash]
+                    &&
+                    I
+                    \arrow[ul,swap,"\text{(ideal)}"]
+                    \\
+                    &
+                    S\cap I 
+                    \arrow{ul}{\text{(ideal)}}
+                    \arrow[ur, dash]
+                \end{tikzcd}
+        \end{figure}
+    \end{minipage} \hfill
+    \begin{minipage}{0.7\textwidth}
+        The diagram on the left is analogous to the one used in
+        the second isomorphism theorem for groups. Hence, this is
+        again known as the diamond theorem. 
+        
+        Although it is
+        important to have this diagram in mind, it is also
+        important to remmeber that $(S + I)/I \cong S/(S\cap I)$
+        (given the appropriate hypotheses).
+    \end{minipage}  
+
+    \begin{prf}
+        \begin{itemize}
+            \item[1.] To prove the first statement we first make
+            the following connection. From the Second Isomorphism
+            Theorem for groups, we know that $S + I$ is an abelian
+            group. We just need to show it is closed under
+            multiplication. Thus let $(s + i), (s' + i') \in S +
+            I$. Then 
+            \[
+                (s + i)(s' + i') = \underbrace{ss'}_{\text{in }S} + \overbrace{si' + is' + ii'}^{\text{in } I}.
+            \]
+            Therefore, we see that $(s + i)(s' + i') \in I$, so
+            that $S + I$ is closed under multiplication. Therefore
+            it is a subring of $R$. 
+
+            \item[2.] Let $s + i \in S + I$, and let $j \in I$. Then observe that 
+            \[
+                (s + i)j = sj + ij \hspace{0.2cm}\text{ and }\hspace{0.2cm} j(s + i) = js + ji.
+            \] 
+            However, since $I$ is an ideal, $sj, js \in I$, and
+            clearly $ij, ji \in I$. Therefore, $(s + i)I \subset
+            I$ and $I(s + j) \subset I$ for any $(s + j) \in S +
+            I$, which shows that $I$ is an ideal of this set.
+            
+            \item[3.] From our study of groups, we know that $S
+            \cap I$ is an abelain group. We just need to check
+            that it is closed under multiplication. Thus for any
+            $i \in S \cap I$ and $s \in S$, we see that $is \in I$
+            since $I$ is an ideal. 
+            
+            But $i \in S \cap I \implies i
+            \in S$. Therfore $is$ is also a product of two
+            elements in $S$.
+
+            Since $is \in I$ and $is \in S$, we see that $is \in S
+            \cap I$, proving that it is an ideal of $S$.
+
+            \item[4.] Consider the projection map $\pi: R \to R/I$
+            restircted to $S$, which we'll define as $\pi|_S : S
+            \to R/I$. (What we mean by "restricted" is that, we
+            let $\pi$ do its job, but we only let it act on
+            elements in $S \subset R$.)
+
+            Note that $\ker(\pi|_S) = S \cap I$, while
+            $\im(\pi|_S) = (S + I)/I$ (namely, all the elements of
+            the form $s + I$ where $s \not\in I$.) Thus by the
+            First Isomorphism Theorem, we have that 
+            \[
+                S/\ker(\pi|_S) \cong \im(\pi|_S)  
+                \implies S/(S \cap I) \cong (S + I)/I 
+            \]
+            as desired.
+        \end{itemize}
+    \end{prf}
+
+    \begin{thm}[(Third Isomorphism Theorem)]
+        Let $R$ be a ring and $I$ and $J$ ideals of $R$ such
+        that $I \subset J$. Then 
+        \begin{itemize}
+            \item[1.] $J/I$ is an ideal of $R/J$ 
+            \item[2.] $R/J \cong (R/I)/(J/I)$. 
+        \end{itemize}
+    \end{thm}
+
+    \begin{prf}
+        For this theorem, we offer a two-in-one proof. 
+        Construct the ring homomorphism $\phi:R/I \to R/J$ as
+        follows: 
+        \[
+            f(r + I) = r + J.
+        \]
+        We first demonstrate that this is well-defined. Suppose $r
+        + I = r' + I$; that is, there exists a $i \in I$ such that
+        $r - r' = i$. Then observe that 
+        \[
+            f(r + I) = r + J = r' + i + I = r' + I = f(r' + I).
+        \]
+        Thus this homomorphism is well defined. Now observe that 
+        \begin{align*}
+            \ker(f) &= \{r + I \in R/I \mid r + J = J\}\\ 
+            &= \{r + I \in R/J \mid r \in J\} = J/I.
+        \end{align*}
+        Now the first result comes by recalling that the kernal is
+        an ideal of the domain ring; that is, $J/I$ is an ideal of
+        $R/J$. The second result comes from realizing that $\im(f)
+        = R/J$, and by applying the First Isomorphism Theorem to
+        that 
+        \[
+            (R/I)/(J/I) = R/J.
+        \]
+    \end{prf}
+
+    \begin{thm}[(Fourth Isomorphism Theorem.)]
+        Let $R$ be a ring, $S$ a subring of $R$ and $I$ an ideal of $R$. Then every
+        subring of $R/I$ is of the form $S/I$ where $I \subset S
+        \subset R$. Moreover, ideals $J$ of $R$ containing $I$
+        correspond to ideals of $R/I$.
+    \end{thm}
+
+    \newpage
+    \section{Principal, Maximal and Prime Ideals.}
+    We'll now move more deeper into ring theory. The results
+    prior were already things we've been familiar with, since they
+    were true for groups. It is here that we'll move onto new,
+    deeper concepts regarding the ideal of a ring. 
+
+    Let $X \subset R$. Then we can talk about the \textbf{subring
+    generated by} $X$ as the smallest subring containing $X$, or
+    equivalently, the intersection of all the subrings containing
+    $X$. More explicitly, we can define it to be the set of all
+    finite sums of elements of $X$. 
+
+    Similarly, we can define the \textbf{ideal generated by}
+    $X$, which again is the smallest ideal containing $X$ or
+    equivthalently the intersection of all ideals contianing $X$. 
+    More explicitly, if $R$ is a ring with identity, then the ideal
+    generated by $X$ is 
+    \[
+        \left< X \right> = \Big\{\sum_{i=1}^{n}r_ix_is_i \mid r_i, s_i \in R, x_i \in X \text{ and } n \in \mathbb{N}\Big\}
+    \]
+    while if $R$ is commutative (and again, has an identity) this becomes 
+    \[
+        \left< X \right>= \Big\{\sum_{i=1}^{n}r_ix_i \mid r_i \in R, x_i \in X \text{ and } n \in \mathbb{N}\Big\}.
+    \]
+    Note: this is not valid for rings without identity. 
+
+    \textcolor{MidnightBlue}{Why are these formulas correct? We'll
+    show this for the more general case for when $R$ may not be
+    commutative. Specifically, we'll show that these formulas are
+    not only ideals, but that they are the smallest ideals
+    containing $X$ as we have claimed. 
+    \\
+    \indent If $r \in R$ then 
+    \[
+        r\left( \sum_{i=1}^{n}r_ix_is_i \right) = \sum_{i=1}^{n}(rr_i)x_is_i \in \left< X \right> 
+    \]
+    since $rr_i \in R$ for each $i \in \{1, 2, \dots, n\}$.
+    Similarly, 
+    \[
+        \left( \sum_{i=1}^{n}r_ix_is_i \right)r = \sum_{i=1}^{n}r_ix_i(s_ir) \in \left< X \right> 
+    \]
+    since again, $s_ir \in R$ for each $i \in \{1, 2, \dots, n\}$.
+    Thus this is an ideal. Now let $X'$ be an ideal which contains
+    $X$. Pick an arbitrary element $\displaystyle \sum_{i=1}^{n}r_ix_is_i \in
+    \left< X \right>$. Observe that since $X'$ is an ideal
+    containing $X$, we know that $r_ix_is_i \in X'$ for each $i
+    \in \{1, 2, \dots, n\}$, and hence the sum itself,
+    $\sum_{i=1}^{n}r_ix_is_i$, must be in $X'$. 
+    \\
+    \indent Thus for any ideal $X'$ containing $X$, we see that $\left< X
+    \right> \subset X'$. Hence, $\left< X \right>$ is the smallest
+    ideal containing $X$. The proof is similar, and easier, for
+    the case of $\left< X \right>$ when $R$ is commutative.
+    }
+
+    \begin{definition}
+        Let $R$ be commutative and $X = \{a\}$, where $a \in R$.
+        Then the ideal generated by $X$ given by 
+        \[
+            \left< X \right> = \{ra \mid r \in R\}
+        \]
+        is said to be a \textbf{principal ideal generated by $a$}.
+        Note that since $R$ is commutative, we could have also
+        written $\left< X \right> = \{ar \mid r \in R\}$.
+
+        One may also view a principal ideal generated by $a$ as
+        the set $Ra$ (or again, equivalently as $aR$).
+    \end{definition}
+
+    What's an example of this? Consider the ring $\ZZ$. Then the
+    subring $2\ZZ$ is a principle ideal generated by the element
+    2. That is 
+    \[
+        2\ZZ = \{2n \mid n \in \ZZ\}
+    \]
+    which is pretty basic fact that we already know. But note that
+    every ideal $I$ of $\ZZ$ is of this form. 
+
+    \textcolor{NavyBlue}{To see this, consider an ideal $I$ of
+    $\ZZ$ and suppose $i$ is the smallest positive element of $I$.
+    First observe that there is no $j \in I$ such that $i < j <
+    2i$. Suppose there was. Then $j = i + k$ for some $0 < k < i$.
+    Since $I$ is closed, we know that 
+    \[
+        j - i = i + k - i = k   
+    \]
+    is a member of $I$. But this contradicts our assumption that
+    $i$ was the smallest positive element of $I$. Therefore, there
+    is no $j \in I$ such that $i < j < 2i$, so that $I$ is of the
+    form 
+    \[
+        I = \{\dots, -2i, -i, 0, i, 2i, \dots\}.
+    \]
+    Hence, $I$ is generated by $i$, a single element, so that $I$
+    is \textbf{principal}.
+    }
+    Thus every ideal of $\ZZ$ is principal. Rings who exhibit this
+    type of behavior get a special name.  
+
+    \begin{definition}
+        Let $R$ be an integral domain. Then $R$ is a
+        \textbf{principal ideal domain (PID)} if every ideal of
+        $R$ is principal.
+    \end{definition}
+    As we just showed, $\ZZ$ is a principal ideal domain.
+
+    \begin{definition}
+        Let $R$ be a ring. Then an ideal $M \ne R$ is called
+        \textbf{maximal} if, for any other ideal $I$ such that $M
+        \subset I \subset R$ we have that $M = I$ or $I = R$. 
+    \end{definition}
+
+    An example of this is the ring $\ZZ$ with the ideal $p\ZZ$
+    where $p$ is prime. To show this, suppose $I$ is an ideal such
+    \[
+        p\ZZ \subset I \subset \ZZ
+    \]
+    and further that there exists an $i \in I$ such that $i
+    \not\in p\ZZ$. 
+
+    Since $i$ is not divisible by $p$, we know by Fermat's Little
+    Theorem that 
+    \[ 
+        i^{p-1} = 1 \mbox{ mod }p.
+    \]
+    Thus for some $n \in \ZZ$, $pn - i^{p-1} = 1.$ Since $p\ZZ \subset
+    I$ and $i \in I \implies i^{p-1} \in I$, we see that $pn - i^{p-1} = 1 \in I$. Since $1 \in
+    I$, we can repeatedly add and subtract $1$ to generated all of
+    $\ZZ$, and since this must all be contained in $I$, we have that $I = \ZZ$. Thus $p\ZZ$ is maximal.
+
+    \begin{thm}
+        Let $R$ be a ring and $I$ a proper ideal (i.e., $I \ne
+        R$.) Then there is a maximal ideal of $R$ containing $I$.
+        Furthermore, if $R$ is a ring with identity, then there
+        are always maximal ideals.
+    \end{thm}
+
+    How do we know when a given ideal is maximal or not? That is,
+    how do we know there aren't "bigger" proper ideals which
+    contain the one we are interested in?
+    \begin{thm} \label{maximal_theorem}
+        Let $R$ be a commutative ring with identity. Then an ideal
+        $M$ of $R$ is maximal if and only if $R/M$ is a field. In
+        other words, 
+        \[
+            M \text{ is maximal } \iff R/M \text{ is a field.}
+        \]
+        \vspace{-0.8cm}
+
+    \end{thm}
+
+    \begin{prf}
+        ($\implies$) Suppose $M$ is a maximal ideal. To show that $R/M$ is a
+        field, we first realize that it is commutative since $R$
+        is commutative. Thus we just need to show it is a divison
+        ring. 
+
+        Let $a + M \in R/M$ where $a \not\in M$. Since $aR$ and
+        $M$ are both ideals, we have that $aR + M$ is an ideal.
+        Note that $M \subset aR + M$, which implies that $aR +  M
+        = R$. Therefore, there exists an element $r \in R$ and $m
+        \in M$ such
+        that $ar + m = 1$. 
+
+        Since $ar = 1 - m$, consider $r + R \in R/M$, and observe
+        that 
+        \[
+            (a + M)(r + M) = ar + M = 1 - m + M = 1 + M
+        \]
+        so that $r + M$ is the desired inverse of $a + M$. Since
+        $a \not\in M$, this shows that $R/M$ is a division ring.
+        Since it is commutative, it is a field. 
+
+        ($\impliedby$)
+        Now suppose that $R/M$ is a field. It is a commutative
+        division ring, so that by Lemma \ref{divison_ring_thm} we
+        know that its only ideals are either $0$ or $R/M$. But by
+        the Fouth Isomorphism Theorem, we know that these ideals of
+        $R/M$ correspond to $M$ and $R$. Thus there are no other
+        ideals of $R$ containing $M$ other than $M$ and $R$,
+        proving that $M$ is maximal. 
+    \end{prf}
+
+    \begin{definition}
+        Let $R$ be a commutative ring. Then an ideal $P$ is said
+        to be \textbf{prime} if $P \ne R$ and if $ab \in P$, then
+        either $a \in P$ or $b \in P$. Furthermore, if there
+        exists a $p \in R$ such that $Rp = \left< p \right>$ is a
+        prime ideal, then $p$ is said to be prime.
+    \end{definition}
+
+    \textcolor{NavyBlue}{You may wonder why we would make this definition, since ideals tend to suck in elements of
+    $R$ (i.e., $ri \in R$ for all $i \in I$, $r \in R$). However,
+    just because $ab \in I$ does not mean $a \in I$ or $b \in I$. 
+    Consider for instance the ring $4\ZZ$. Obviously, $4 \in
+    4\ZZ$, but $2\cdot2 = 4$ and yet $2 \not\in 4\ZZ$.}
+
+    Prime ideals have a similar theorem that maximal ideals have. 
+
+    \begin{thm}\label{prime_theorem}
+        Let $R$ be a commutative ring with identity. Then an ideal
+        $P$ of $R$ is prime if and only if $R/P$ is an integeral
+        domain. That is, 
+        \[
+            P \text{ is prime } \iff R/P \text{ is an integral domain.}
+        \]
+        \vspace{-0.8cm}
+    \end{thm}
+
+    \begin{prf}
+        ($\implies$) Suppose $P$ is a prime ideal. To show that $R/P$ is an
+        integral domain, we must show that it has no zero divisor
+        (as we already know it is commutative). Thus 
+        let $r + P \in R/P$ where $r \not\in P$.
+        Suppose for the sake of contradiction that
+        \[
+            (r + P)(r' + P) = P   
+        \]
+        for some $r' + P \in R/P$ where $r' \not\in P$ (i.e.,
+        that there are zero divisors). Then this
+        implies that $rr' \in P$. Since $P$ is prime, we have that
+        either $r \in P$ for $r' \in P$, which is a contradiction
+        since our hypothesis was that $r, r' \not\in p$. Therefore
+        $R/P$ is commutative and has no zero divisors, so it is an
+        integral domain. 
+
+        ($\impliedby$) Now suppose that $R/P$ is an integral
+        domain. Then 
+        \[
+            (r + P)(r' + P) \ne P
+        \]
+        for any $r$ and $r' \not\in P$. In other words, if $r, r'
+        \not\in P$ then $rr' \not\in P$. Taking the contrapositive of
+        this statement, we have equivalently that if $rr' \in P$
+        then $r$ or $r' \in P$ (notice how that "and" changed to
+        an "or" upon negation) which proves that $P$ is prime.
+    \end{prf}
+
+    Finally, we can combine all of these theorems into one useful
+    criterion for primeness. 
+
+    \begin{thm}
+        Let $R$ be a commutative ring with identity. Let $I$ be an
+        ideal. If $I$ is maximal then $I$ is prime. In other
+        words, 
+        \[
+            I \text{ is maximal } \implies I \text{ is prime.}
+        \]
+        \vspace{-0.8cm}
+    \end{thm}
+
+    \begin{prf}
+        By Theorem 1.\ref{maximal_theorem}, if $I$ is maximal then
+        $R/I$ is a field. But since $R/M$ is a field, it is an
+        integral domain. Hence by Theorem 1.\ref{prime_theorem},
+        we have that $I$ is a prime ideal, which proves the theorem.
+    \end{prf}
+
+    The corollaries of these theorems are immediate. 
+
+    \begin{corollary}
+        Let $R$ and $S$ be commutative rings with identity, and suppose 
+        $\phi: R \to S$ be a surjective ring homomorphism. Then 
+        \begin{itemize}
+            \item[1.] If $S$ is a field, then $\ker(\phi)$ is a
+            maximal ideal of $R$. 
+            \item[2.] If $S$ is an integral domain then
+            $\ker(\phi)$ is a prime ideal of $R$. 
+        \end{itemize}
+    \end{corollary}
+
+    \begin{prf}
+        \begin{itemize}
+            \item[1.] If $\phi$ is surjective, then by the First
+            Isomorphism Theorem $R/\ker(\phi) = \im(\phi) = S$.
+            Therefore $R/\ker(\phi)$ is a field, so by Theorem
+            1.\ref{maximal_theorem} we have that $\ker(\phi)$ is
+            maximal. 
+
+            \item[2.] In this case, we again have that
+            $R/\ker(\phi) = S$, so that $R/\ker(\phi)$ is an
+            integral domain. Therefore $\ker(\phi)$ is a prime
+            ideal of $R$ by Theorem 1.\ref{prime_theorem}.
+        \end{itemize}
+    \end{prf}
+    
+    \newpage
+    \section{Ring of Fractions.}
+    As rings were modeled based on the behavior of the integers,
+    we can hypothesize that it is possible to generalize the
+    construction of $\mathbb{Q}$ from 
+    $\mathbb{Z}$. Such a construction is possible, and studying it
+    will utilize all of the concepts introduced up to this point. 
+    However, there is a very subtle issue that
+    when we try to do this. The main issue is in defining
+    $\dfrac{a}{b}$ when $b \ne 0 $ doesn't have an inverse.
+    
+    \begin{definition}
+        Say $(R, +, \cdot)$ is a commutative ring with $1 \ne 0$.
+        We say that $D \subset R$ is a \textbf{multiplicative set}
+        if 
+        \begin{itemize}
+            \item[1.] $1 \in D$
+            \item[2.] $x \cdot y \in D$ for all $x, y \in D$.  
+        \end{itemize}
+        Condition 1. is not really crucial. We just need to make
+        sure that $D$ is nonempty. 
+    \end{definition}
+    An example of a multiplicative set includes $D = \{1\}$. A
+    less boring example is $D = \{2n+1 \mid n \in \mathbb{Z}\}$,
+    since the product of two odd integers is odd. And the maximal
+    example we can come up with for any ring is to set $D = R$. 
+
+    Now we introduce a proposition regarding a relation on
+    elements. 
+    \begin{proposition}
+        Define a relation $\sim$ on $R \times D$ by saying $(a, b) \sim
+        (c,d)$ whenever we can find $x \in D$ such that 
+        \[
+            x\cdot (a\cdot d - b \cdot c) = 0.
+        \]
+        Then $\sim$ is an equivalence relation on $R \times D$. 
+    \end{proposition}
+    \begin{prf}
+        We must show the three properties of an equivalence
+        relation. 
+        \begin{description}
+            \item[Reflexivity.] $(a, b)\sim(a, b)$. Choosing $x = 1$,
+            then we see that 
+            \[
+                x\cdot(a\cdot b - a\cdot b) = 0.  
+            \]
+
+            \item[Symmetry.] $(a, b) \sim (c, d)$ if and only if $(c,
+            d) \sim (a, b)$. 
+
+            Say $(a, b) \sim (c, d)$. We can find an $x \in D$ such
+            that 
+            \[
+                x\cdot(a\cdot d - b \cdot c) = 0.
+            \]
+            Now consider 
+            \[
+                x\cdot (c\cdot b - d \cdot a) = (-1)\cdot[x\cdot (a\cdot d - b \cdot c)] = 0
+            \]
+            This shows that $(c, d) \sim (a, b)$ 
+
+            \item[Transitivity.] If $(a, b) \sim (c, d)$ and $(c, d) \sim
+            (e, f)$, then $(a, b) \sim (e, f)$. 
+
+            We can find $x, y \in D$ such that 
+            \[
+                x \cdot (a \cdot d - b \cdot c) = y \cdot (c \cdot f - d \cdot e) = 0.
+            \]
+            Denote $z = d \cdot x \cdot y$. This is an element of
+            $D$ since it is a multiplicative set. Now 
+            \begin{align*}
+                z \cdot (a \cdot f - b \cdot e) & = yfxad - yfxbc - xbycf - xbyde\\
+                & = 
+                y \cdot f [x \cdot (a \cdot d  - b \cdot c)] + x\cdot b[y \cdot(c \cdot f - d \cdot e)]\\
+                & = 0.
+            \end{align*}
+        \end{description}
+    \end{prf}
+    \noindent We'll define the collection of all equivalence classes by the
+    set 
+    \[
+        D^{-1}R = \left\{\frac{a}{b} \mid a \in R, b \in D  \right\}
+    \]
+    where 
+    \[ 
+        \dfrac{a}{b} = \big\{ (c, d) \in R \times D \mid (a ,
+    b) \sim (c, d) \big\}.
+    \]
+    \textcolor{MidnightBlue}{\textbf{Why are we doing this?} Let's say that $R = \mathbb{Z}$, and
+    $D = \mathbb{Z}\setminus\{0\}$. Then $D$ is a multiplicative
+    set and $(a, b) \sim (c, d) \text{ if and only if } ab - bc = 0$. As an
+    example, $(1, 2) \sim (2, 4)$ implies that in our set,
+    $\dfrac{1}{2} = \dfrac{2}{4}$. In other words, we're basically
+    saying we don't care whether or not the fraction is in reduced
+    terms.}
+
+    \begin{proposition}
+        Let $R$ be a ring with identity $1 \ne 0$. 
+
+        \begin{itemize} 
+            \item[1.] $D^{-1}R$ is a commutative ring 
+            \item[2.] $D^{-1}R = \left\{\dfrac{0}{1}\right\}$ is
+            the trivial ring if and only if $0 \in D$.
+            \item[3.] The units $(D^{-1}R)^\times$ contains 
+            \[
+                D^{-1}D = \left\{ \frac{a}{b} \mid a, b \in D \right\}.
+            \] 
+        \end{itemize}
+    \end{proposition}
+
+    \begin{prf}
+        \begin{itemize}
+            \item[1.]
+            Define addition and multiplication. 
+            \begin{lemma}
+                The following is well-defined. 
+                \begin{align*}
+                    +: D^{-1}R \times D^{-1}R &\longrightarrow D^{-1}R\\
+                    \frac{a}{b}, \frac{c}{d} &\longmapsto \frac{ad - bc}{bd}
+                \end{align*}
+            \end{lemma}
+            Suppose that $(a_1, b_1) \sim (a_2, b_2)$ and $(c_1, d_1)
+            \sim (c_2, d_2)$. We can find $x, y \in D$ such that 
+            \[
+                x \cdot (a_1b_2 - a_2b_1) = y \cdot[c_1d_2 - c_2d_1] = 0.
+            \]
+            Denote $z = xy \in D$. Then 
+            \begin{align*}
+                z[(a_1d_1 + c_1b_1)(b_2d_2) - (a_2d_2 + c_2b_2)(b_1d_1)]
+                \\=
+                yd_1d_2[x(a_1b_2 - a_2b_1)]
+                + xb_2b_1[y(c_1d_2 - c_2d_1)] = 0.
+            \end{align*}
+            Hence $(a_1d_1 + c_1b_1, b_1d_1) \sim (a_2d_2 + c_2d_2,
+            b_2d_2)$. 
+
+            \begin{lemma}
+                The following is well-defined:
+                \begin{align*}
+                    \cdot: D^{-1}R \times D^{-1}R &\longrightarrow D^{-1}R\\
+                    \frac{a}{b}, \frac{c}{d} &\longmapsto \frac{ac}{bd}
+                \end{align*}
+            \end{lemma}
+            Again, say that $(a_1, b_1) \sim (a_2, b_2)$ and $(c_1, d_1)
+            \sim (c_2, d_2)$. Denote $z = xy \in D$. Then 
+            \begin{align*}
+                z[(a_1c_1) \cdot(b_2d_2) - (a_2c_2)(b_1d_1)]
+                =
+                yc_1d_2[x(a_1b_2 - a_2b_1)]
+                + 
+                xa_2b_1[y(c_1d_2 - c_2d_1)]
+                = 0
+            \end{align*}
+        Hence $(a_1c_1, b_1d_1) \sim (a_2c_2, b_2d_2)$. Showing
+        that $D^{-1}R$ is a commutative ring with these properties
+        is straightforward. 
+    
+            \item[2.] We show that $D^{-1}R$ is trivial if and only
+            if $0 \in D$. 
+    
+            Say $D^{-1}R = \left\{\dfrac{0}{1}\right\}$. Since $1 \in R$, we see that
+            $\dfrac{1}{1} \in D^{-1}R$ so $\dfrac{1}{1} = \dfrac{0}{1}$. By
+            definition, we can find an $x \in D$ such that 
+            \[
+                x \cdot (1 \cdot 1 - 0 \cdot 1) = 0
+            \]
+            so $x = 0$. Hence $0 \in D$. 
+    
+            Now suppose $0 \in D$. Pick any $\dfrac{a}{b} \in D^{-1}R$.
+            For $x = 0$, we have that $x \cdot (a \cdot 1 - b \cdot 0) =
+            0$. Hence we see that $\dfrac{a}{b} = \dfrac{0}{1}$, so that
+            $D^{-1}R = \left\{\dfrac{0}{1}\right\}$.
+        
+            \item[3.] If $a, b \in D$, then $\dfrac{a}{b} \in
+            D^{-1}R$ so that $\dfrac{a}{b} \cdot \dfrac{b}{a} =
+            \dfrac{1}{1}$. Hence $\dfrac{a}{b} \in (D^{-1}R)^{*}$. That
+            is, $DD^{-1} \subset (D^{-1}R)^*$. 
+        \end{itemize}
+    \end{prf}
+    $D^{-1}R$ is the ring of fractions of $R$ by $D$. We also
+    remark that if $D \subset R \setminus \{0\}$, then $D^{-1}R$
+    is a commutative ring with $\dfrac{1}{1} \ne \dfrac{0}{1}$.
+    Finally, we also note that the elements of $D$ are invertible
+    in $D^{-1}R$. We want to construct $D^{-1}R$ as the "smallest"
+    ring such that $D$ is invetible.
+
+    Next we introduce a theorem. 
+    \begin{thm}
+        Let $(R, +, \cdot)$ be a commutative ring with $1 \ne 0$, and $D
+        \subset R$ be a multiplicative set. Denote $S = D^{-1}R = \{a/b
+        \mid a \in R, b \in D\}$ as the \textit{ring of fractions of $R$
+        by $D$}. Then 
+        \begin{description}
+            \item[1.] Let $I$ be an ideal of $R$. Then $D^{-1}I =\{x/b
+            \mid x \in I, b \in D\}$ is an ideal of $S$. (This is called
+            the \textit{extension} of $I$ to $S$.)
+    
+            \item[2.] Let $J$ be an ideal of $S$. Define the ring
+            homomorphism $\pi: R \to S$ which sends $r \mapsto r/1$. Then
+            the preimage $\pi^{-1}(J)$ is an ideal of $R$. (This is
+            called the \textit{contraction} of $J$ to $R$.)
+    
+            \item[3.] For any ideal $J$ of $S$ we have that $D^{-1}[\pi^{-1}(J)] = J$.
+            (That is, "extension is the left inverse of
+            contraction.")
+        \end{description}
+    \end{thm}
+
+    \begin{prf}
+        \begin{description}
+            \item[1.] To show this we proceed as follows. \\
+            \underline{$\bm{D^{-1}I} $ \textbf{is nonempty.}}\\[1.2ex]
+            Observe that since $D$ is a multiplicative set we have that $1
+            \in D$. Hence if $I$ is nonempty, then $\dfrac{i}{1} \in
+            D^{-1}I$ for all $i \in I$. Hence it is nonempty.
+            \\
+    
+            \noindent\underline{$\bm{a - b \in D^{-1}I}$ \textbf{if} $\bm{a, b
+            \in D^{-1}I}$.}\\[1.2ex]
+            Let $a, b \in D^{-1}I$. Then $a = \dfrac{i_1}{d_1}$ and $b =
+            \dfrac{i_2}{d_2}$. Then observe that 
+            \[
+                a - b = \dfrac{i_1d_2 - i_2d_1}{d_1d_2}.
+            \]
+            Since $I$ is an ideal, $i_1d_2. i_2d_1 \in I$. Therefore their
+            difference $i_1d_2 - i_2d_1 \in I$. Since $D$ is a
+            multiplicative set we have that $d_1d_2 \in D$. Hence we see
+            that $\dfrac{i_1d_2 - i_2d_1}{d_1d_2} \in D^{-1}I$, so that $a
+            - b \in D^{-1}I$ whenever $a, b \in D^{-1}I$. 
+    
+            \noindent\underline{$\bm{s\cdot a\in D^{-1}I}$ \textbf{if} $\bm{s
+            \in S, a \in D^{-1}I}$}\\[1.2ex]
+            Let $s \in S$ and $a \in D^{-1}I$. Then $s = \dfrac{r}{d}$ and
+            $a = \dfrac{i}{d'}$ for $r \in R, i \in I, d,d' \in D$. 
+            Hence observe that 
+            \begin{align*}
+                s\cdot a = \dfrac{r}{d} \cdot \dfrac{i}{d'}
+                = \dfrac{ri}{dd'}.
+            \end{align*}
+            Since $I$ is an ideal, we see that $ri \in I$. Since $D$ is a
+            multiplicative set, we also see that $dd' \in D$. Hence, we
+            see that $\dfrac{ri}{dd'} \in D^{-1}I$, so that $s\cdot a \in
+            D^{-1}I$ if $s \in S$ and $a \in D^{-1}I$.\\
+        Thus in total we have that $D^{-1}I$ is an ideal of $S$.
+    
+        \item[2.]
+        To show this is an ideal, we proceed as follows.\\
+        \underline{$\bm{\pi^{-1}(J)} $ \textbf{is nonempty.}}\\[1.2ex]
+        Observe that if $J$ is nonempty, then $\dfrac{0}{1} \in J$. This
+        is because if $J$ is an ideal, then $sj \in J$ for all $s \in
+        S$ and $j \in J$. Hence let $s = \dfrac{0}{1}$, and $j = \dfrac{r}{d} \in
+        J$. Then 
+        \[
+            sj \in J \implies \dfrac{0}{1}\cdot \dfrac{r}{d} \in J \implies \frac{0}{d} \in J.  
+        \]
+        Now observe that $(0, 1) \sim (0, d)$ for any $d \in D$. This is
+        because 
+        \[
+            x \cdot(0 \cdot d - 0 \cdot 1) = x \cdot (0) = 0
+        \]
+        is automatically satisfied by any $x \in D$.
+        Hence, $(0, 1) \sim (0, d)$. Now we argue that
+        \[
+            \pi^{-1}(J) = \{r \in R \mid \pi(r) \in J\}.
+        \]
+        is nonempty. Observe that $\pi\left(\dfrac{0}{1}\right) =
+        \dfrac{0}{1}$, which we know is true because $\pi$, as a ring
+        homomorphism, is also a group homomorphism between the abelian
+        groups $R$ and $S$ (i.e., the abelian groups we get when we remove
+        the multiplicative ring stucture on them). We know from group theory
+        that group homomorphisms map additive zero elements from one group
+        to the additive zero element of the other group, so that $\pi\left(\dfrac{0}{1}\right) =
+        \dfrac{0}{1}$.
+        
+        As we just showed, $\dfrac{0}{1} \in J$. Since
+        $\pi\left(\dfrac{0}{1}\right) = \dfrac{0}{1}$,
+        we see that $\dfrac{0}{1} \in \pi^{-1}(J)$, so it is nonempty. 
+    
+        \noindent\underline{$\bm{a - b \in \pi^{-1}(J)}$ \textbf{if} $\bm{a, b
+        \in \pi^{-1}(J)}$.}\\[1.2ex]
+        Suppose $a, b \in \pi^{-1}(J)$. Then $\pi(a) = \dfrac{a}{1}$ and
+        $\pi(b) = \dfrac{b}{1}$ are both members of $J$. Since $J$ is an
+        ideal, we know that on one hand,
+        \begin{align*}
+            \frac{a}{1}, \frac{b}{1} \in J \implies \frac{a}{1} - \frac{b}{1} \in J
+            \implies \frac{a - b}{1} \in J.
+        \end{align*}
+        On the other hand, observe that $\pi(a - b) = \dfrac{a - b}{1}$,
+        which we just showed is inside $J$. Therefore $a - b \in
+        \pi^{-1}(J)$ when $a, b \in \pi^{-1}(J)$, which is what we set out
+        to show.
+    
+        \noindent\underline{$\bm{r\cdot a \in \pi^{-1}(J)}$ \textbf{if}
+        $\bm{r \in R, a \in \pi^{-1}(J)}$.}\\[1.2ex]
+        Now suppose that $r \in R$ and $a \in \pi^{-1}(J)$. Then $\pi(a) =
+        \dfrac{a}{1} \in J$ by definition. Hence, observe that 
+        \[
+            \pi(r \cdot a) = \dfrac{ra}{1} = \frac{r}{1} \cdot \frac{a}{1}.
+        \]
+        Observe that since $J$ is an ideal of $S$, $\frac{r}{1} \cdot \frac{a}{1}
+        \in R$. Hence we see that $\pi(r \cdot a) \in J$, so that $r \cdot
+        a \in \pi^{-1}(J)$ whenever $r \in R$, $a \in \pi^{-1}(J)$, as
+        desired. 
+    
+        \item[3.] We can prove equality between the sets by demonstrating
+        mutual subset properties. \\
+        \noindent\underline{$\bm{D^{-1}[\pi^{-1}(J)] \subset J}$}\\[1.2ex]
+        Consider any $\frac{a}{b} \in D^{-1}[\pi^{-1}(J)]$ where by definition $a \in
+        \pi^{-1}(J)$ and $b \in D$. 
+    
+        Since $a \in \pi^{-1}(J)$ we know that $\pi(a) = \dfrac{a}{1} \in
+        J$. Consider the element $\dfrac{1}{b} \in S$. Since $J$ is an
+        ideal of $S$, we know that $sj \in J$ for all $s \in S, j \in J$.
+        Set $j = \dfrac{a}{1}$ and $s = \dfrac{1}{b}$, and observe that 
+        \[
+            sj \in J \implies \frac{1}{b} \cdot \frac{a}{1} = \frac{a}{b} \in J.
+        \]
+        Hence we have that $D^{-1}[\pi^{-1}(J)] \subset J$. 
+        \\
+        \noindent\underline{$\bm{J \subset D^{-1}[\pi^{-1}(J)]}$}\\[1.2ex]
+        Now consider any $j = \dfrac{a}{b} \in J$. To prove this direction,
+        we just need to show that $a \in \pi^{-1}(J)$ since $b$ is already
+        a member of $D$. And to prove that, we just need to show that
+        $\dfrac{a}{1} \in J$. Hence we formalize our claim:
+    
+        \textbf{Claim:} $\dfrac{a}{b} \in J \implies \dfrac{a}{1} \in J$.\\
+        To show this, observe that $\dfrac{b}{1} \in S$ and since $J$ is an
+        ideal, 
+        \[
+            \frac{b}{1} \cdot \frac{a}{b} \in J \implies \frac{ab}{b} \in J.
+        \]
+        Now observe that $(ab, b) \sim (a, 1)$, since 
+        \[
+            x \cdot (ab\cdot 1 -b\cdot a) = x \cdot (ab - ab) = 0
+        \]
+        is satisfied by any choice of $x \in D$. Therefore, $\dfrac{ab}{b}
+        = \dfrac{a}{1}$, and since $\dfrac{ab}{b} \in J$ we have that
+        $\dfrac{a}{1} \in J$. 
+    
+        Finally, since $\dfrac{a}{1} \in J$, we see that $a \in
+        \pi^{-1}(J)$. Therefore, $\dfrac{a}{b} \in D^{-1}[\pi^{-1}(J)]$, so
+        that $J \subset D^{-1}[\pi^{-1}(J)]$ as desired. 
+    
+        With both directions, we can then conclude that
+        $D^{-1}[\pi^{-1}(J)] = J$, which is what we set out to show.
+        \end{description}
+    \end{prf}
+
+\begin{thm}
+    Let $(R, +, \cdot)$ be a commutative ring with $1 \ne 0$, and $D
+    \subset R$ be a multiplicative set. Let $P$ be an ideal of $R$
+    with the property that if $d \cdot x \in P$ for $d \in D$ then $x
+    \in P$. Then the following are equivalent.
+    \begin{itemize}
+        \item[i.] $P$ is a prime ideal of $R$ with $P \cap D = \varnothing$
+        \item[ii.] $D^{-1}P$ is a prime ideal of the ring of fractions
+    $D^{-1}R$.  
+    \end{itemize}
+\end{thm}
+
+\begin{prf}
+    \begin{description}
+        \item[$\bm{i \implies ii}$.]
+        Suppose $P$ is disjoint with $D$. Then we show that $D^{-1}P$
+        is a prime ideal of $D^{-1}R$.\\
+        \noindent\underline{$\bm{D^{-1}P}$\textbf{ is nonempty.}}\\[1.2ex]
+        If $P$ is nonempty, then since $1 \in D$, we know that
+        $\dfrac{p}{1} \in D^{-1}P$ for each $p \in P$. Hence, it is nonempty.
+
+        \noindent\underline{$\bm{a, b \in D^{-1}P \implies a - b \in D^{-1}P}$.}\\[1.2ex]
+        Suppose $a, b \in D^{-1}P$. Write $a = \dfrac{p_1}{d_1}$ and
+        $b = \dfrac{p_2}{d_2}$. Then we see that 
+        \[
+            a - b = \frac{p_1d_2 - p_2d_1}{d_1d_2}.
+        \] 
+        Observe that $p_1d_2, p_1d_2 \in P$ since $P$ is an ideal of
+        $R$. Hence, $p_1d_2 - p_2d_1 \in P$, and since $d_1d_2 \in D$,
+        we have that $a - b \in D^{-1}P$ whenever $a, b \in D^{-1}P$.
+
+        \noindent\underline{$\bm{r\cdot a \in D^{-1}P}$ \textbf{ for }
+        $\bm{r \in  D^{-1}R, a \in D^{-1}P}$.}\\[1.2ex]
+        Consider an element $a = \dfrac{p}{d} \in
+        D^{-1}{P}$ and $r = \dfrac{r'}{d'} \in D^{-1}R$. Then 
+        \[
+            r \cdot a = \frac{r'}{d'} \cdot \frac{p}{d} = \frac{r'p}{d'd}.
+        \]
+        Since $P$ is a prime ideal, we see that $r'p \in P$ and $d'd
+        \in D$ as it is a multiplicative set. Therefore it is an
+        ideal. 
+
+        \noindent\underline{$\bm{a\cdot b \in D^{-1}P \implies a \in D^{-1}P}$
+        \textbf{or} $\bm{b \in D^{-1}P}$} \\[1.2ex]
+        Let $a = \dfrac{r_1}{d_1}$ and $b = \dfrac{r_2}{d_2}$ where
+        $r_1,r_2 \in R$ and $d_1,d_2 \in D$. Now 
+        \[
+            a \cdot b \in D^{-1}P \implies \frac{r_1r_2}{d_1d_2} \in D^{-1}P.
+        \] 
+        Then we see that $r_1r_2 \in P.$ Since $P$ is a prime ideal
+        disjoint with $D$, we see that $r_1 \in P$ or $r_2 \in P$ and
+        $r_1,r_2 \not\in D$ by assumption. Therefore, we see that $a
+        \in D^{-1}P$ or $b \in D^{-1}P$, so that $D^{-1}P$ is a prime
+        ideal. 
+
+        \item[$\bm{ii \implies i}$.] 
+        Suppose $D^{-1}P$ is a prime ideal of $D^{-1}R$. 
+        \\[1.2ex]
+        \underline{$\bm{P}$ \textbf{is nonempty}.}\\[1.2ex]
+        If $D^{-1}P$ is nonempty, then since $D$ at least contains $1$, there exists at least one
+        $\dfrac{a}{1} \in D^{-1}P$ where $a \in P$.
+        Hence we see that $P$ is nonempty.
+        \\[1.2ex]
+        \underline{$\bm{a,b \in P \implies a - b \in P}$.}\\[1.2ex]
+        Suppose $a, b \in P$. Then we see that 
+        $\dfrac{a}{1}, \dfrac{b}{1} \in D^{-1}P$. Hence,
+        \[
+            \frac{a}{1} - \frac{b}{1} \in D^{-1}P \implies 
+            \frac{a - b}{1} \in P.
+        \]
+        Since $\dfrac{a - b}{1} \in D^{-1}P$, we see that $a - b \in
+        P$. Hence $a, b \in P \implies a - b \in P$.
+        \\[1.2ex]
+        \underline{$\bm{rp \in P}$ \textbf{if} $\bm{r \in R, p \in P}$.}\\[1.2ex]
+        Consider $\dfrac{p}{1} \in D^{-1}P$ and $\dfrac{r}{1} \in
+        D^{-1}R$ for any $r \in R$. Then since $D^{-1}P$ is an ideal,
+        \[
+            \frac{r}{1} \cdot \frac{p}{1} \in D^{-1}P \implies \frac{rp}{1} \in D^{-1}P.
+        \]
+        Thus we see that $rp \in P$. Therefore $r \in R, p \in P
+        \implies rp \in P$. 
+        \\[1.2ex]
+        \underline{$\bm{D \cap P = \varnothing}.$}\\[1.2ex]
+        Suppose that $D \cap P \ne \varnothing$. Then there exists a
+        $p \in P$ where $p \in D$. Hence, observe that $\dfrac{p}{p} =
+        \dfrac{1}{1} \in D^{-1}P$. Then since $D^{-1}P$ is an ideal of
+        $D^{-1}R$, we see that
+        $pr \in D^{-1}P$ for any $p \in D^{-1}P$ and $r \in D^{-1}R$. Thus
+        see that for any $\dfrac{a}{b} \in D^{-1}R$, 
+        \[
+            \frac{1}{1} \cdot \frac{a}{b} \in D^{-1}P \implies \frac{a}{b} \in D^{-1}P
+        \]
+        which shows that $D^{-1}P = D^{-1}R$. Hence, if we want
+        $D^{-1}P$ to be a proper ideal, we need that $D \cap P = \varnothing.$
+        \\[1.2ex]
+        \underline{$\bm{ab \in P \implies a \in P}$ \textbf{or} $\bm{b\in P}$}\\[1.2ex]
+        Suppose that $a = \dfrac{p_1}{d_1}$ and $b =
+        \dfrac{p_2}{d_2}$ such that 
+        \[
+            \frac{p_1}{d_1}\cdot \frac{p_2}{d_2} \in D^{-1}P \implies \frac{p_1}{d_1} \text{ or } \frac{p_2}{d_2} \in D^{-1}P.
+        \]
+        Since $\dfrac{p_1}{d_1}\cdot \dfrac{p_2}{d_2} \in D^{-1}P$, we
+        have that $\dfrac{p_1p_2}{d_1d_2} \in D^{-1}P$, which implies
+        that $p_1p_2 \in P$. 
+
+        The fact that $\dfrac{p_1}{d_1} \in D^{-1}P$ or
+        $\dfrac{p_2}{d_2} \in D^{-1}P$ implies that $p_1 \in P$ or
+        $p_2 \in P$. Hence we see that $p_1p_2 \in P \implies p_1 \in
+        P$ or $p_2 \in P$, which proves that $P$ is a prime ideal.
+    \end{description}
+    With both directions proven, we can conclude that the two given
+    statments are in fact equivalent.
+\end{prf}
+
+\textbf{Localization.}
+The construction we have been implementing relates to a concept
+as localization, which we define as follows. 
+\begin{definition}
+    Let $(R, +, \cdot)$ be a commutative ring with identity $1 \ne
+    0$. Let $S \subset R$ and define $D = R - S$. We define the
+    \textbf{localization} of 
+    $R$ at $S$ as the ring of fractions 
+    \[
+        R_P = D^{-1}R = \left\{ \frac{r}{d} \mid r \in R, d \in D \right\}.
+    \]
+\end{definition}
+It turns out that if we localize at a prime ideal, nice things
+happen. Specifically, the localization contains a unique maximal
+ideally. 
+
+Generally, rings do not have unique maximal ideals, although the
+definition of a maximal ideal can often confuse people. For
+example, consider the ring $\mathbb{Z}$. Then for any prime $p$,
+we see that $p\mathbb{Z}$ is a maximal ideal; given the infinitude
+of the primes, we have infinitely many maximal primes. 
+
+For rings that do have a unique, maximal ideal, we give them a
+special name. 
+
+\begin{definition}
+    Let $(R, +, \cdot)$ be a ring. If $R$ has a unique, maximal
+    ideal $M$, then we say that $R$ is a \textbf{local ring}.
+\end{definition}
+
+\begin{thm}
+    Let $(R, +, \cdot)$ be an integral domain, and $P$ be a prime
+    ideal of $R$. 
+    \begin{description}
+        \item[1.] The set $D = R - P$ is a \textit{multiplicative set}.
+
+        \item[2.] The \textit{localization} of $R$ at $P$, $R_P =
+        D^{-1}R$, is an integral domain. 
+
+        \item[3.] The ring $R_P$ is a \textit{local} ring i.e., $R_P$ has
+        a unique maximal ideal $M_P$.
+    \end{description}
+\end{thm}
+
+\begin{prf}
+    \begin{description}
+        \item[1.] First we show that $1 \in D$. 
+        Suppose $P$ is a prime ideal such that $R \ne P$. Then
+        observe that $1 \not\in P$. For if $1 \in P$, then for any $r
+        \in R$, we'd see that 
+        \[
+            1 \cdot r = r \in P.
+        \]
+        Since $r$ is arbitrary, we'd have that $R = P$, a
+        contradiction. Therefore, we see that $1 \in R - P = D$, which
+        proves the first property.
+        
+        Now we show $x, y \in D \implies xy \in D$. Since $P$ is a prime ideal, we know that
+        $p_1p_2 \in P \implies p_1 \in P$ or $p_2 \in P$. Hence the reverse
+        negative of the statement is true: if $p_1 \not\in P$ and $p_2
+        \not\in P$ then $p_1p_2 \not\in P$. 
+        
+        Therefore for any $x, y
+        \in D =R - P$, we see that $xy \not\in P$. Hence $xy \in D$, which
+        proves the second property.
+
+        \item[2.] Since we already know that $R_P$ is a commutative ring,
+        it suffices to show that there are no zero divisors. Suppose
+        on the contrary that $\dfrac{a}{b}, \dfrac{c}{d} \in R_P$ are
+        zero divisors of each other. Hence, $a \ne 0$ and $c \ne 0$.
+        Then we see that 
+        \[
+            \frac{a}{b} \cdot \frac{c}{d} = \frac{0}{1}.
+        \]
+        In this case, we see that there exists a $x \in D$ such that 
+        \[
+            x \cdot (ac \cdot 1 - bd \cdot 0) \implies x \cdot(ac).            
+        \]
+        Since $a, c \ne 0$, and $R$ is an integral domain, we see that
+        $ac \ne 0$. But $x$ is also nonzero, while $x \cdot (ac) =
+        0$. This cannot happen since $R$ is an integral domain, so we
+        have a contradiction. Therefore there are no zero divisors,
+        and since $R_P$ is a commutative, this makes it an integral
+        domain. 
+
+        \item[3.] Let $M_P = D^{-1}P$. We'll show that this is our unique,
+        maximal ideal. 
+
+        First observe that in the previous theorem, if $P$ is a prime
+        ideal and $P \cap D = \varnothing$, then $D^{-1}P$ is a prime
+        ideal of $D^{-1}R$. 
+        
+        In our case, $D = R - P$. Hence $P \cap D
+        = \varnothing$, so we may conclude that $M_P$ is a prime
+        ideal.
+        
+        Now we show $M_p$ is maximal. Let $I$ be a proper ideal, i.e. $I
+        \ne D^{-1}R$, and suppose $I
+        \not\subset M_P$. That is, there exist an element
+        $\dfrac{a}{b} \in I$ such that $\dfrac{a}{b} \not\in M_P$.
+        
+        Since $\dfrac{a}{b} \not\in M_P$, we see that $a \not\in P$.
+        Hence, $a \in R - P = D$, and of course $b \in D$ as well. Now
+        consider the element $\dfrac{b}{a}$. Observe that
+        $\dfrac{b}{a} \not\in M_P$, since $b, a \in D$, as shown
+        earlier. Since $\dfrac{a}{b} \in I$, we have that 
+        \[
+            \dfrac{a}{b}\cdot \dfrac{b}{a} \in I \implies = \dfrac{1}{1} \in I.
+        \]
+        Since $I$ contains $\dfrac{1}{1}$, we have that $I = D^{-1}R$.
+        This is because we see that for any
+        $\dfrac{c}{d} \in D^{-1}R$, 
+        \[
+            \dfrac{c}{d} =\dfrac{c}{d}\cdot\dfrac{1}{1} \in I \implies \dfrac{c}{d} \in I.
+        \]
+        Hence, $I = D^{-1}R$. But we assumed $I$ was a proper ideal; thus we
+        have a contradiction, so we see that $M_P = D^{-1}P$ is in fact maxmial.
+        Since we assumed $I$ was \textit{any} ideal of $D^{-1}R$, this
+        also proves that $M_P$ is a unique maximal ideal, since what we
+        showed is that any other ideal is automatically contained in
+        $M_P$. 
+    \end{description}
+\end{prf}
+
+As an example, consider the prime ideal $\{0\}$ of the ring
+$\mathbb{Z}$. Then the localization of $\mathbb{Z}$ at $\{0\}$ is
+given by 
+\[
+    \left\{ \dfrac{a}{b} \mid a \in \ZZ, b \in \ZZ - \{0\}  \right\}
+\]
+which is just the rational numbers. 
+
+\begin{thm}
+    Let $(R, +, \cdot)$ be an integral domain, and $P$ be a prime
+    ideal of $R$. Let $R_P$ be the localization of $R$ at $P$, and
+    $M_P$ be its unique maximal ideal. Consider the map $\phi: R/P
+    \to R_P/M_P$ which sends $r + P \mapsto r/1 + M_P$. 
+    \begin{description}
+        \item[1.] $\phi$ is a well-defined, injective ring
+        homomorphism. 
+        \item[2.] $\phi$ is an isomorphism if $P$ is a
+        maximal ideal. 
+    \end{description}
+\end{thm}
+
+\begin{prf}
+    \begin{description}
+    \item[1.]     \underline{\textbf{Well-defined.}}\\ First observe that this function is
+    well-defined. Suppose that $r + P = r' + P$; that is, $r = r'
+    + p$ for some $p \in P$. Observe that 
+    \begin{align*}
+        \phi(r + P) = \frac{r}{1} + M_P
+        &= \frac{r' + p}{1} + M_P\\
+        &= \frac{r'}{1} + \frac{p}{1} + M_P\\
+        &= \frac{r'}{1} + M_P\\
+        &= \phi(r' + P)
+    \end{align*}
+    where in the fourth step we used that fact that $\dfrac{p}{1}
+    \in M_P$ since $p \in P$, $1 \in D$. Since $\phi(r + P) =
+    \phi(r' + P)$, we see that
+    this function is well-defined. 
+    \\
+    \\
+    \underline{\textbf{Ring homomorphism.}}\\
+    We demonstrate that $\phi: R/P \to R_P/M_P$ is a ring
+    homomorphism. 
+    \begin{description}
+        \item[$\bm{\phi(a + b) = \phi(a) + \phi(b)}$.]
+        Let $a = r + P$ and $b = r' + P$ be elements or $R/P$.
+        Then
+        \begin{align*}
+            \phi(a + b) = \phi\big((r + r') + P \big)
+            & = \frac{r + r'}{1} + M_P\\
+            & = \frac{r}{1} + \frac{r'}{1} + M_P\\
+            & = \left( \frac{r}{1} + M_P\right) + \left(\frac{r'}{1} + M_P\right)\\
+            & = \phi(a) + \phi(b)
+        \end{align*}    
+        which is what we set out to show.
+        \item[$\bm{\phi(ab) = \phi(a)\phi(b)}$.] Again, suppose $a
+        = r + P$ and $b = r' + P$. Then observe that 
+        \begin{align*}
+            \phi(ab) = \phi\big( (r + P)(r' + P) \big) & = \phi(rr' + P)\\
+            & = \frac{rr'}{1} + M_P\\
+            & = \left(\frac{r}{1} + M_P\right)\left(\frac{r'}{1} + M_P\right)\\
+            & = \phi(a)\phi(b)
+        \end{align*}
+        which is what we set out to show. 
+    \end{description}
+    With these two properties, we have that $\phi: R/P \to
+    R$ is a ring homomorphism.
+    \\
+    \\
+    \underline{\textbf{Injectivity.}}\\
+    Next we show that this is an injective function. Suppose $r +
+    P,r' + P \in D^{-1}R$ such that 
+    \[
+        \phi(r + P)= \phi(r' + P).
+    \]
+    Then we have that $\dfrac{r}{1} + M_P = \dfrac{r'}{1} + M_P$. In
+    other words, we see that 
+    \[
+        \frac{r}{1} = \frac{r'}{1} + \frac{a}{b}
+    \]
+    for some $\dfrac{a}{b} \in M_P$. This further implies that
+    $\dfrac{r}{1} = \dfrac{r'b + a}{b}$. Hence, $(r, 1) \sim (r'b
+    + a, b)$. For this equivalence to
+    occur, there must exist an element $x \in D$ such that 
+    \[
+        x\cdot(rb - (r'b + a)) = 0.
+    \]   
+    Since $R$ is an integral domain, and $x \ne 0$, we require
+    that $rb = r'b + a$. Rearranging, we see that this implies
+    that 
+    \[
+        rb - r'b = a \implies (r - r')b = a.
+    \]
+    The above equality implies that $(r - r')b \in P$; recall that
+    $\dfrac{a}{b} \in M_P = D^{-1}P$, so that $a \in P$
+    and $b \in D = R - P$. 
+    
+    Since $P$ is a prime ideal, we thus see that either $r -
+    r' \in P$ or $b \in P$. Since we just said that $b \not\in P$,
+    we must have that $r - r' \in P.$ In other words, 
+    \[
+        r - r' = p \implies r = r' + p
+    \]
+    for some $p \in P$. Hence, 
+    \[
+        r + P = r' + p + P = r' + P.   
+    \]
+    Therefore we see that $\phi(r + P) = \phi(r' + P) \implies r +
+    P = r' + P$, so that $\phi$ is injective.
+
+    \item[2.] Suppose $P$ is a maximal ideal (in addition to being
+    prime). To demonstrate that $\phi: R/P \to R_P/M_P$ is an
+    isomorphism, it suffices to show that $\phi$ is surjective,
+    since in the previous step we already showed that it was
+    injective. 
+
+    Since $P$ is a maximal ideal, we see
+    that $R/P$ is a field. Therefore inverse elements exist, so
+    for the element $b + P$, there exists an element $b' + P$
+    where $b' \not\in P$ such that 
+    \[
+        (b + P)(b' + P) =  1 + P.
+    \]
+    That is, $bb' = 1 + p$ for some $p \in P$. 
+
+    Let $r = ab'$, and consider the elements $\dfrac{a}{b} + M_P$
+    and $\dfrac{r}{1} + M_P$. Since we want $\dfrac{a}{b} + M_P$
+    to be nontrivial, we let $a, b \in D$ (that is, $a \not\in P$
+    or else in that case $\dfrac{a}{b} \in M_P$).
+    
+    Observe that $\dfrac{r}{1} \not\in
+    M_P$ since $a \in D, b' \in D$, and because $D$ is a
+    multiplicative set, $r = ab \in D$. Therefore $r \not\in P$,
+    so that $\dfrac{r}{1} \not\in M_P$. Hence, $\dfrac{r}{1} + M_P
+    \ne \dfrac{0}{1} + M_P$. 
+
+    Now observe that 
+    \begin{align*}
+        \left(\frac{a}{b} + M_p\right) - \left(\frac{r}{1} + M_P\right)
+        & = \left( \frac{a}{b} - \frac{r}{1} \right) + M_P\\
+        & = \frac{a - br}{b} + M_P\\
+        & = \frac{a - b(ab')}{b} + M_P\\
+        & = \frac{a - abb'}{b} + M_P \text{ (by commutativity)}\\
+        & = \frac{a - a(1 + p)}{b} + M_P\\
+        & = \frac{-ap}{b} + M_P.
+    \end{align*}
+    Since $P$ is an ideal, we see that $-ap \in P$. Therefore,
+    $\dfrac{-ap}{b} \in M_P$, so that
+    $\dfrac{-ap}{b} + M_P = \dfrac{0}{1} + M_P$. Thus what we've shown is that 
+    \[
+        \left(\frac{a}{b} + M_P\right) - \left( \frac{r}{1} + M_P \right) = \frac{0}{1} + M_P.
+    \]
+    which implies that 
+    \[
+        \frac{a}{b} + M_P = \frac{r}{1} + M_P.
+    \]
+    Thus we see that $\phi(r + P) = \dfrac{r}{1} + M_P =
+    \dfrac{a}{b} + M_P$. However, $\dfrac{a}{b} + M_P$ was an
+    arbitrary element of $R_P/M_P$. Hence, we've shown that for
+    any $\dfrac{a}{b} + M_P$, there exists an $r + P\in R/P$ such that 
+    $\phi(r + P) = \dfrac{a}{b} + M_P$. In particular, $\phi(0 + P) =
+    \dfrac{0}{1} + M$. Therefore $\phi$ is surjective,
+    and as we already showed it is injective, this makes it an
+    isomorphism. 
+\end{description}
+\end{prf}
+
+
+\newpage
+\section{PIDs and Euclidean Domains.}
+
+Rings were invented in order to generalize mathematical domains which
+are parralel to the properties of integers and polynomials, since
+there exist many mathematical structures which share such properties.
+Two major properites of interest include the \textbf{fundamental
+theorem of arithmetic} and \textbf{factorization} via Euclid's
+algorithm. These concepts generalize to rings, specifically to
+Principal Ideal Domains, which we will demonstrate in this section. 
+
+First we begin with defintions. 
+
+\begin{definition}
+Let $R$ be a commutative ring, and suppose $a, b \in R$ are
+nonzero. Then 
+\begin{itemize}
+    \item [1.] We say $a$ \textbf{divides} $b$ if $b = ac$ for
+    some $c \in R$. This is denoted as $a\mid b$.
+    \item [2.] Let $a$ not be a unit. Then $a$ is \textbf{irreducible} if $a = bc$
+    implies $b$ or $c$ is a unit. 
+    \item [3.] If $a$ is not a unit, then $a$ is \textbf{prime} if
+    $a | bc$ implies $a|b$ or $a | c$. 
+\end{itemize}
+\end{definition}
+
+As a consquence of these definitions, we have the following
+proposition. 
+\begin{proposition} 
+Let $R$ be an integral domain and suppose $a, b \in R$ are
+nonzero. Then 
+\begin{itemize}
+    \item[1.] If $\left< a \right>$ is the principal ideal
+    generated by $a$, then $a \mid b$ if and only if $\left< b
+    \right> \subset \left< a \right>$. 
+
+    \item[2.] The element $a$ is a prime element of $R$ if and
+    only if $\left< a \right>$ is a prime ideal.
+
+    \item[3.] If $a \mid b$ then $au \mid bv$ for any units $u,v
+    \in R$ 
+
+    \item[4.] If $a \mid b$ and $a$ is not a unit then $b$ is not
+    a unit. 
+
+    \item[5.] If $p$ is prime and $p \mid a_1a_2\cdots a_n$ then
+    $p \mid a_i$ for some $i \in \{1, 2, \dots, n\}$.
+\end{itemize}
+\end{proposition}
+
+\begin{prf}
+\begin{itemize}
+    \item[1.] ($\implies$) Suppose $a \mid b$. Then $b = ac$ for some $c \in
+    R$. Now observe that 
+    \[
+        \left< b \right> = \{rb \mid r \in R\} = \{r(ac) \mid r \in R\} = \left<a\right>c.
+    \]
+    Since $\left< a \right>c \subset \left< a \right>$, we have
+    that $\left< b \right> \subset \left< a \right>$, as desired.
+    
+    ($\impliedby$) Now suppose that $\left< b \right> \subset
+    \left< a \right>$. Then $b \in \left< a \right>$, so that $b =
+    ac$ for some $c \in R$. Hence, $a \mid b$, which proves the
+    result. 
+
+    \item[2.] This is just the definition of an
+    element being prime in $R$. 
+
+    \item[3.] Suppose $a \mid b$ and let $u, v$ be units. Since $b
+    = ac$ for some $c\in R$, we see that $bu = acv = avc$.
+    Therefore $bu \mid av$. (Since $u, v$ were units, they are not
+    zero divisors, so they did not change the value of the
+    equation.)
+
+    \item[4.] Suppose $a$ is not a unit and $a \mid b$ for some $b
+    \in R$. Suppose for the sake of contradiction that $b$ is a
+    unit. Then $b = ac$ for some $c \in R$, and furthermore there
+    exists a $d \in R$ such that $br = 1$. 
+
+    Therefore, $bd = acd \implies 1 = acd$. Hence $a$ is a unit
+    since $a(bd) = (bd)a= 1$. But this is a contradiction since we
+    said $a$ was not a unit, which completes the proof. 
+
+    \item[5.] Let $p$ be a prime element and suppose $p \mid
+    a_1a_2 \cdots a_n$ for elements $a_1, a_2, \dots, a_n \in R$. 
+    Then $a_1a_2\cdots a_n = pb$ for some $b \in R$. Hence we see
+    that $a_1a_2\cdots a_n \in Rp$. Since $p$ is prime, $Rp$ is a
+    prime ideal and hence one element $a_i$ where $i \in \{1, 2,
+    \dots, a_n\}$ must be in $P$. In other words, $p \mid a_i$ for
+    some $i \in \{1, 2, \dots, n\}$, as desired. 
+\end{itemize}
+\end{prf}
+
+The above propsition generalizes rules that we hold to be familiar
+in $\ZZ$. For example, we know the units of $\ZZ$ are $\{1, -1\}$,
+and it is obvious to us that if $a \mid b$ for some integers $a,
+b$ then $-1\cdot a \mid -1\cdot b$ and $1 \cdot a \mid 1 \cdot b$.
+We also know that if $p$ is prime integer and $p \mid a_1a_2\cdots
+a_n$ for some integers $a_1, a_2 \dots, a_n$ then $p \mid a_i$ for
+some $i \in \{1, 2, \dots, n\}$. The proposition just tells us
+that our intuition on $\ZZ$ does in fact generalize to integral
+domains, and what we've seen in $\ZZ$ is just a tiny snap shot of
+algebra at work.
+
+\begin{proposition}
+    Let $R$ be an integral domain. If $p \in R$ is prime then $p$
+    is also irreducible.
+\end{proposition}
+
+\begin{prf}
+    Let $p \in R$ be prime and suppose $p = qm$ for some $q, m \in
+    R$. Then by definition we know that $p \mid q$ or $p \mid m$.
+    Without loss of generality suppose $p \mid q$. Then $q = pc$
+    for some $c \in R$. Then we have that 
+    \[
+        p = qm \implies p = pcm \implies 1 = cm
+    \]
+    where we used the cancellation law, valid on integral domains.
+    Then $m$ is a unit, and hence by definition this implies that
+    $p$ is irreducible. 
+\end{prf}
+
+\textcolor{Red}{Keep in mind that the converse of the above statement
+is not true. It will, however, turn out to be true for PIDs.}
+
+We now see that greatest common divisors can be generalized to
+integral domains. 
+
+\begin{definition}
+    Let $R$ be an integral domain and let $A \subset R$ be
+    nontrivial. Then we define 
+\end{definition}
+
+
+Say $(R, +, \cdot)$ is an integral domain. That is, a commutative
+rwith $1 \ne 0$ having no zero divisors. We say it is a Euclidean
+Domain if 
+\begin{itemize}
+    \item[1.] We have a map $N: R \to mathbb{Z}_{\ge 0}$ with
+    $N(0)= 0$.
+    \item[2.] Given $a, b \in R$, we can find $q, r \in R$ with $a
+    = bq + r$ and either  $r = 0$  or $N(r) < N(b)$. 
+\end{itemize}
+
+\begin{proposition}
+    Every ideal in a Euclidean Domain is principal. That is, 
+    \[
+        \text{(Euclidean Domain)} \subseteq \text{(Principal Ideal Domains)} \subseteq \text{(Integral Domain)}   
+    \]
+\end{proposition}
+\textbf{Question:} Are there PIDs that are not Euclidean Domains?
+
+\subsection*{Unique Factorization Domain}
+\begin{definition}
+    Say $(R, +, \cdot)$ is an integral domain. Pick $r \in R$ that
+    is neither zero nor a unit, i.e., $r \not\in
+    R^{\times}\cup\{0\}$. 
+
+    We say that $R$ is \textbf{irreducible} if when $r=ab$ either
+    $a \in R^{\times}$ or $b \in R^{\times}$. Otherwise, we say
+    that r is \textbf{reducible}.
+\end{definition}
+
+\textbf{Example.} Say $R = \ZZ$. Then 
+\begin{align*}
+    r &= 5 \text{ is irreducible.}\\
+    r &= 6 = 2 \cdot 3 \text{ is irreducible.}\\
+\end{align*}
+
+\begin{definition}
+    We say $R$ is a \textbf{Unique Factorization Domain} (UFD) if
+    the following holds for all $r \in  R^{\times} \cup \{0\}$:
+    \begin{itemize}
+        \item[1.] $r = p_1p_2\cdots p_m$ is  a finite product of
+        irreducibles $p_i \in R$.
+        \item[2.] If $r = q_1q_2\cdots q_m$ is another
+        factorization into irreducibles, then $n = m$ and $q_i=q_i
+        \cdot p_i$ for some $u_i \in R^{\times}$. 
+    \end{itemize}
+\end{definition}
+Again, let $R = \ZZ$ and observe that  $r = 6 = 2 \cdot 3 =
+(-2)\cdot(-3)$. Really, we see that $2 = (-1)\cdot 2$ and $3 =
+(-1)\cdot 3$. 
+
+\begin{proposition}
+    Say $R$ is a UFD. Given $r \not\in R^{\times}
+    \cup\{0\}$, the following are equivalent:
+    \begin{itemize}
+        \item[1.] If $I = (r)$ is a nonzero prime ideal of $R$.
+        \item[2.] $r$ is irreducible.  
+    \end{itemize}
+\end{proposition}
+Remark: We avoid saying "$r$ is prime", we say "$I = (r)$ is
+prime".
+
+\begin{prf}
+    \begin{description}
+        \item[$\bm{i \implies ii}$] Assume $I = (r)$ is a prime
+        Write $r = a \cdot b$. We want to show either $a \in
+        R^{\times}$ and $b \in R^{\times}$. 
+
+        We have $a \cdot b = r \in I$, so by definition either $a
+        \in I$ or $b \in I$. Either  $a = v \cdot r$ where $b = u
+        \cdot r$ for some $u, v \in R$. 
+
+        Hence either $r = a \cdot b = (v \cdot r)\cdot b$ or  $r =
+        (v \cdot a) \cdot r$. Since $R$ is an integral domain, the
+        cancellation law holds. Hence either
+        \begin{align*}
+            r = 0 \quad \text{or} \quad v \cdot b = 1 \quad \text{if} \quad a \in I\\ 
+            r = 0 \quad \text{or} \quad v \cdot a = 1 \quad \text{if} \quad b \in I  
+        \end{align*}
+        Since $r \not\in R^{\times}\cup\{0\}$, either $v \cdot b =
+        1$ or $u \cdot a = 1$. Hence either $b \in R^{\times}$ or
+        $a \in R^{\times}$ is a unit. 
+
+        \item[$\bm{ii  \implies i}$.] Assume $r \in R$. We'll
+        show that $I$ is a \textbf{proper} ideal. Since $r \not\in
+        R^{\times}$, we know that $I  \ne R$. 
+
+        Now we show that $I$ is prime. Say $a, b \in R$ satisfying
+        $a \cdot b \in I$. We must show that either $a \in I$ or $b \in
+        I$. Since $a \cdot b \in I$, we can write  $a \cdot b = r
+        \cdot c$ for some $c \in  R$. 
+        \\
+        \\
+        \textbf{Case \#1.} Either $a,  b = 0$. Then either $a, b
+        \in I$.
+        \\
+        \\
+        \textbf{Case \#2.}  Either  $a, b \in R^{\times}$. Without
+        loss of generality, say  $a \cdot u = 1$. Then $b = u
+        \cdot r \cdot  c \in I$. 
+        \\
+        \\
+        \textbf{Case \#3.} $a, b \not\in R^{\times}\cup\{0\}$.
+        Since $R$ is a UFD, factor $a$ and $b$. 
+        \begin{align*}
+            a = p_1p_2\cdots p_n\\
+            b = q_1q_2\cdots q_m.
+        \end{align*}
+        Hence $a \cdot b = p_1\cdots p_nq_1 \cdots q_m$. But $r$
+        is an irreducible that divides $a \cdot b = c \cdot r$.
+        Thus either $q_i = u \cdot r$ or $p_j = v \cdot r$ for
+        some $i, j$. But then either 
+        \begin{align*}
+            a = (v\cdot r) p_2 \cdots p_n \in I = (r)\\
+            b = (v \cdot r) q_2 \cdots q_m \in I = (r)
+        \end{align*}
+        if for example $i, j= 1$. 
+
+    \end{description}
+\end{prf}
+
+\begin{definition}
+    Say $(R, +, \cdot)$ is an integral domain. We say $R$ is a
+    \textbf{principal ideal domain} (PID) if every ideal $I = (r)$
+    is principal.
+\end{definition}
+
+\begin{proposition}
+    \begin{itemize}
+        \item[1.] If $R$ is a Euclidean Domain, then $R$ is a PID.
+        \item[2.] If $R$ is a PID, then $R$ is a UFD. 
+    \end{itemize}
+\end{proposition}
+
+Here's a diagram of what we have so far. 
+\[
+    \text{(Euclidean Domains)} \subseteq \text{(Principal Ideal Domains)} \subseteq \text{(UFDs)} \subseteq \text{(Integral Domains)}
+\]
+\begin{prf}
+    We showed (1) before. Now we show (2). Assume $R$ is a PID.
+    We'll show that every $r \in R$ that is nonzero has unique
+    factorization. 
+    \[
+        r = u \cdot p_1p_2 \cdots p_n
+    \]
+    where $u \in R^{\times}$ and $p_i$ are irreducibles. We will
+    in two parts: (i) existence (of at least one factorzation) and
+    (ii) uniqueness (of at most one factorization).
+
+    \begin{description}
+        \item[Existence.] Consider
+        \[
+            S = \{I = (r) \mid r \in R-\{0\} \text{ does not have a factorization}\}.   
+        \]  
+        We want to show that $S = \varnothing$. Thus assume
+        otherwise. Pick some $I_1 = (r_1)$ in $S$. 
+        Then $r_1 \not\in R^{\times}\cup\{0\}$ and $r_1$ is not
+        irreducible. This means that $r_1$ is reducible, so write 
+        \[
+            r_1 = r_2 \cdot r_2' \quad r_2,r_2' \in R^{\times}\cup\{0\}.
+        \]
+        Consider $I_2 = (r_2)$ and $I_2' = (r_2')$. If both $r_2,
+        r_2'$ have factorizations into irreducibles, then so would
+        $r_1 = r_2\cdot r_2'$. Thus without loss of generality, $r_2$
+        does not have a factorization into irreducibles. Thus the
+        ideal $I_2 \in S$. Observe $I_1 \subsetneqq I_2$. We then have
+        a chain of proper ideals:
+        \[
+            I_1 \subsetneqq I_2 \subsetneqq \cdots \subsetneqq I_n \subsetneqq \cdots \subsetneqq R.
+        \]
+        Let $\displaystyle I = \bigcup_{n \ge 1} I_n = (r_0)$ as the maximal ideal.
+        ask: is $I \in S$? If  $I \in S$, then we see that $I$ is not
+        maximal. If $I \not\in S$, then $r_0$ can be written as a
+        product of irreducibles. 
+
+        \item[Uniqueness.] We show uniqueness. Consider a proof by
+        induction via the following statement:
+        \begin{align*}
+            P(n) = \text{"If } r \in R - \{0\} \text{ has some factorization }\\ 
+            r=u\cdot p_1\cdots p_n \text{ into }  n
+            \text{ irreducibles, then such a factorization is unique."}
+        \end{align*}
+        We will show $P(n)$ is true for $n=0,1,2$. 
+        \begin{itemize}
+            \item[Base Case.] If $r \ne 0$ has a factorization into
+            $n = 0$ irreducibles, then $r = u$ is a unit. Say it
+            has a second factorization 
+            \[
+                r = u \cdot q_1 \cdots q_n \text{  for } m>0.
+            \]
+            Then 
+            \[
+                1 = (u^{-1}\cdot v \cdot q_1 \cdots q_m)\cdot q_m
+            \]
+            So $q_m \in R^{\times}$ is a unit. This is a contradiction
+            \item[Induction.] 
+            Suppose that $P(n_0)$ is true for some $n_0 \ge 0$.
+            Then we'll show that $P(n_0 + 1)$ is true. Consider $r
+            \ne 0$ that is the product of $n$ irreducibles: 
+            \begin{align*}
+                r & = u \cdot p_1 \cdots p_n\\
+                & = (u \cdot p_1 \cdots p_{n_0}) \cdot p_n
+            \end{align*}
+            Say we have a second factorization:
+            \[
+                r = v \cdot q_1 \cdots q_m.
+            \]
+            We then have the following facts:\\
+            $P = (p_n)$ is a prime ideal of $R$. (Recall $I = (r)$
+            is prime if and only if $r$ is irreducible.)\\
+            $\overline{Q_i} = q_i \cdot P$ is a coset in
+            $\overline{R} = R/P$.  Not all $\overline{q_i} \ne
+            \overline{0}$. Why? Because 
+            \[
+                \overline{u} \cdot \overline{q_1} \cdots \overline{q_m}\overline{p_m} = \overline{u\cdot  q_1 \cdots q_m} \cdot \overline{p_m} = 0.
+            \]
+            Since $\overline{R}$ is an integral domain, without
+            of generality,  suppose $\overline{q_m} =
+            \overline{0}$. Hence $q_m = q_m \cdot p_n$. Now
+            consider 
+            \[
+                (u \cdot p_1 \cdots p_{n_0}) \cdot p_n
+                = 
+                r
+                = 
+                (u_m\cdot v \cdot  q_1 \cdots q_{m-1})\cdot p_n.
+            \]
+            Since we're in an integral domain, we can use the
+            cancellation law. Hence we have that 
+            \[
+                u\cdot p_1 \cdots p_{n_0} = (u_m \cdot v)\cdot q_1 \cdots q_{m-1}.  
+            \]
+            Now we can invoke the inductive hypothesis. We see
+            that $m - 1 = n_0$  and $q_i = u_i \cdot p_i$ for some
+            unit $u_i \in R^{\times}$. However, this is equivalent
+            to saying that $m = n$. and as we showed $q_m = u_m
+            \cdot p_n$, we have that the factorizations are the
+            same. Hence $P(n)$ is true for all positive integers. 
+        \end{itemize}
+    \end{description}
+\end{prf}
+
+\textbf{Primes, irreducibles and Maximal Ideals.}\\
+\begin{proposition}
+    Say $(R, +, \cdot)$ is a PID. Then the following are
+    equivalent for  $r \in R$ with $r \not\in
+    R^{\times}\cup\{0\}$:
+    \begin{itemize}
+        \item[i.] $r$ is irreducible.
+        \item[ii] $I = (r)$ is a prime ideal.
+        \item[iii.] $I=(r)$ is a maximal ideal.   
+    \end{itemize}
+\end{proposition}
+
+\begin{prf}
+    First observe that $i \iff ii$ since they are true in a UFD,
+    and we know that a PID is a UFD. Hence we just need to show
+    that $ii \iff iii$. 
+
+    We show that $(ii \iff iii)$. By way of contradiction, sy $I =
+    (r)$ is a prime that is not maximal. Then we can find an ideal
+    $M = (a)$ such that $I \subsetneqq M \subsetneqq R$. This
+    means that $a | r$. That is, one can find $a, b \in R$ such
+    that $r = a\cdot b$. 
+
+    Since $I$ is prime and $a \cdot b \in  I$, either $a \in I$ or
+    $b \in I$. If $a \in I$, then $M = (a) \subset I$, which would
+    imply that $M = I$. Thus we have a contradiction. 
+
+    Thus we need that $b \in I$. Since $b \in I = (r)$, write $b =
+    u \cdot r$. Then $r = a \cdot b = (u \cdot a) \cdot r$. Since
+    $r \ne 0$, we find $u \cdot a = 1$. This means that $a \in
+    R^\times$ so $M = (a) = R$. But $M \subsetneqq R$, so again we
+    find a contradiction.
+
+    Thus we see that $I$ must be a maximal ideal. The other
+    direction, that every maximal ideal is a prime ideal, is trivial.
+\end{prf}
+
+\section*{Dedekind-Hasse Norms.}
+\textbf{Motivating questions.}
+\begin{itemize}
+    \item[1.] Are there examples of PIDs that are not Euclidean Domains?
+    \item[2.] Are there examples of PIDs that are not $\ZZ$?  
+\end{itemize}
+
+Say $(R, +, \cdot)$ is an integral domain. A \textbf{norm} is a
+map $\mathbb{N} : R \to \mathbb{Z}_{\ge 0}$. such that
+$\mathbb{N}(0) = 0$.
+
+On the other hand, a \textbf{Dedekind-Hasse} Norm is a norm
+$\mathbb{N}$ satisfying 
+\begin{description}
+    \item[DH1.] ${N}(0) = 0$
+    \item[DH2.] $N(a) > 0$ for all $a > 0$
+    \item[DH3.] For all nonzero $a, b \in R$, either 
+    \begin{itemize}
+        \item[1.] $b$ divides $a$, i.e., $a = q \cdot b$ or 
+        \item[2.] there exits $s, t \in R$ such that 
+        \[
+            x = s \cdot a -  t \cdot b \in  (a , b) 
+        \]  
+        satisfies $0 < N(x) < N(b)$.
+    \end{itemize}   
+\end{description}
+Remark: If in (DH3) we can \textbf{always} choose $s = 1$, then we
+say that $R$ is a Euclidean Domain.
+
+\textbf{Examples.}\\
+Let $R = \mathbb{Z}$. This a Euclidean Domain. The statement (DH3)
+is the Euclidean algorithm for $N(a) = |a|$.
+\\
+\\
+Let $R$ be any integral domain. Then $S = R[x]$ is also an
+integral domain. We define a norm on $S$ be saying $N(g(x)) =
+\text{deg}(g)$ if $g \ne 0$. If $g(x) \equiv 0$ is the zero
+polynomial, then $\deg(g) = -\infty$. So define $N(0) = 0$. This
+is not Dedekind-Hasse. As an example, consider $R = \ZZ$. Then let
+$I =(2, x)$ in $S$. This is not a principal ideal.
+
+Now consider $F$ a field. Let $S' = F[x]$ which is a PID. Define
+$N(g(x= 2^{\deg(g)}$. And $N(0) = 2^{-\infty} = 0$.
+
+\section{Polynomial Rings (for Galois Theory).}
+
+\begin{definition}
+    Say $(R, +, \cdot)$ is a ring with identity $1 \ne 0$. We will
+    always assume $R$ is of this form. 
+    \begin{itemize}
+        \item[1.] If $x$  is indeterminate (i.e. a variable) a
+        \textbf{polynomial} in $x$ is a formal sum 
+        \[
+            a_dx^d + \cdots + a_1x + a_0.
+        \]
+        with $a_k \in R$.
+        \item[2.] We say the \textbf{degree} $\deg(p) = d$ if $a_d$.
+        Otherwise, set  $\deg(p) = -\infty$ if $a_d = \cdots = a_0
+        = 0$.
+        \item[3.] Let $R[x]$ be the collectionn of all such
+        $p(x)$. This is the \textbf{polynomial ring} over $R$.
+        \item[4.] More generally, say $\{x_1, x_2, \dots, x_n\}$
+        is a collection of $n$ indeterminates. Inductively define
+        $R[x_1, x_2, \dots, x_n] = S[x_n]$ where $S = R[x_1, x_2,
+        \dots, x_{n-1}]$. A typical element is in the form 
+        \[
+            p(x_1, \cdots, x_n) = \sum_{i_1 =  1}^{d_1}\cdots\sum_{i_n = 1}^{d_n}a(i_1, \cdots, i_n)x_1^{i_1}\cdots x_n^{i_n}.
+        \] 
+        We then say that this $p(x_1, \dots, x_n)$ is a polynomial
+        in $n$ variables. 
+        \item[5.] Assuming that the highest coefficient
+        \    $a(d_1, \dots, d_n) \ne 0$, we then say the degree is
+        \[
+            \deg(p) = \max\{i_1  + \cdots + i_n\} \text{ (fix here)}.                
+        \]
+        Otherwise, if all terms are zero, i.e., if all $a(i_1,
+        \dots, i_n) = 0$, then we set $\deg(p) = -\infty$.
+    \end{itemize}
+\end{definition}
+
+\textbf{Example.}
+Consider the polynomial ring $R[x, y]$ as the polynomial ring in
+$n = 2$ variables. Let $p(x, y) = 1 + x^3 + y^3$. Then $\deg(p) =
+3$. 
+
+\begin{proposition}
+    $(R[x_1, \cdots, x_n], + , \cdot)$ is a ring with $1 \ne 0$.
+\end{proposition}
+
+\begin{prf}
+    We'll showt this by induction:
+    \begin{align*}
+        P(n) = "(R[x_1, \dots, x_n]) \text{ is a ring with } 1 \ne 0".
+    \end{align*}
+    We have already shown the base case $P(1)$ is true. Assume
+    that $P(n)$ is true for some $n_0$. We show $P(n)$ is true for
+    $n = n_0 + 1$.
+
+    By definition, $R[x_1, \dots, x_n] = S[x_n]$ where $S = R[x_1,
+    \dots, x_{n_0}]$. By our inductive hypothesis, we have that
+    \ $(S, +, \cdot )$ is a ring with $1 \ne 0$. Hence by $P(1)$
+    we have that $(S[x_n], \cdot, +)$ is also a ring with $1 \ne
+    0$. Hence $P(n_0 +  1)$ is true.
+\end{prf}
+
+\begin{proposition}
+    Assume $R$ is an integral domain. 
+    \begin{itemize}
+        \item[1.] Suppose $p, q \in R[x_1, \cdots x_n]$. Then 
+        \[
+            \deg(p \cdot q) = \deg(p) + \deg(q).   
+        \] 
+        \item[2.] $R[x_1, \dots, x_n]$ is also an integral
+        domain. 
+
+        \item[3.] The units of $R[x_1, \dots, x_n]$ is
+        $R^{\times}$.  
+    \end{itemize}
+\end{proposition}
+
+\begin{prf}
+    \begin{itemize}
+        \item[1.] If either $p = 0$ or $q = 0$, then $p \cdot q =
+        0$. Then observe that 
+        \[
+            \deg(p \cdot q) = \deg(p) + \deg(q)
+        \]
+        doesn't make sense unless  we choose  to set $\deg(0) =
+        -\infty$. Hence we see that
+        \[
+            \deg(p \cdot q) = -\infty.   
+        \]
+        We could make it positive infinity, but we assume that it
+        is negative for subtle reasons later on. 
+
+        Now assume that $p, q \ne 0$. We write our polynomials 
+        \[
+            p = \sum_{i_1, \dots, i_n}^{d_1, d_2, \cdots, d_n}a(i_1, \dots, i_n)x_1^{i_1}\cdots x_n^{i_n}
+            \qquad 
+            q = \sum_{j_1, \dots, j_n}^{e_1, e_2, \cdots, e_n}a(j_1, \dots, j_n)x_1^{j_1}\cdots x_n^{j_n}
+        \]
+        where $\deg(p) = d_1 + d_2 + \cdots + d_n$ and $\deg(q) =
+        e_1 + e_2 + \cdots + e_n$. Then we see that 
+        \[
+            p \cdot q  
+            = 
+            \sum_{k_1, \dots, k_n}^{d_1 + e_1, d_2 + e_2, \cdots, d_n + e_n}c(i_1, \dots, i_n)x_1^{k_1}\cdots x_n^{k_n}  
+        \]
+        where 
+        \[
+            c(k_1, \dots, k_n) 
+            = 
+            \sum_{i_1+j_1 = k_1, \dots, i_n+j_n = k_n.} a(i_1,  \dots i_n)b(j_1, \dots, j_n).
+        \]
+        The leading term is  $c(d_1 + e_1, \dots, d_n + e_n) =
+        a(d_1, \dots, d_n )b(e_1, \dots, e_n)$. Hence, the
+        leading term is also nonzero, so the degree must be 
+        \[
+            d_1 + e_1 +  \dots + d_n + e_n = \deg(p) + \deg(q).  
+        \]
+        There are actually many ways to define the degree of a
+        polynomial in $R[x_1, \dots, x_n]$ when$n \ge 2$. 
+
+        \item[2., 3.] We can show both (2)  and (3) at the same
+        time via induction. Let 
+        \[
+            P(n) = "R[x_1, \dots, x_n] \text{ is an integral domain and } R[x_1, \dots, x_n]^{\times} = R^{\times}."
+        \] 
+        We've done this in the one-variable case, so that $P(1)$
+        is true. We can invoke our inductive hypothesis to suppose
+        that $P(n_0)$ is true for some $n_0$. We next show that $n
+        = n_0 + 1$ is true. 
+
+        By definition, our ring $R[x_1, \dots, x_{n_0}] = S[x_n]$ for 
+        \[
+            S = R[x_1, \dots, x_{n_0}].
+        \]
+        By our inductive hypothesis, we know that (1)  $S$ is an
+        integral domain. Since $P(1)$ is true, we know that
+        $S[x_{n_0}]$ is an integral domain. By (2), we know that
+        $S^\times = R^\times$. By $P(1)$, we see that $S[x_n] =
+        R^\times$. This show that $P(n)$ is true for all $n$.
+    \end{itemize}
+\end{prf}
+
+\begin{proposition}
+    Say $(R, +, \cdots)$ is a ring with $1 \ne 0$ and $I
+    \subsetneqq R$ is a ideal. Denote $S
+    = R[x_1, \dots, x_n]$.
+    \begin{itemize}
+        \item[1.] $J = I[x_1, \dots, x_n]$ is a proper ideal of $S$
+        \item[2.] $S/J = (R/J)[x_1, \dots, x_n]$ 
+        \item[3.] Moreover, say $R$ is commutative. If $I \subset
+        R$ is a prime ideal of $R$, then $J$ is a prime ideal of
+        $S$. 
+    \end{itemize}
+\end{proposition}
+
+\begin{prf} 
+    \begin{itemize}
+        \item[1., 2.] Denote $\overline{R} = R/I$ as a ring  with
+        identity $1 \ne 0$, which holds since  we are working with
+        a proper ideal. We know both $S$ and $\overline{R}[x_1,
+        \dots, x_n]$ is also a ring with $1 \ne 0$. 
+
+        Consider the following "reduction mod $I$" map:
+        \[
+            \phi: R[x_1,\dots, x_n] \to \overline{R}[x_1,\dots, x_n]
+        \]
+        where if $\displaystyle p = \sum_{i_1, \dots, i_n}^{d_1, d_2,
+        \cdots, d_n}a(i_1, \dots, i_n)x_1^{i_1}\cdots x_n^{i_n}$
+        then 
+        \[
+            \overline{p} = \sum_{i_1, \dots, i_n}^{d_1, d_2, \cdots, d_n}\overline{a(i_1, \dots, i_n)}x_1^{i_1}\cdots x_n^{i_n}
+        \]
+        where $\overline{a} = a + I$ in $R/I$. \\
+        \textbf{Claim:} This is a ring homomorphism. In fact, this
+        map is surjective. 
+        \\
+        Neither of these are difficult to show. 
+
+        Observe that 
+        \[
+            \ker(\phi) = \Big\{p = \sum_{i_1, \dots, i_n}^{d_1, d_2,
+            \cdots, d_n}a(i_1, \dots, i_n)x_1^{i_1}\cdots x_n^{i_n} mid a(i_1, \dots, i_n)\in I \Big\}
+            = I[x_1, \dots, x_n].
+        \]
+        The First Isomorphism Theorem for Rings states that 
+        \begin{align*}
+            S/J &\cong R[x_1, \dots, x_n]/\ker(\phi)\\
+            &\cong \im(\phi)\\
+            &= (R/I)[x_1, \dots, x_n].
+        \end{align*}
+        At this point, we've shown (2). Now observe that $J
+        \subsetneqq R$ since $(R/I)[x_1, \dots, x_n]$ is a ring
+        with identity $1 \ne 0$. This proves (1). To show (3), say
+        $R$ is a commutative ring and $I \subset R$ is a prime
+        ideal. Since $I$ is prime, we see that $(R/I)$ is an
+        integral domain. Hence we  see that $(R/I)[x_1, \dots,
+        x_n]$ is an integral domain. Since $S/J \cong (R/I)[x_1, \dots,
+        x_n]$, and  we know that $R[x_1, \dots, x_n]$ is also a
+        commutative ring, we see  that $J \subset S$ must be a
+        prime ideal as well. 
+
+
+    \end{itemize}
+\end{prf}   

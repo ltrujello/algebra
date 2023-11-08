@@ -1,0 +1,187 @@
+\documentclass[12pt,letterpaper]{algebra_book}
+\usepackage[margin=0.7in]{geometry}
+\usepackage[utf8]{inputenc} 
+% \usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, thmtools}
+\usepackage{braket} 
+\usepackage{relsize} 
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{lmodern} 
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
+\usepackage[dvipsnames]{xcolor} % Colors, use dvipsnames for more color options
+\usepackage{framed} % Fancy leftbar
+\usepackage[normalem]{ulem}
+\usepackage{tikz-cd} % Diagrams
+\usepackage{tikz} % General purpose graphics
+\usepackage{tikz-3dplot}
+\usepackage[most]{tcolorbox} % For theorem boxing
+\usepackage{bm} % For better bold math font
+\usepackage{old-arrows} 
+\usepackage[usestackEOL]{stackengine}
+\usepackage[hyperfootnotes=false]{hyperref} % For clickable table of contents
+\usepackage{calc} % For simpler calculation - used for spacing the index letter headings correctly
+\usepackage{verbatim}
+\usepackage{enumitem} % Customize lists
+\setitemize{noitemsep,topsep=0.5em, parsep=0.5em ,partopsep=0pt}
+\setlist{nolistsep} %  Reduce spacing between bullet points and numbered lists
+\usepackage{adjustbox} % Very useful boxing environment
+\usepackage{setspace} % Variable line spacing
+\linespread{1.1}
+
+%My various environment commands
+\input{latex_commands} 
+
+% All images lie in pictures folder
+\graphicspath{{pictures/}}
+
+% For clickable table of contents
+\hypersetup{ 
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usetikzlibrary{arrows, 
+arrows.meta, 
+braids, 
+calc, 
+shapes.geometric,
+arrows,
+decorations.markings,
+decorations.pathreplacing, 
+intersections,
+hobby
+}
+% Tikzcd specifications
+\tikzcdset{arrow style = tikz, diagrams={>={Stealth[scale=1]}}} % Use stealth arrows in CDs
+\tikzset{>={Stealth[scale=1]}} % Use stealth arrows in TiKZ graphics
+\newcommand{\smallish}{1.45em} % Unit for measuring
+
+% Better \to command
+\renewcommand{\to}{\mathbin{\tikz[baseline] \draw[-{Stealth[length=5pt,width=4pt]}] (0pt,.6ex) -- (3.5ex,.6ex);}}
+
+% Barrage of shorcuts
+\newcommand{\normal}{\unlhd}
+\newcommand{\im}{\mbox{Im}}
+\newcommand{\nat}{\mbox{Nat}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\dom}{\mbox{Dom}}
+\newcommand{\cod}{\mbox{Cod}}
+\newcommand{\id}{\mbox{id}}
+\newcommand{\ob}{\mbox{Ob}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\cc}{\mathcal{C}}
+\newcommand{\dd}{\mathcal{D}}
+\newcommand{\bb}{\mathcal{B}}
+\newcommand{\pp}{\mathcal{P}} 
+\newcommand{\ee}{\mathcal{E}}
+\newcommand{\qqq}{\mathcal{Q}}
+\newcommand{\ppp}{\mathbb{Q}}
+\newcommand{\vv}{\mathcal{V}}
+\newcommand{\ff}{\mathcal{F}}
+\newcommand{\gal}{\text{Gal}}
+\newcommand{\aut}{\text{Aut}}
+\newcommand{\cone}{\text{Cone}}
+\newcommand{\fun}{\text{Fun}}
+\newcommand{\op}{^{\text{op}}}
+\newcommand{\ann}{\mbox{Ann}}
+\newcommand{\<}{\left<}
+\newcommand{\Lim}{\text{Lim }}
+\newcommand{\Colim}{\text{Colim }}
+\newcommand{\proj}{\text{proj}}
+\newcommand{\join}{\vee}
+\newcommand{\meet}{\wedge}
+\newcommand{\coker}{\text{Coker}}
+\newcommand{\isomarrow}{\mathrel{\setstackgap{S}{-0.5pt}\ensurestackMath{\Shortstack{\scriptstyle\sim\\ \longrightarrow}}}} 
+\newcommand{\aend}{\text{End}} %a is added because LaTeX does not allow commands to begin with "end."
+\newcommand{\spec}{\text{Spec}}
+\renewcommand{\path}{\text{Path}}
+\newcommand{\ww}{\mathcal{W}}
+\newcommand{\mm}{\mathcal{M}}
+\renewcommand{\ll}{\mathcal{L}}
+\renewcommand{\ee}{\mathcal{E}}
+\renewcommand{\ss}{\mathcal{S}}
+\renewcommand{\wp}{\mathcal{W}_{\mathrm{P}}}
+\renewcommand{\*}{ \mathbin{*}}
+\renewcommand{\phi}{\varphi}
+
+% Theorem customization and colorings
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+
+\declaretheoremstyle[
+    spacebelow=6pt,%
+    headfont=\color{RoyalPurple}\normalfont\bfseries,
+]{colors}
+
+\declaretheorem[
+  style=colors,
+  name=Definition,
+  sibling=theorem
+]{definition}
+
+\declaretheoremstyle[
+    spacebelow=6pt,%
+    headfont=\color{RoyalBlue}\normalfont\bfseries,
+]{colorss}
+
+\declaretheorem[
+  sibling=theorem,
+  style=colorss,
+  name=Proposition,
+]{proposition}
+
+\declaretheoremstyle[
+    spacebelow=6pt,%
+    headfont=\color{RoyalBlue}\normalfont\bfseries,
+]{colorsss}
+
+\declaretheorem[ 
+  style=colorsss,
+  name=Corollary,
+  sibling=theorem
+]{corollary}
+
+\declaretheoremstyle[
+    spacebelow=6pt,%
+    headfont=\color{RoyalBlue}\normalfont\bfseries,
+]{colorssss}
+
+\declaretheorem[
+  style=colorssss,
+  name=Lemma,
+  sibling=theorem
+]{lemma}
+
+\renewcommand{\contentsname}{}
+
+\begin{document} 
+    \begin{center}
+        {\huge \bf Groups, Rings, and Modules}
+    \end{center}
+    {\let\clearpage\relax 
+    \tableofcontents
+    \let\clearpage\relax}
+
+    % Group theory notes
+    \include{group_theory/group_theory}
+    
+    % Ring theory notes
+    \include{ring_theory/ring_theory}
+    
+    % Module theory notes
+    \include{module_theory/module_theory}
+
+\end{document}
